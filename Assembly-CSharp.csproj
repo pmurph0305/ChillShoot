@@ -68,8 +68,13 @@
      <Compile Include="Assets\Scripts\Experience\ExperienceAttractor.cs" />
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\Weapons\TransformSpawnWeapon.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\TransformShot.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ShotSpawnInfoGetter.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\SingleTransformSpawn.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\TransformSpawnInfo.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ListTransformSpawn.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\NoMovementShot.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\2021.2.7f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

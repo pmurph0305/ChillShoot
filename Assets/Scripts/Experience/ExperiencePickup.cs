@@ -25,6 +25,11 @@ public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
   public void Release()
   {
     SetTarget(null);
+    this.gameObject.SetActive(false);
+  }
+
+  private void OnDisable()
+  {
     _pool.Release(this);
   }
 
