@@ -5,11 +5,12 @@ using UnityEngine.Pool;
 
 /// <summary>
 /// An abstract class so we can create different types of Prefab Shots and place those onto items but retain the same pool and dictionary functionality.
+/// Responsible for tracking its own life-time, updating its movement, and getting its travel direction for updating movement.
+/// Also responsible for disabling/releasing to the pool when it hits an enemy (OnHitEnemy is called from the WeaponInfo class)
 /// </summary>
 public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot
 {
   protected WeaponInfo weaponInfo;
-
   [SerializeField] Collider2D col;
   [SerializeField] protected Vector3 travelDirection;
   [SerializeField] protected Timer lifeTimer;
@@ -48,12 +49,13 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   /// </summary>
   public virtual void OnGetFromPool()
   {
-    transform.position = weaponInfo.SpawnTransform.position;
     lifeTimer.Reset();
   }
 
   /// <summary>
-  /// Called when the object is about to be released to the pool. Use like you would OnDisable.
+  /// Called when the object is about to be released to the pool. Use like you would SetActive(false).
+  /// Doesn't actually release the shot, instead that is done when it is actually disabled, otherwise you could re-use it before it is disabled,
+  /// and then it would be disabled and cause pooling errors.
   /// </summary>
   public void Release()
   {
@@ -67,6 +69,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
 
   protected virtual void OnDisabled()
   {
+    // released in on disable to prevent pool issues, see IPoolable comments
     pool.Release(this);
   }
 
@@ -102,7 +105,6 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   public void OnCreate()
   {
     weaponInfo = WeaponDictionary.Get(this.gameObject.tag);
-    transform.position = weaponInfo.SpawnTransform.position;
     lifeTimer = new Timer(weaponInfo.ShotLifeTime);
 
     //Register this created gameobject to the weapon info's dictionary.

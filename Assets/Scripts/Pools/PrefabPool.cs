@@ -82,6 +82,14 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     return t;
   }
 
+  public virtual T Get(Vector3 position, Quaternion rotation)
+  {
+    T t = Get();
+    t.transform.position = position;
+    t.transform.rotation = rotation;
+    return t;
+  }
+
   /// <summary>
   /// Gets an object from the pool.
   /// </summary>

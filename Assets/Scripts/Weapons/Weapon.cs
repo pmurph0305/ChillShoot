@@ -4,10 +4,11 @@ using UnityEngine;
 
 /// <summary>
 /// Base weapon class that handles getting the weaponinfo from the weapon container, handling the cooldown timer of the weapon, and telling the weapon to shoot.
+/// WeaponInfo's are added to the static dictionary by the gameobjects tag that this script is on.
+/// So each weapon should have a unique tag.
 /// </summary>
 public abstract class Weapon : MonoBehaviour
 {
-
   [SerializeField] BaseWeaponInfoContainer weaponInfoContainer;
   protected WeaponInfo weaponInfo;
   [SerializeField] protected Timer timer;
@@ -62,4 +63,8 @@ public abstract class Weapon : MonoBehaviour
   /// Called when the weapon should shoot
   /// </summary>
   protected abstract void Shoot();
+
+  protected abstract Vector3 GetShotSpawnPosition();
+
+  protected abstract Quaternion GetShotSpawnRotation();
 }

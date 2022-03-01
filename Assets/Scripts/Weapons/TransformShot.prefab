@@ -120,4 +120,5 @@ MonoBehaviour:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  t: {fileID: 338003387198270469}
+  _transform: {fileID: 338003387198270469}
+  direction: 0
