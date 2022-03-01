@@ -63,8 +63,4 @@ public abstract class Weapon : MonoBehaviour
   /// Called when the weapon should shoot
   /// </summary>
   protected abstract void Shoot();
-
-  protected abstract Vector3 GetShotSpawnPosition();
-
-  protected abstract Quaternion GetShotSpawnRotation();
 }
