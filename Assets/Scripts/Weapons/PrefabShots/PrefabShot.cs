@@ -14,15 +14,23 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   [SerializeField] Collider2D col;
   [SerializeField] protected Vector3 travelDirection;
   [SerializeField] protected Timer lifeTimer;
-
   public IObjectPool<PrefabShot> pool;
+
+  int NumberOfHits = 0;
 
   /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
   /// </summary>
   public virtual void OnHitEnemy()
   {
-    Release();
+    if (weaponInfo.DestroyOnHit)
+    {
+      NumberOfHits++;
+      if (NumberOfHits >= weaponInfo.DestroyAfterXHits)
+      {
+        Release();
+      }
+    }
   }
 
   /// <summary>
@@ -49,7 +57,8 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   /// </summary>
   public virtual void OnGetFromPool()
   {
-    lifeTimer.Reset();
+    lifeTimer.Reset(weaponInfo.ShotLifeTime, false);
+    NumberOfHits = 0;
   }
 
   /// <summary>

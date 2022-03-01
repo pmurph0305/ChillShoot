@@ -8,7 +8,11 @@ public class WeaponInfo
   public float ShotSpeed = 5f;
   public float ShotLifeTime = 2f;
   public float Cooldown = 0.5f;
-  public bool DestroyAfterUse = false;
+
+  //todo: number of hits before destroy/release
+  public bool DestroyOnHit = true;
+  public int DestroyAfterXHits = 0;
+
 
   /// <summary>
   /// Dictionary used by enemies to tell the weapon info that a WeaponShot has hit an enemy.<br></br> 
