@@ -82,6 +82,14 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     return t;
   }
 
+  public virtual T Get(TransformSpawnInfo spawnInfo)
+  {
+    T t = Get();
+    t.transform.position = spawnInfo.Position;
+    t.transform.rotation = spawnInfo.Rotation;
+    return t;
+  }
+
   public virtual T Get(Vector3 position, Quaternion rotation)
   {
     T t = Get();
@@ -109,7 +117,9 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     T val = o.GetComponent<T>();
     val.SetPool(Pool);
     val.OnCreate();
-    o.SetActive(false);
+    // Since OnDisable releases a pooled item, we can't set active here or it causes issues.
+    // IE: if you get multiple of the same object in one frame, it could be released and then used again in the same frame.
+    // o.SetActive(false);
     OnCreateInPool?.Invoke(val);
     return val;
   }
