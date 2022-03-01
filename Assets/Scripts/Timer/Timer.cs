@@ -54,6 +54,22 @@ public class Timer
     else
     {
       CurrentTime = CurrentTime - EndTime;
+      // if (CurrentTime < 0) { CurrentTime = 0; }
+    }
+    IsFinished = false;
+  }
+
+  public void Reset(float endTime, bool resetToZero = true)
+  {
+    if (resetToZero)
+    {
+      CurrentTime = 0;
+      EndTime = endTime;
+    }
+    else
+    {
+      CurrentTime = CurrentTime - endTime;
+      EndTime = endTime;
     }
     IsFinished = false;
   }
