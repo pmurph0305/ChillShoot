@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 public class PrefabSpawnWeapon : Weapon
 {
-  [SerializeField] PrefabPool<PrefabShot> pool;
+  [SerializeField] protected PrefabPool<PrefabShot> pool;
   protected override void Shoot()
   {
     // shots automatically update position when gotten from pool.

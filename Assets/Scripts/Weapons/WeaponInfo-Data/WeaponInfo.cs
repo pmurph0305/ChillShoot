@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponInfo
 {
+  //TODO: needed? -> weapons can spawn from multiple sources.
   public Transform SpawnTransform;
   public float ShotDamage = 10f;
   public float ShotSpeed = 5f;
