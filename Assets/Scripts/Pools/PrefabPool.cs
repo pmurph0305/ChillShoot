@@ -124,6 +124,8 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     return val;
   }
 
+  Transform getTransform;
+
   /// <summary>
   /// Called when an object is gotten to the pool.<br></br>
   /// Calls the IPoolable's OnGetFromPool<br></br>
@@ -134,6 +136,14 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   {
     // item.SetPool(Pool);
     item.OnGetFromPool();
+    getTransform = item.transform;
+    if (parentType == ParentType.This)
+    {
+      if (getTransform.parent != this.transform)
+      {
+        getTransform.SetParent(this.transform);
+      }
+    }
     if (SetActiveOnGet)
     {
       item.gameObject.SetActive(true);

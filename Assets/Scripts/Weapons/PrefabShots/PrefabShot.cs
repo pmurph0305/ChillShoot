@@ -111,7 +111,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   /// <summary>
   /// Called by the pool when this object is created, use for initialization like you would Start/Awake
   /// </summary>
-  public void OnCreate()
+  public virtual void OnCreate()
   {
     weaponInfo = WeaponDictionary.Get(this.gameObject.tag);
     lifeTimer = new Timer(weaponInfo.ShotLifeTime);
