@@ -7,7 +7,8 @@ TagManager:
   - RandomDirBullet
   - HomingDirBullet
   - PlayerDirBullet
-  - TransformBullet
+  - ListTransformBullet
+  - CrossTransformBullet
   layers:
   - Default
   - TransparentFX

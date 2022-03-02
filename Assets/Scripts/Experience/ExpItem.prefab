@@ -98,7 +98,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bc0545e331f9a49a5375dc79c81c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4701107559213639347}
   col: {fileID: 2106660034016815502}
+  colorList:
+    ColorPairs:
+    - color: {r: 0.058823533, g: 0.9725491, b: 0, a: 1}
+      value: 10
+    - color: {r: 0, g: 0.9811321, b: 0.9045967, a: 1}
+      value: 20
+    - color: {r: 0.06672716, g: 0, b: 1, a: 1}
+      value: 30
   speed: 25
   ExpVal: 0
 --- !u!58 &2106660034016815502

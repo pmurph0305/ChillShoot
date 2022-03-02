@@ -11,6 +11,7 @@ public class ExperiencePickerUpper : MonoBehaviour
   {
     if (ExperiencePickupPool.TryGetActiveExperiencePickup(other, out ep))
     {
+      // Debug.Log("Pickup and release.", ep);
       controller.GainExp(ep.ExperienceValue);
       ep.Release();
     }

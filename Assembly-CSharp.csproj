@@ -36,12 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\NoMovementShot.cs" />
      <Compile Include="Assets\Scripts\Weapons\TargetedPrefabSpawnWeapon.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperiencePickupPool.cs" />
      <Compile Include="Assets\Scripts\Pools\EnemyPool.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\HomingShot.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponInfo-Data\TargetedWeaponInfo.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\RandomDirectionShot.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TransformShot.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\IWeaponShot.cs" />
      <Compile Include="Assets\Scripts\TestVectors.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\BaseWeaponInfoContainer.cs" />
@@ -54,12 +56,17 @@
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\TargetedWeaponInfoComponent.cs" />
      <Compile Include="Assets\Scripts\Jobs\EnemyJobs.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabSpawnWeapon.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\TransformSpawnInfo.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\WeaponInfoComponent.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ShotSpawnInfoGetter.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponInfo-Data\WeaponInfo.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShot.cs" />
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ListTransformSpawn.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperiencePickup.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\IWeaponInfoContainer.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\SingleTransformSpawn.cs" />
      <Compile Include="Assets\Scripts\Pools\PrefabPool.cs" />
      <Compile Include="Assets\Scripts\Player\ExperiencePickerUpper.cs" />
      <Compile Include="Assets\Scripts\Timer\Timer.cs" />
@@ -68,13 +75,7 @@
      <Compile Include="Assets\Scripts\Experience\ExperienceAttractor.cs" />
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TransformShot.cs" />
-     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
-     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ShotSpawnInfoGetter.cs" />
-     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\SingleTransformSpawn.cs" />
-     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\TransformSpawnInfo.cs" />
-     <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ListTransformSpawn.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\NoMovementShot.cs" />
+     <Compile Include="Assets\Scripts\ColorList.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\2021.2.7f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

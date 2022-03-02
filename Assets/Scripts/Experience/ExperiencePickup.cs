@@ -6,11 +6,15 @@ using UnityEngine.Pool;
 public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
 {
   private IObjectPool<ExperiencePickup> _pool;
-
+  [SerializeField] SpriteRenderer spriteRenderer;
   [SerializeField] Collider2D col;
   public Collider2D GetCollider => col;
 
+  [SerializeField] ColorList colorList;
+
   public float speed = 2f;
+
+
 
   public void OnCreate()
   {
@@ -42,6 +46,19 @@ public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
   public void SetValue(float value)
   {
     ExpVal = value;
+    spriteRenderer.color = colorList.GetColorForValue(value);
+  }
+
+  void SetColor()
+  {
+
+  }
+
+  Vector3Int _DictionaryPosition = Vector3Int.zero;
+  public Vector3Int DictionaryPosition => _DictionaryPosition;
+  public void SetDictionaryPosition(Vector3Int pos)
+  {
+    _DictionaryPosition = pos;
   }
 
   Transform target;
