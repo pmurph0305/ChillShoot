@@ -19,14 +19,16 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   //todo: number of hits before destroy/release
   [SerializeField] bool DestroyOnHit = true;
   [SerializeField] int DestroyAfterXHits = 0;
+  [SerializeField] float damageCooldown = 0.25f;
 
+  Dictionary<EnemyController, Timer> DamagedEnemies = new Dictionary<EnemyController, Timer>();
 
   int NumberOfHits = 0;
 
   /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
   /// </summary>
-  public virtual void OnHitEnemy()
+  public virtual void OnHitEnemy(EnemyController enemy)
   {
     if (DestroyOnHit)
     {
@@ -62,6 +64,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   /// </summary>
   public virtual void OnGetFromPool()
   {
+    DamagedEnemies.Clear();
     lifeTimer.Reset(weaponInfo.ShotLifeTime, false);
     NumberOfHits = 0;
   }
@@ -87,6 +90,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
     pool.Release(this);
   }
 
+
   // Update is called once per frame
   void Update()
   {
@@ -98,10 +102,65 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
     OnUpdate();
   }
 
+
+  CircleCollider2D circle;
+  Collider2D[] hitColliders;
+  [SerializeField] LayerMask mask;
+
+  [SerializeField] int DamagedEnemiesCount;
   /// <summary>
   /// Called At the end of Update()
   /// </summary>
-  protected virtual void OnUpdate() { }
+  protected virtual void OnUpdate()
+  {
+    DamagedEnemiesCount = DamagedEnemies.Count;
+    if (DestroyOnHit && DestroyAfterXHits == 0 && DamagedEnemiesCount > 0)
+    {
+      Debug.LogWarning("Hit issue?", this.gameObject);
+      foreach (var kvp in DamagedEnemies)
+      {
+        Debug.LogWarning("Still damaging:", kvp.Key.gameObject);
+      }
+    }
+    foreach (var kvp in DamagedEnemies)
+    {
+      if (kvp.Value.Update())
+      {
+        kvp.Value.Reset();
+        kvp.Key.OnHitFromShot(weaponInfo.ShotDamage);
+      }
+    }
+    foreach (var item in ReleasedEnemies)
+    {
+      DamagedEnemies.Remove(item);
+    }
+    ReleasedEnemies.Clear();
+    // if (circle == null)
+    // {
+    //   if (col is CircleCollider2D)
+    //   {
+    //     circle = (CircleCollider2D)col;
+    //   }
+    // }
+    // hitColliders = Physics2D.OverlapCircleAll(transform.position, circle.radius * transform.localScale.x, mask);
+    // foreach (var h in hitColliders)
+    // {
+    //   if (EnemyDictionary.Contains(h))
+    //   {
+    //     EnemyController ec = EnemyDictionary.Get(h);
+    //     ec.OnHitFromShot(weaponInfo.ShotDamage);
+    //     NumberOfHits++;
+    //     if (DestroyOnHit)
+    //     {
+    //       if (NumberOfHits >= DestroyAfterXHits)
+    //       {
+    //         Release();
+    //         break;
+    //       }
+    //     }
+    //   }
+    // }
+  }
 
   /// <summary>
   /// Sets the objects pool so it can handle releasing itself.
@@ -123,5 +182,36 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
 
     //Register this created gameobject to the weapon info's dictionary.
     weaponInfo.Add(this, col);
+  }
+
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (EnemyDictionary.ContainsActive(other))
+    {
+      EnemyController ec = EnemyDictionary.GetActive(other);
+      ec.OnHitFromShot(weaponInfo.ShotDamage);
+      OnHitEnemy(ec);
+      DamagedEnemies.Add(ec, new Timer(damageCooldown));
+      ec.OnEnemyReleased += OnEnemyReleased;
+    }
+  }
+
+  List<EnemyController> ReleasedEnemies = new List<EnemyController>();
+  void OnEnemyReleased(EnemyController ec)
+  {
+    ec.OnEnemyReleased -= OnEnemyReleased;
+    ReleasedEnemies.Add(ec);
+    // Debug.Log("Released.");
+  }
+
+  private void OnTriggerExit2D(Collider2D other)
+  {
+    if (EnemyDictionary.Contains(other))
+    {
+      // Debug.Log("Remove on exit.");
+      EnemyController ec = EnemyDictionary.Get(other);
+      DamagedEnemies.Remove(ec);
+    }
   }
 }

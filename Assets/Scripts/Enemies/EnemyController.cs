@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
   [SerializeField] float updatePathTime = 1f;
   Timer agentPathTimer;
 
-  public event Action OnEnemyReleased;
+  public event Action<EnemyController> OnEnemyReleased;
   // private void Update()
   // {
   //   if (useAgent)
@@ -82,6 +82,10 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
     }
   }
 
+  public void OnHitFromShot(float damage)
+  {
+    TakeDamage(damage);
+  }
 
   void TakeDamage(float damage)
   {
@@ -111,8 +115,8 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
   {
     // Debug.Log("Release");
     pool.Release(this);
-    EnemyDictionary.Remove(col);
-    OnEnemyReleased?.Invoke();
+    EnemyDictionary.RemoveActive(col);
+    OnEnemyReleased?.Invoke(this);
   }
 
   private void OnTriggerStay2D(Collider2D other)
@@ -125,13 +129,13 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
       PlayerController pc = other.gameObject.GetComponent<PlayerController>();
       pc.TakeDamage(damage);
     }
-    else if (pool != null)
-    {
-      WeaponInfo info = WeaponDictionary.Get(other.gameObject.tag);
-      TakeDamage(info.ShotDamage);
-      // Destroy(other.gameObject);
-      info.OnHitEnemy(other);
-    }
+    // else if (pool != null)
+    // {
+    //   WeaponInfo info = WeaponDictionary.Get(other.gameObject.tag);
+    //   TakeDamage(info.ShotDamage);
+    //   // Destroy(other.gameObject);
+    //   info.OnHitEnemy(other, this);
+    // }
   }
 
   // todo: if on trigger stay is used damage is taken every frame, need to be able to only take damage occasionally depending on weapon.
@@ -151,7 +155,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
     {
       agent.SetDestination(PlayerController.PlayerPosition);
     }
-    EnemyDictionary.Add(col, this);
+    EnemyDictionary.AddActive(col, this);
   }
 
   IObjectPool<EnemyController> pool;
@@ -162,6 +166,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
 
   public void OnCreate()
   {
+    EnemyDictionary.Add(col, this);
     t = this.transform;
     updateDirectionTimer = new Timer(UpdateDirToPlayerTime);
     damageTimer = new Timer(damageTimerLength);
@@ -173,7 +178,6 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
     {
       Destroy(GetComponent<NavMeshAgent>());
     }
-
     if (agent != null)
     {
       agentPathTimer = new Timer(updatePathTime);

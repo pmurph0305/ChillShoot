@@ -54,7 +54,7 @@ public class Timer
     else
     {
       CurrentTime = CurrentTime - EndTime;
-      // if (CurrentTime < 0) { CurrentTime = 0; }
+      if (CurrentTime < 0) { CurrentTime = 0; }
     }
     IsFinished = false;
   }

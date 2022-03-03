@@ -27,10 +27,10 @@ public class TargetedWeaponInfo : WeaponInfo
 
       foreach (var item in cols)
       {
-        if (EnemyDictionary.Contains(item))
+        if (EnemyDictionary.ContainsActive(item))
         {
           target = item.transform;
-          trackedEnemy = EnemyDictionary.Get(item);
+          trackedEnemy = EnemyDictionary.GetActive(item);
           trackedEnemy.OnEnemyReleased += OnTargetReleasedHandler;
           break;
         }
@@ -43,7 +43,7 @@ public class TargetedWeaponInfo : WeaponInfo
     return trackedEnemy == null || !trackedEnemy.isActiveAndEnabled;
   }
 
-  public void OnTargetReleasedHandler()
+  public void OnTargetReleasedHandler(EnemyController enemyController)
   {
     trackedEnemy.OnEnemyReleased -= OnTargetReleasedHandler;
     UpdateTarget();

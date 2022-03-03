@@ -35,12 +35,12 @@ public class WeaponInfo
   /// Called when an enemy is hit by a collider2d that is also a IWeaponShit.
   /// </summary>
   /// <param name="Col"></param>
-  public void OnHitEnemy(Collider2D Col)
+  public void OnHitEnemy(Collider2D Col, EnemyController enemy)
   {
     IWeaponShot s = null;
     if (ShotDict.TryGetValue(Col, out s))
     {
-      s.OnHitEnemy();
+      s.OnHitEnemy(enemy);
     }
   }
 }

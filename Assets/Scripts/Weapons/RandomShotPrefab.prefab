@@ -120,3 +120,8 @@ MonoBehaviour:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
+  DestroyOnHit: 1
+  DestroyAfterXHits: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
