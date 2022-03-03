@@ -64,6 +64,12 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     {
       if (_pool == null)
       {
+        // because if we set GetFromPool here, the Get(position, rotation) methods will call on getfrompool first,
+        // whereas one would expect calling Get(position, rotation) would call OnGetFromPool for that item with the
+        // position and rotation already set, but it does not.
+        // instead we manually handle calling OnGetFromPool.
+
+        // we fixed this by removing the <T>.OnGetFromPool() call after the Get() and settings of position and rotation.
         _pool = new ObjectPool<T>(CreatePooledItem, OnGetFromPool, OnReturnedToPool, OnDestroyPoolObject, false, capacity);
       }
       return _pool;
@@ -79,22 +85,37 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   {
     T t = Get();
     t.transform.position = position;
+    t.OnGetFromPool();
     return t;
   }
 
+  /// <summary>
+  /// Gets an item from the pool, while settings its position and rotation.
+  /// </summary>
+  /// <param name="spawnInfo"></param>
+  /// <returns></returns>
   public virtual T Get(TransformSpawnInfo spawnInfo)
   {
     T t = Get();
     t.transform.position = spawnInfo.Position;
     t.transform.rotation = spawnInfo.Rotation;
+    t.OnGetFromPool();
     return t;
   }
 
+
+  /// <summary>
+  /// Gets an item from the pool, while settings its position and rotation.
+  /// </summary>
+  /// <param name="position"></param>
+  /// <param name="rotation"></param>
+  /// <returns></returns>
   public virtual T Get(Vector3 position, Quaternion rotation)
   {
     T t = Get();
     t.transform.position = position;
     t.transform.rotation = rotation;
+    t.OnGetFromPool();
     return t;
   }
 
@@ -134,8 +155,6 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   /// <param name="item"></param>
   protected virtual void OnGetFromPool(T item)
   {
-    // item.SetPool(Pool);
-    item.OnGetFromPool();
     getTransform = item.transform;
     if (parentType == ParentType.This)
     {
