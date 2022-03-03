@@ -16,6 +16,11 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   [SerializeField] protected Timer lifeTimer;
   public IObjectPool<PrefabShot> pool;
 
+  //todo: number of hits before destroy/release
+  [SerializeField] bool DestroyOnHit = true;
+  [SerializeField] int DestroyAfterXHits = 0;
+
+
   int NumberOfHits = 0;
 
   /// <summary>
@@ -23,10 +28,10 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   /// </summary>
   public virtual void OnHitEnemy()
   {
-    if (weaponInfo.DestroyOnHit)
+    if (DestroyOnHit)
     {
       NumberOfHits++;
-      if (NumberOfHits >= weaponInfo.DestroyAfterXHits)
+      if (NumberOfHits >= DestroyAfterXHits)
       {
         Release();
       }

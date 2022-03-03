@@ -9,6 +9,7 @@ TagManager:
   - PlayerDirBullet
   - ListTransformBullet
   - CrossTransformBullet
+  - FlameBullet
   layers:
   - Default
   - TransparentFX

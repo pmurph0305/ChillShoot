@@ -9,9 +9,6 @@ public class WeaponInfo
   public float ShotLifeTime = 2f;
   public float Cooldown = 0.5f;
 
-  //todo: number of hits before destroy/release
-  public bool DestroyOnHit = true;
-  public int DestroyAfterXHits = 0;
 
 
   /// <summary>

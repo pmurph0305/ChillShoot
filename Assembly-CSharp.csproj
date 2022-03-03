@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Weapons\WeaponInfo-Data\WeaponInfo.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShot.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\SetParentDelayShot.cs" />
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ListTransformSpawn.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperiencePickup.cs" />
@@ -73,10 +74,10 @@
      <Compile Include="Assets\Scripts\Enemies\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\PlayerDirectionShot.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperienceAttractor.cs" />
+     <Compile Include="Assets\Scripts\ColorList.cs" />
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\ColorList.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\SetParentDelayShot.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyDictionary.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\2021.2.7f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

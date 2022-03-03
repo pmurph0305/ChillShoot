@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
-
+using System;
 public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
 {
   [SerializeField] public float speed = 1;
@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
   Timer updateDirectionTimer;
   Transform t;
   [SerializeField] Rigidbody2D rb2d;
+  [SerializeField] Collider2D col;
 
   [SerializeField] NavMeshAgent agent;
   [SerializeField] Vector3 dir;
@@ -34,6 +35,8 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
 
   [SerializeField] float updatePathTime = 1f;
   Timer agentPathTimer;
+
+  public event Action OnEnemyReleased;
   // private void Update()
   // {
   //   if (useAgent)
@@ -108,6 +111,8 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
   {
     // Debug.Log("Release");
     pool.Release(this);
+    EnemyDictionary.Remove(col);
+    OnEnemyReleased?.Invoke();
   }
 
   private void OnTriggerStay2D(Collider2D other)
@@ -129,6 +134,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
     }
   }
 
+  // todo: if on trigger stay is used damage is taken every frame, need to be able to only take damage occasionally depending on weapon.
   private void OnTriggerEnter2D(Collider2D other)
   {
 
@@ -138,7 +144,6 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
 
   public void OnGetFromPool()
   {
-    // Debug.Log("Get");
     updateDirectionTimer.Reset();
     damageTimer.Reset();
     this.health = MaxHealth;
@@ -146,6 +151,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
     {
       agent.SetDestination(PlayerController.PlayerPosition);
     }
+    EnemyDictionary.Add(col, this);
   }
 
   IObjectPool<EnemyController> pool;

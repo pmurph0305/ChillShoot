@@ -19,7 +19,7 @@ public class TargetedPrefabSpawnWeapon : PrefabSpawnWeapon
 
   protected override void OnUpdate()
   {
-    if (targetUpdater.Update() || targetedWeaponInfo.target == null)
+    if (targetUpdater.Update() || targetedWeaponInfo.NeedsUpdate())
     {
       targetedWeaponInfo.UpdateTarget();
       targetUpdater.Reset(false);

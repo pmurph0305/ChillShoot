@@ -7,8 +7,10 @@ public class TargetedWeaponInfo : WeaponInfo
 {
   [SerializeField] public Transform weaponTransform;
   [SerializeField] public Transform target;
-
   [SerializeField] LayerMask TargetLayerMask;
+
+  EnemyController trackedEnemy;
+
   public virtual void UpdateTarget()
   {
     List<Collider2D> cols = Physics2D.OverlapCircleAll(weaponTransform.position, 10f, TargetLayerMask).ToList();
@@ -23,7 +25,27 @@ public class TargetedWeaponInfo : WeaponInfo
         return 0;
       });
 
-      target = cols[0].transform;
+      foreach (var item in cols)
+      {
+        if (EnemyDictionary.Contains(item))
+        {
+          target = item.transform;
+          trackedEnemy = EnemyDictionary.Get(item);
+          trackedEnemy.OnEnemyReleased += OnTargetReleasedHandler;
+          break;
+        }
+      }
     }
+  }
+
+  public bool NeedsUpdate()
+  {
+    return trackedEnemy == null || !trackedEnemy.isActiveAndEnabled;
+  }
+
+  public void OnTargetReleasedHandler()
+  {
+    trackedEnemy.OnEnemyReleased -= OnTargetReleasedHandler;
+    UpdateTarget();
   }
 }

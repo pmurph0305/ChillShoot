@@ -102,9 +102,12 @@ MonoBehaviour:
   speed: 2
   damage: 10
   damageTimerLength: 0.2
+  MaxHealth: 100
   health: 100
+  expValue: 10
   UpdateDirToPlayerTime: 0.0133
   rb2d: {fileID: -6536042073960072785}
+  col: {fileID: -6754030371237035193}
   agent: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   JobIndex: 0
