@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8068250853018516626}
   - component: {fileID: -8803565517505702046}
   - component: {fileID: 932891991653526923}
-  - component: {fileID: -426455542784252040}
   m_Layer: 11
   m_Name: PlayerDirShotPrefab
   m_TagString: PlayerDirBullet
@@ -121,7 +120,7 @@ MonoBehaviour:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  director: {fileID: -426455542784252040}
+  director: {fileID: 932891991653526923}
   DestroyOnHit: 1
   DestroyAfterXHits: 0
   damageCooldown: 0.25
@@ -142,21 +141,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   travelDirection: {x: 0, y: 0, z: 0}
---- !u!114 &-426455542784252040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4390567009046939577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5bff1b3f85694241b4806a3a90efd6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  travelDirection: {x: 0, y: 0, z: 0}
-  _transform: {fileID: 691047783576802950}
-  direction: 0
-  frequency: 5
-  amplitude: 5
-  phaseShift: 0
