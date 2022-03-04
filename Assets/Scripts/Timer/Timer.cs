@@ -43,6 +43,8 @@ public class Timer
 
   /// <summary>
   /// If reset to zero is false, resets to CurrentTime-EndTime so the time carries over to the next "loop"
+  /// Note: using false can cause the visual appearance in repeated patterns to be "off" for some reason,
+  /// even though it should carry the extra time into the next loop, reseting to zero is more consistent appearing?
   /// </summary>
   /// <param name="resetToZero"></param>
   public void Reset(bool resetToZero = true)
@@ -68,18 +70,13 @@ public class Timer
     }
     else
     {
-      CurrentTime = CurrentTime - endTime;
+      CurrentTime = CurrentTime - EndTime;
+      if (CurrentTime < 0) { CurrentTime = 0; }
       EndTime = endTime;
     }
     IsFinished = false;
   }
 
-  public void Reset(float newEndTime)
-  {
-    CurrentTime = 0;
-    EndTime = newEndTime;
-    IsFinished = false;
-  }
 
 
 

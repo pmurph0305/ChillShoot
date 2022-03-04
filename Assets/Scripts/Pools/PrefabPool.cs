@@ -12,7 +12,7 @@ using System;
 public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolable<T>
 {
   [SerializeField, Tooltip("GameObject.SetActive(true) on pool.Get")] bool SetActiveOnGet = true;
-
+  [SerializeField] bool ResetScaleOnGet = true;
   // Removed because it causes bugs with multiple releases as the the object can be released
   // multiple times between initally telling it to be released, and the object actually being de-activated through the callback.
   // Recommended to use something like releasing in OnDisable to prevent multiple-release issues.
@@ -162,6 +162,10 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
       {
         getTransform.SetParent(this.transform);
       }
+    }
+    if (ResetScaleOnGet)
+    {
+      getTransform.localScale = Prefab.transform.localScale;
     }
     if (SetActiveOnGet)
     {

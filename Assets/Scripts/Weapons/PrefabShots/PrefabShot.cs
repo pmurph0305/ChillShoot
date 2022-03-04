@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-
+using System;
 /// <summary>
 /// An abstract class so we can create different types of Prefab Shots and place those onto items but retain the same pool and dictionary functionality.
 /// Responsible for tracking its own life-time, updating its movement, and getting its travel direction for updating movement.
@@ -24,6 +24,10 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   Dictionary<EnemyController, Timer> DamagedEnemies = new Dictionary<EnemyController, Timer>();
 
   int NumberOfHits = 0;
+
+  public event Action<PrefabShot> OnCreateAction;
+  public event Action<PrefabShot> OnGetFromPoolAction;
+  public event Action<PrefabShot> OnReleaseAction;
 
   /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
@@ -65,8 +69,9 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   public virtual void OnGetFromPool()
   {
     DamagedEnemies.Clear();
-    lifeTimer.Reset(weaponInfo.ShotLifeTime, false);
+    lifeTimer.Reset(weaponInfo.ShotLifeTime);
     NumberOfHits = 0;
+    OnGetFromPoolAction?.Invoke(this);
   }
 
   /// <summary>
@@ -88,6 +93,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   {
     // released in on disable to prevent pool issues, see IPoolable comments
     pool.Release(this);
+    OnReleaseAction?.Invoke(this);
   }
 
 
@@ -182,6 +188,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
 
     //Register this created gameobject to the weapon info's dictionary.
     weaponInfo.Add(this, col);
+    OnCreateAction?.Invoke(this);
   }
 
 
