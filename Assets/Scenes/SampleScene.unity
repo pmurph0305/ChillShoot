@@ -1673,7 +1673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1474936478
 Transform:
   m_ObjectHideFlags: 0
@@ -1783,7 +1783,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1517226361
 Transform:
   m_ObjectHideFlags: 0
@@ -1814,7 +1814,7 @@ MonoBehaviour:
   weaponInfo:
     ShotDamage: 111
     ShotSpeed: 5
-    ShotLifeTime: 2
+    ShotLifeTime: 22
     Cooldown: 0
 --- !u!114 &1517226363
 MonoBehaviour:
@@ -2557,7 +2557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
   ResetScaleOnGet: 1
-  parentType: 1
+  parentType: 2
   Prefab: {fileID: 6734185159865417342, guid: f16ed6d3139a5484c8382b4ce1102dbc, type: 3}
   capacity: 100
 --- !u!114 &2027540384
@@ -2574,7 +2574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo:
     ShotDamage: 10
-    ShotSpeed: 0
+    ShotSpeed: 1
     ShotLifeTime: 2
     Cooldown: 0.1
 --- !u!114 &2027540385

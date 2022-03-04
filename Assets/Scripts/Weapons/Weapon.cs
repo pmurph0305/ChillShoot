@@ -39,7 +39,7 @@ public abstract class Weapon : MonoBehaviour
     if (timer.Update())
     {
       Shoot();
-      timer.Reset();
+      timer.Reset(true);
     }
     OnUpdate();
   }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TransformDirector : TravelDirector
 {
   [SerializeField] Transform _transform;
-  [SerializeField] Direction direction;
+  [SerializeField] protected Direction direction;
   public enum Direction
   {
     Up,

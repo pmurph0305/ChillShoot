@@ -17,4 +17,9 @@ public abstract class TravelDirector : MonoBehaviour
   {
     return travelDirection;
   }
+
+  public virtual void UpdateMovement(WeaponInfo weaponInfo)
+  {
+    transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
+  }
 }
