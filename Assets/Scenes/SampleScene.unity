@@ -737,6 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 2
   Prefab: {fileID: 4387108056059798180, guid: 9e9222e2ed0beff4c8c5c4f773696644, type: 3}
   capacity: 100
@@ -814,6 +815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 1
   Prefab: {fileID: 6367144414600344108, guid: 0b1adca17d561f943931f9bb73639c78, type: 3}
   capacity: 100
@@ -922,6 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 2
   Prefab: {fileID: 3587576049261919546, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
   capacity: 100
@@ -1026,6 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 1
   Prefab: {fileID: 6686872759568759905, guid: 84551c7e808ba68478291df3a85e690f, type: 3}
   capacity: 2048
@@ -1669,7 +1673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1474936478
 Transform:
   m_ObjectHideFlags: 0
@@ -1719,6 +1723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 2
   Prefab: {fileID: 1793865229171533960, guid: 58879b8477758ca419dae84cfed3fd73, type: 3}
   capacity: 100
@@ -1844,6 +1849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 2
   Prefab: {fileID: 4390567009046939577, guid: b3cabfd138045c54a87ed01b44318a82, type: 3}
   capacity: 100
@@ -2536,7 +2542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnTransform: {fileID: 0}
+  SpawnTransform: {fileID: 2027540381}
 --- !u!114 &2027540383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2550,6 +2556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 1
   Prefab: {fileID: 6734185159865417342, guid: f16ed6d3139a5484c8382b4ce1102dbc, type: 3}
   capacity: 100
@@ -2567,9 +2574,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo:
     ShotDamage: 10
-    ShotSpeed: 5
+    ShotSpeed: 0
     ShotLifeTime: 2
-    Cooldown: 0
+    Cooldown: 0.1
 --- !u!114 &2027540385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2681,6 +2688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
+  ResetScaleOnGet: 1
   parentType: 2
   Prefab: {fileID: 7835464467613785700, guid: 4451b937ea799014eafdc119c29e7a43, type: 3}
   capacity: 100

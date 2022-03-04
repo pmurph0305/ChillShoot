@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6468396436977405787}
   - component: {fileID: 260710981316584060}
   - component: {fileID: 4587878716984747343}
-  - component: {fileID: -2432538513432921933}
+  - component: {fileID: 5234707825921152448}
+  - component: {fileID: 4210162056259095853}
   m_Layer: 11
   m_Name: HomingShot
   m_TagString: HomingDirBullet
@@ -102,7 +103,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-2432538513432921933
+--- !u!114 &5234707825921152448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,12 +112,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 7835464467613785700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e478740f943450a4798935712dc3c72c, type: 3}
+  m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 4587878716984747343}
-  travelDirection: {x: 0, y: 0, z: 0}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
+  director: {fileID: 4210162056259095853}
+  DestroyOnHit: 1
+  DestroyAfterXHits: 0
+  damageCooldown: 0.25
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  DamagedEnemiesCount: 0
+--- !u!114 &4210162056259095853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7835464467613785700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a524a683c828f8a44a2ad3e47c9e190c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelDirection: {x: 0, y: 0, z: 0}

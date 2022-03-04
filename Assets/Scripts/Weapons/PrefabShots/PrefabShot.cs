@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using System;
+
+
+//TODO: A separate component that just returns the travel direction, so we can use different combinations and mix and match.
+
 /// <summary>
 /// An abstract class so we can create different types of Prefab Shots and place those onto items but retain the same pool and dictionary functionality.
 /// Responsible for tracking its own life-time, updating its movement, and getting its travel direction for updating movement.
 /// Also responsible for disabling/releasing to the pool when it hits an enemy (OnHitEnemy is called from the WeaponInfo class)
 /// </summary>
-public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot
+public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot
 {
-  protected WeaponInfo weaponInfo;
+  public WeaponInfo weaponInfo { get; protected set; }
+
   [SerializeField] Collider2D col;
-  [SerializeField] protected Vector3 travelDirection;
   [SerializeField] protected Timer lifeTimer;
+
+  [SerializeField] TravelDirector director;
+
   public IObjectPool<PrefabShot> pool;
 
   //todo: number of hits before destroy/release
@@ -50,7 +57,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   /// <returns></returns>
   protected virtual Vector3 GetTravelDirection()
   {
-    return travelDirection;
+    return director.GetTravelDirection();
   }
 
   /// <summary>
@@ -58,8 +65,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
   /// </summary>
   protected virtual void UpdateMovement()
   {
-    travelDirection = GetTravelDirection();
-    transform.position += Time.deltaTime * weaponInfo.ShotSpeed * travelDirection;
+    transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
   }
 
   /// <summary>
@@ -72,6 +78,7 @@ public abstract class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeapon
     lifeTimer.Reset(weaponInfo.ShotLifeTime);
     NumberOfHits = 0;
     OnGetFromPoolAction?.Invoke(this);
+    director.OnGetFromPool(this);
   }
 
   /// <summary>

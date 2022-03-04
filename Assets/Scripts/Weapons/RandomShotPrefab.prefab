@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 692242260146959259}
   - component: {fileID: 6035159550670757564}
   - component: {fileID: 8067180041430178191}
-  - component: {fileID: 6811523591860763980}
+  - component: {fileID: -3823853421912480215}
+  - component: {fileID: 4103529498289093500}
   m_Layer: 11
   m_Name: RandomShotPrefab
   m_TagString: RandomDirBullet
@@ -102,7 +103,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6811523591860763980
+--- !u!114 &-3823853421912480215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,17 +112,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 4387108056059798180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c304b1bae5cf6cd4bbfb107b102dcc25, type: 3}
+  m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 8067180041430178191}
-  travelDirection: {x: 0, y: 0, z: 0}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
+  director: {fileID: 4103529498289093500}
   DestroyOnHit: 1
   DestroyAfterXHits: 0
+  damageCooldown: 0.25
   mask:
     serializedVersion: 2
     m_Bits: 128
+  DamagedEnemiesCount: 0
+--- !u!114 &4103529498289093500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4387108056059798180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a0bd83abaa69649a399be9f55094a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelDirection: {x: 0, y: 0, z: 0}

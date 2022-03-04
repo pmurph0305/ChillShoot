@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7497882720171487041}
   - component: {fileID: 3627565471047844454}
   - component: {fileID: 3498506225980025904}
-  - component: {fileID: 3709760473020614564}
+  - component: {fileID: 3742237322961764883}
   - component: {fileID: 2633672018410860109}
+  - component: {fileID: -5806275856119994195}
   m_Layer: 11
   m_Name: FlameBullet
   m_TagString: FlameBullet
@@ -113,7 +114,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8430384, y: 0.64422053}
   m_EdgeRadius: 0
---- !u!114 &3709760473020614564
+--- !u!114 &3742237322961764883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,15 +123,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6734185159865417342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93abb019bce612e44a90a665cd2b4a7f, type: 3}
+  m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 3498506225980025904}
-  travelDirection: {x: 0, y: 0, z: 0}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
+  director: {fileID: -5806275856119994195}
   DestroyOnHit: 1
   DestroyAfterXHits: 0
   damageCooldown: 0.25
@@ -138,7 +139,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   DamagedEnemiesCount: 0
-  detachTime: 0.25
 --- !u!114 &2633672018410860109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,8 +151,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77371988c3f993f43bcef1f48d6bfc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shot: {fileID: 3709760473020614564}
+  shot: {fileID: 3742237322961764883}
   DelayForTransformation: 1
   FinalScale: {x: 0, y: 0, z: 0}
   EaseType: 17
   TweenTime: 1
+--- !u!114 &-5806275856119994195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734185159865417342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelDirection: {x: 0, y: 0, z: 0}
+  _transform: {fileID: 7497882720171487041}
+  direction: 1

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransformShot : PrefabShot
+public class TransformDirector : TravelDirector
 {
   [SerializeField] Transform _transform;
   [SerializeField] Direction direction;
@@ -13,7 +13,8 @@ public class TransformShot : PrefabShot
     Left,
     Right
   }
-  protected override Vector3 GetTravelDirection()
+
+  protected override Vector3 GetNewTravelDirection(WeaponInfo info)
   {
     switch (direction)
     {

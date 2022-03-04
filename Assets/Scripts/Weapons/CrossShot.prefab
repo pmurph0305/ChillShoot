@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3286611544784370103}
   - component: {fileID: 8630590963607803024}
-  - component: {fileID: 7772493164138854448}
   - component: {fileID: 8438769003627133638}
+  - component: {fileID: 5198855746583636509}
+  - component: {fileID: -1900515133732688777}
   m_Layer: 11
   m_Name: CrossShot
   m_TagString: CrossTransformBullet
@@ -86,24 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7772493164138854448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793865229171533960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 707c1735d195b3a4dac0603ce5bf8ee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 8438769003627133638}
-  travelDirection: {x: 0, y: 0, z: 0}
-  lifeTimer:
-    CurrentTime: 0
-    _EndTime: 0
-    _IsFinished: 0
 --- !u!61 &8438769003627133638
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -130,3 +113,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5198855746583636509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793865229171533960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 8438769003627133638}
+  lifeTimer:
+    CurrentTime: 0
+    _EndTime: 0
+    _IsFinished: 0
+  director: {fileID: -1900515133732688777}
+  DestroyOnHit: 1
+  DestroyAfterXHits: 0
+  damageCooldown: 0.25
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  DamagedEnemiesCount: 0
+--- !u!114 &-1900515133732688777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793865229171533960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fc32c61bc546d4ca5671e30fb813a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelDirection: {x: 0, y: 0, z: 0}

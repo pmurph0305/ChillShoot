@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 338003387198270469}
   - component: {fileID: 6839476082057347362}
   - component: {fileID: 7124663142496814609}
-  - component: {fileID: -6392010584537174688}
+  - component: {fileID: 1200739048070270120}
+  - component: {fileID: 351043473198996397}
   m_Layer: 11
   m_Name: TransformShot
   m_TagString: ListTransformBullet
@@ -102,7 +103,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-6392010584537174688
+--- !u!114 &1200739048070270120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,14 +112,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 3587576049261919546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3f1ac9c619104043a91009e4ce17d71, type: 3}
+  m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 7124663142496814609}
-  travelDirection: {x: 0, y: 0, z: 0}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
+  director: {fileID: 351043473198996397}
+  DestroyOnHit: 1
+  DestroyAfterXHits: 0
+  damageCooldown: 0.25
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  DamagedEnemiesCount: 0
+--- !u!114 &351043473198996397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3587576049261919546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelDirection: {x: 0, y: 0, z: 0}
   _transform: {fileID: 338003387198270469}
   direction: 0

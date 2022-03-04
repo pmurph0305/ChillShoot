@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// Base weapon class that handles getting the weaponinfo from the weapon container, handling the cooldown timer of the weapon, and telling the weapon to shoot.
 /// WeaponInfo's are added to the static dictionary by the gameobjects tag that this script is on.
