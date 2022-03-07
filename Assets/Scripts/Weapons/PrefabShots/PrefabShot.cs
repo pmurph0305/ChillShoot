@@ -12,7 +12,7 @@ using System;
 /// Responsible for tracking its own life-time, updating its movement, and getting its travel direction for updating movement.
 /// Also responsible for disabling/releasing to the pool when it hits an enemy (OnHitEnemy is called from the WeaponInfo class)
 /// </summary>
-public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot
+public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITargetProvider
 {
   public WeaponInfo weaponInfo { get; protected set; }
 
@@ -66,7 +66,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot
   protected virtual void UpdateMovement()
   {
     // transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
-    director.UpdateMovement(weaponInfo);
+    director.UpdateMovement(weaponInfo.ShotSpeed);
   }
 
   /// <summary>
@@ -79,7 +79,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot
     lifeTimer.Reset(weaponInfo.ShotLifeTime);
     NumberOfHits = 0;
     OnGetFromPoolAction?.Invoke(this);
-    director.OnGetFromPool(this);
+    director.OnGetFromPool();
   }
 
   /// <summary>
@@ -228,5 +228,14 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot
       EnemyController ec = EnemyDictionary.Get(other);
       DamagedEnemies.Remove(ec);
     }
+  }
+
+  public Transform GetTarget()
+  {
+    if (weaponInfo is TargetedWeaponInfo)
+    {
+      return ((TargetedWeaponInfo)weaponInfo).target;
+    }
+    return null;
   }
 }

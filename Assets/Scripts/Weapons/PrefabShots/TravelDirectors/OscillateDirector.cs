@@ -9,10 +9,11 @@ public class OscillateDirector : TransformDirector
   [SerializeField] float frequency = 10f;
   [SerializeField] float amplitude = 1f;
   [SerializeField] float phaseShift = 1f;
-  protected override Vector3 GetNewTravelDirection(WeaponInfo info)
+  protected override Vector3 GetNewTravelDirection()
   {
     time = 0.0f;
-    return base.GetNewTravelDirection(info);
+    previousS = 0.0f;
+    return base.GetNewTravelDirection();
   }
 
   public override Vector3 GetTravelDirection()
@@ -45,8 +46,13 @@ public class OscillateDirector : TransformDirector
     return oscillation;
   }
 
-  public override void UpdateMovement(WeaponInfo weaponInfo)
+  public override void UpdateMovement(float movementSpeed)
   {
-    transform.position = transform.position + GetTravelDirection() * Time.deltaTime * weaponInfo.ShotSpeed + GetOscillationVector();
+    transform.position = transform.position + GetTravelDirection() * Time.deltaTime * movementSpeed + GetOscillationVector();
+  }
+
+  public override Vector3 GetScaledMovement(float movementSpeed)
+  {
+    return GetTravelDirection() * Time.deltaTime * movementSpeed + GetOscillationVector();
   }
 }

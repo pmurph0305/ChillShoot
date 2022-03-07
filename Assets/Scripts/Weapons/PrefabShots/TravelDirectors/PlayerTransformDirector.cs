@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerTransformDirector : TravelDirector
 {
-  protected override Vector3 GetNewTravelDirection(WeaponInfo info)
+  protected override Vector3 GetNewTravelDirection()
   {
     return PlayerController.PlayerTransform.up;
   }

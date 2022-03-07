@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConstantDirector : TravelDirector
 {
-  protected override Vector3 GetNewTravelDirection(WeaponInfo info)
+  protected override Vector3 GetNewTravelDirection()
   {
     return travelDirection;
   }

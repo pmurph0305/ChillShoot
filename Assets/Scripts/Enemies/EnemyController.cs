@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 using System;
-public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
+public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITargetProvider
 {
   [SerializeField] public float speed = 1;
 
@@ -35,6 +35,9 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
 
   [SerializeField] float updatePathTime = 1f;
   Timer agentPathTimer;
+
+
+  [SerializeField] TravelDirector travelDirector;
 
   public event Action<EnemyController> OnEnemyReleased;
   // private void Update()
@@ -72,15 +75,17 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
     }
     else
     {
-      Vector3 toPlayer = (PlayerController.PlayerPosition - t.position);
-      dir = (toPlayer).normalized;
+      // Vector3 toPlayer = (PlayerController.PlayerPosition - t.position);
+      // dir = (toPlayer).normalized;
       // dir = toPlayer.FastNormalized();
       // why fixed delta time?
-      Vector3 position = t.position + speed * Time.fixedDeltaTime * dir;
+      Vector3 position = t.position + travelDirector.GetScaledMovement(speed);
+      // rb2d.MovePosition(position);
       rb2d.MovePosition(position);
       damageTimer.FixedUpdate();
     }
   }
+
 
   public void OnHitFromShot(float damage)
   {
@@ -156,6 +161,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
       agent.SetDestination(PlayerController.PlayerPosition);
     }
     EnemyDictionary.AddActive(col, this);
+    travelDirector.OnGetFromPool();
   }
 
   IObjectPool<EnemyController> pool;
@@ -184,5 +190,10 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>
       agent.updateRotation = false;
       agent.updateUpAxis = false;
     }
+  }
+
+  public Transform GetTarget()
+  {
+    return PlayerController.PlayerTransform;
   }
 }

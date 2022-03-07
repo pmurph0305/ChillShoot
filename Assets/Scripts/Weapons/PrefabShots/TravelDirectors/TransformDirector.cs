@@ -14,7 +14,7 @@ public class TransformDirector : TravelDirector
     Right
   }
 
-  protected override Vector3 GetNewTravelDirection(WeaponInfo info)
+  protected override Vector3 GetNewTravelDirection()
   {
     switch (direction)
     {

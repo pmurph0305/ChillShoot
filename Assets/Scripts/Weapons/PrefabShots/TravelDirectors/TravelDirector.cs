@@ -6,20 +6,30 @@ public abstract class TravelDirector : MonoBehaviour
 {
   [SerializeField] protected Vector3 travelDirection;
 
-  public virtual void OnGetFromPool(PrefabShot shot)
+  public virtual void OnGetFromPool()
   {
-    travelDirection = GetNewTravelDirection(shot.weaponInfo);
+    travelDirection = GetNewTravelDirection();
   }
 
-  protected abstract Vector3 GetNewTravelDirection(WeaponInfo info);
+  protected abstract Vector3 GetNewTravelDirection();
 
   public virtual Vector3 GetTravelDirection()
   {
     return travelDirection;
   }
 
-  public virtual void UpdateMovement(WeaponInfo weaponInfo)
+  public virtual void UpdateMovement(float movementSpeed)
   {
-    transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
+    transform.position += GetScaledMovement(movementSpeed);
+  }
+
+  /// <summary>
+  /// Gets movement vector for this frame.
+  /// </summary>
+  /// <param name="movementSpeed"></param>
+  /// <returns>Movement vector already scaled by time.delta time.</returns>
+  public virtual Vector3 GetScaledMovement(float movementSpeed)
+  {
+    return Time.deltaTime * movementSpeed * GetTravelDirection();
   }
 }
