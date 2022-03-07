@@ -82,7 +82,7 @@
      <Compile Include="Assets\Scripts\Weapons\WeaponInfo-Data\WeaponInfo.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\TravelDirector.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\BaseClasses\TravelDirector.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
@@ -118,6 +118,8 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\ITargetProvider.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\ContinuousTrackedTransformDirector.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\BaseClasses\MathDirector.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\OrbitDirector.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

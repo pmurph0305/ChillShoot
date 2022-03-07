@@ -10,6 +10,8 @@ TagManager:
   - ListTransformBullet
   - CrossTransformBullet
   - FlameBullet
+  - OscillateBullet
+  - OrbitBullet
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OscillateDirector : TransformDirector
+public class OscillateDirector : MathDirector
 {
   float time = 0.0f;
   Vector3 oscillation = Vector3.zero;
@@ -13,16 +13,11 @@ public class OscillateDirector : TransformDirector
   {
     time = 0.0f;
     previousS = 0.0f;
-    return base.GetNewTravelDirection();
-  }
-
-  public override Vector3 GetTravelDirection()
-  {
-    return travelDirection;
+    return transform.up;
   }
 
   float previousS;
-  Vector3 GetOscillationVector()
+  protected override Vector3 GetMathVector()
   {
     time += Time.deltaTime;
     float s = amplitude * Mathf.Sin(time * frequency + phaseShift);
@@ -44,15 +39,5 @@ public class OscillateDirector : TransformDirector
         break;
     }
     return oscillation;
-  }
-
-  public override void UpdateMovement(float movementSpeed)
-  {
-    transform.position = transform.position + GetTravelDirection() * Time.deltaTime * movementSpeed + GetOscillationVector();
-  }
-
-  public override Vector3 GetScaledMovement(float movementSpeed)
-  {
-    return GetTravelDirection() * Time.deltaTime * movementSpeed + GetOscillationVector();
   }
 }
