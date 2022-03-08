@@ -66,7 +66,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   protected virtual void UpdateMovement()
   {
     // transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
-    director.UpdateMovement(weaponInfo.ShotSpeed);
+    director.UpdateMovement(weaponInfo.ShotSpeed, Time.deltaTime);
   }
 
   /// <summary>

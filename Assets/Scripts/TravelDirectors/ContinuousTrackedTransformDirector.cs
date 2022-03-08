@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public class ContinuousTrackedTransformDirector : TrackedTransformDirector
 {
-  public override Vector3 GetScaledMovement(float movementSpeed)
+  public override Vector3 GetTravelDirection()
   {
-    return movementSpeed * Time.deltaTime * (target.position - transform.position).normalized;
+    return (target.position - transform.position).normalized;
   }
 }

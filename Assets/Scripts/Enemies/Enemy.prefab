@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6754030371237035193}
   - component: {fileID: -6536042073960072785}
   - component: {fileID: -3150947794679615366}
+  - component: {fileID: -6085521909754321150}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -50
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5611074c7e7ca504792a37591232d463, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,6 +116,8 @@ MonoBehaviour:
   useAgent: 0
   updatePathTime: 1
   travelDirector: {fileID: -3150947794679615366}
+  rotationDirector: {fileID: -6085521909754321150}
+  rotationSpeed: 55
 --- !u!58 &-6754030371237035193
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -151,7 +154,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-3150947794679615366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,3 +169,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   travelDirection: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
+--- !u!114 &-6085521909754321150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686872759568759905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae747d29d48a644c99fddbaae9c7536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  axis: {x: 0, y: 0, z: 1}

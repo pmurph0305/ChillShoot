@@ -32,13 +32,8 @@ public abstract class MathDirector : TravelDirector
 
   protected abstract Vector3 GetMathVector();
 
-  public override void UpdateMovement(float movementSpeed)
+  public override Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
-    transform.position = transform.position + GetTravelDirection() * Time.deltaTime * movementSpeed + GetMathVector();
-  }
-
-  public override Vector3 GetScaledMovement(float movementSpeed)
-  {
-    return GetTravelDirection() * Time.deltaTime * movementSpeed + GetMathVector();
+    return GetTravelDirection() * deltaTime * movementSpeed + GetMathVector();
   }
 }

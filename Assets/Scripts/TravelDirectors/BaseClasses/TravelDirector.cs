@@ -18,9 +18,9 @@ public abstract class TravelDirector : MonoBehaviour
     return travelDirection;
   }
 
-  public virtual void UpdateMovement(float movementSpeed)
+  public virtual void UpdateMovement(float movementSpeed, float deltaTime)
   {
-    transform.position += GetScaledMovement(movementSpeed);
+    transform.position += GetScaledMovement(movementSpeed, deltaTime);
   }
 
   /// <summary>
@@ -28,8 +28,8 @@ public abstract class TravelDirector : MonoBehaviour
   /// </summary>
   /// <param name="movementSpeed"></param>
   /// <returns>Movement vector already scaled by time.delta time.</returns>
-  public virtual Vector3 GetScaledMovement(float movementSpeed)
+  public virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
-    return Time.deltaTime * movementSpeed * GetTravelDirection();
+    return deltaTime * movementSpeed * GetTravelDirection();
   }
 }

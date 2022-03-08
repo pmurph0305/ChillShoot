@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\TravelDirectors\ContinuousTrackedTransformDirector.cs" />
      <Compile Include="Assets\Scripts\Weapons\TargetedPrefabSpawnWeapon.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperiencePickupPool.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
@@ -52,23 +53,24 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\LogoCinematic.cs" />
      <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponDictionary.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\TransformDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\TransformDirector.cs" />
      <Compile Include="Assets\Scripts\Pools\IPoolable.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\PlayerTransformDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\PlayerTransformDirector.cs" />
      <Compile Include="Assets\Scripts\Vector3Extensions.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\Scripts\Enemies\InnerOuterBoxEnemySpawner.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\TargetedWeaponInfoComponent.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\ITargetProvider.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\ShotTransformer.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
      <Compile Include="Assets\Scripts\Jobs\EnemyJobs.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabSpawnWeapon.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\RandomDirectionDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\RandomDirectionDirector.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\TransformSpawnInfo.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\WeaponInfoComponent.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\TrackedTransformDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\TrackedTransformDirector.cs" />
      <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
@@ -81,8 +83,9 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponInfo-Data\WeaponInfo.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\BaseClasses\MathDirector.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\BaseClasses\TravelDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\BaseClasses\TravelDirector.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
@@ -94,11 +97,12 @@
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ListTransformSpawn.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\ConstantDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\OrbitDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\ConstantDirector.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperiencePickup.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\IWeaponInfoContainer.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\OscillateDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\OscillateDirector.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\SingleTransformSpawn.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
      <Compile Include="Assets\Scripts\Pools\PrefabPool.cs" />
@@ -116,10 +120,8 @@
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\ITargetProvider.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\ContinuousTrackedTransformDirector.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\BaseClasses\MathDirector.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\TravelDirectors\OrbitDirector.cs" />
+     <Compile Include="Assets\Scripts\RotationDirector\RotationDirector.cs" />
+     <Compile Include="Assets\Scripts\RotationDirector\RotateAroundDirector.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

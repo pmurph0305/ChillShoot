@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 
 
   [SerializeField] TravelDirector travelDirector;
-
+  [SerializeField] RotationDirector rotationDirector;
   public event Action<EnemyController> OnEnemyReleased;
   // private void Update()
   // {
@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
   //   }
   // }
 
-
+  [SerializeField] float rotationSpeed = 10f;
   private void FixedUpdate()
   {
     if (useAgent)
@@ -79,8 +79,9 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
       // dir = (toPlayer).normalized;
       // dir = toPlayer.FastNormalized();
       // why fixed delta time?
-      Vector3 position = t.position + travelDirector.GetScaledMovement(speed);
+      Vector3 position = t.position + travelDirector.GetScaledMovement(speed, Time.deltaTime);
       // rb2d.MovePosition(position);
+      rotationDirector.UpdateRotation(rotationSpeed);
       rb2d.MovePosition(position);
       damageTimer.FixedUpdate();
     }
