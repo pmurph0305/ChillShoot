@@ -81,7 +81,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
       // why fixed delta time?
       Vector3 position = t.position + travelDirector.GetScaledMovement(speed, Time.deltaTime);
       // rb2d.MovePosition(position);
-      rotationDirector.UpdateRotation(rotationSpeed);
+      rotationDirector.UpdateTransform(rotationSpeed, Time.deltaTime);
       rb2d.MovePosition(position);
       damageTimer.FixedUpdate();
     }
@@ -163,6 +163,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     }
     EnemyDictionary.AddActive(col, this);
     travelDirector.OnGetFromPool();
+    rotationDirector.OnGetFromPool();
   }
 
   IObjectPool<EnemyController> pool;

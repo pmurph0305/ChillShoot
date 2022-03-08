@@ -5,8 +5,8 @@ using UnityEngine;
 public class RotateAroundDirector : RotationDirector
 {
   [SerializeField] Vector3 axis = Vector3.forward;
-  public override void UpdateRotation(float rotationSpeed)
+  public override void UpdateTransform(float rotationSpeed, float deltaTime)
   {
-    transform.RotateAround(transform.position, axis, rotationSpeed * Time.deltaTime);
+    transform.RotateAround(transform.position, axis, rotationSpeed * deltaTime);
   }
 }

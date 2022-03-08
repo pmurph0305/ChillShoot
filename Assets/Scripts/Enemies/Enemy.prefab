@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6536042073960072785}
   - component: {fileID: -3150947794679615366}
   - component: {fileID: -6085521909754321150}
+  - component: {fileID: 4674696689868162492}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -116,7 +117,7 @@ MonoBehaviour:
   useAgent: 0
   updatePathTime: 1
   travelDirector: {fileID: -3150947794679615366}
-  rotationDirector: {fileID: -6085521909754321150}
+  rotationDirector: {fileID: 4674696689868162492}
   rotationSpeed: 55
 --- !u!58 &-6754030371237035193
 CircleCollider2D:
@@ -181,5 +182,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae747d29d48a644c99fddbaae9c7536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0, z: 0, w: 0}
   axis: {x: 0, y: 0, z: 1}
+--- !u!114 &4674696689868162492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686872759568759905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2e0c9050cf5e24c8dd5a35f9601520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FromRotation: {x: 0, y: 0, z: 45}
+  ToRotation: {x: 0, y: 0, z: -45}
+  rotationTime: 1

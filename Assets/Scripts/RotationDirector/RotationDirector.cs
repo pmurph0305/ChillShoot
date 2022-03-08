@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RotationDirector : MonoBehaviour
 {
-
-  [SerializeField] protected Quaternion rotation;
+  protected Quaternion rotation;
   public virtual void OnGetFromPool()
   {
     rotation = GetNewRotation();
@@ -16,12 +15,13 @@ public class RotationDirector : MonoBehaviour
     return Quaternion.identity;
   }
 
-  public virtual void UpdateRotation(float rotationSpeed)
+  public virtual void UpdateTransform(float rotationSpeed, float deltaTime)
   {
-    transform.rotation = GetScaledRotation(rotationSpeed);
+    transform.rotation = GetScaledRotation(rotationSpeed, deltaTime);
   }
 
-  public virtual Quaternion GetScaledRotation(float rotationSpeed)
+
+  public virtual Quaternion GetScaledRotation(float rotationSpeed, float deltaTime)
   {
     return rotation;
   }

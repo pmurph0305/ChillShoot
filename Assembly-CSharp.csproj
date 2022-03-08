@@ -122,6 +122,7 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
      <Compile Include="Assets\Scripts\RotationDirector\RotationDirector.cs" />
      <Compile Include="Assets\Scripts\RotationDirector\RotateAroundDirector.cs" />
+     <Compile Include="Assets\Scripts\RotationDirector\RotateFromToDirector.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
