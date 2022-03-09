@@ -28,4 +28,5 @@ public abstract class TravelOffsetter : MonoBehaviour
   /// <param name="deltaTime"></param>
   /// <returns></returns>
   public abstract Vector3 GetOffset(float deltaTime);
+
 }

@@ -60,11 +60,6 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // so using the rigidbody, we have to do this, but it causes an issue if the spawn location isn't the initial
     // position for an offset shot.
     // update does not have the issue, but then needs to sync transforms.
-    if (justGotFromPool)
-    {
-      justGotFromPool = false;
-      return;
-    }
     Vector3 delta = director.GetScaledMovement(weaponInfo.ShotSpeed, fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
     // transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
     // rb.MovePosition(transform.position + director.GetScaledMovement(weaponInfo.ShotSpeed, Time.deltaTime));
@@ -90,12 +85,13 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   public virtual void OnGetFromPool()
   {
-    justGotFromPool = true;
+    director.OnGetFromPool();
+    rb.MovePosition(director.GetInitialPosition());
+    Physics2D.SyncTransforms();
     DamagedEnemies.Clear();
     lifeTimer.Reset(weaponInfo.ShotLifeTime);
     NumberOfHits = 0;
     OnGetFromPoolAction?.Invoke(this);
-    director.OnGetFromPool();
   }
 
   /// <summary>
@@ -122,26 +118,27 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
 
 
   // Update is called once per frame
-  void Update()
+  // void Update()
+  // {
+  //   UpdateMovement(false);
+  //   if (lifeTimer.Update(Time.deltaTime))
+  //   {
+  //     Release();
+  //   }
+  //   OnUpdate(Time.deltaTime);
+  // }
+
+  // causes issues because on spawn
+  // if we call SyncTransform manually, with the new get initial offset method, it works.
+  void FixedUpdate()
   {
-    UpdateMovement(false);
-    if (lifeTimer.Update(Time.deltaTime))
+    UpdateMovement(true);
+    if (lifeTimer.Update(Time.fixedDeltaTime))
     {
       Release();
     }
-    OnUpdate(Time.deltaTime);
+    OnUpdate(Time.fixedDeltaTime);
   }
-
-
-  // void FixedUpdate()
-  // {
-  //   UpdateMovement(true);
-  //   // if (lifeTimer.Update(Time.fixedDeltaTime))
-  //   // {
-  //   //   Release();
-  //   // }
-  //   // OnUpdate(Time.fixedDeltaTime);
-  // }
 
 
   CircleCollider2D circle;
@@ -176,31 +173,6 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
       DamagedEnemies.Remove(item);
     }
     ReleasedEnemies.Clear();
-    // if (circle == null)
-    // {
-    //   if (col is CircleCollider2D)
-    //   {
-    //     circle = (CircleCollider2D)col;
-    //   }
-    // }
-    // hitColliders = Physics2D.OverlapCircleAll(transform.position, circle.radius * transform.localScale.x, mask);
-    // foreach (var h in hitColliders)
-    // {
-    //   if (EnemyDictionary.Contains(h))
-    //   {
-    //     EnemyController ec = EnemyDictionary.Get(h);
-    //     ec.OnHitFromShot(weaponInfo.ShotDamage);
-    //     NumberOfHits++;
-    //     if (DestroyOnHit)
-    //     {
-    //       if (NumberOfHits >= DestroyAfterXHits)
-    //       {
-    //         Release();
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   /// <summary>

@@ -15,6 +15,12 @@ public abstract class TravelDirector : MonoBehaviour
     }
   }
 
+  public virtual Vector3 GetInitialPosition()
+  {
+    if (offsetter == null) return transform.position;
+    return transform.position + offsetter.GetOffset(0);
+  }
+
   /// <summary>
   /// Called when the travel director is gotten from the pool, used to calculate a new travelDirection
   /// </summary>

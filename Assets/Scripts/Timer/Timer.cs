@@ -88,7 +88,7 @@ public class Timer
   public bool Update()
   {
     CurrentTime += Time.deltaTime;
-    if (CurrentTime >= EndTime)
+    if (CurrentTime > EndTime)
     {
       IsFinished = true;
       OnTimerComplete?.Invoke();
@@ -99,7 +99,7 @@ public class Timer
   public bool Update(float deltaTime)
   {
     CurrentTime += deltaTime;
-    if (CurrentTime >= EndTime)
+    if (CurrentTime > EndTime)
     {
       IsFinished = true;
       OnTimerComplete?.Invoke();
@@ -110,7 +110,7 @@ public class Timer
   public bool FixedUpdate()
   {
     CurrentTime += Time.fixedDeltaTime;
-    if (CurrentTime >= EndTime)
+    if (CurrentTime > EndTime)
     {
       IsFinished = true;
       OnTimerComplete?.Invoke();

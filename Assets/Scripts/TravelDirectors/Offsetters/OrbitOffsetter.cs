@@ -17,8 +17,10 @@ public class OrbitOffsetter : TravelOffsetter
     sincos.y = Mathf.Cos(time);
     Vector2 val = sincos - previous;
     previous = sincos;
-    return val;
+    return transform.right * val.x + transform.up * val.y;
+    // return val;
   }
+
 
   protected override void OnReset()
   {
