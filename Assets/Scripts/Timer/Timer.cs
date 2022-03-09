@@ -96,6 +96,17 @@ public class Timer
     return IsFinished;
   }
 
+  public bool Update(float deltaTime)
+  {
+    CurrentTime += deltaTime;
+    if (CurrentTime >= EndTime)
+    {
+      IsFinished = true;
+      OnTimerComplete?.Invoke();
+    }
+    return IsFinished;
+  }
+
   public bool FixedUpdate()
   {
     CurrentTime += Time.fixedDeltaTime;

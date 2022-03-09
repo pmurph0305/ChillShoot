@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 7302738703840398297}
   - component: {fileID: 6444046386408131818}
   - component: {fileID: 3694788577753294618}
-  - component: {fileID: -3318333837428250266}
+  - component: {fileID: 727988068687592586}
+  - component: {fileID: -2071685634203281712}
+  - component: {fileID: 7864882703971176995}
   m_Layer: 11
   m_Name: OrbitShot
   m_TagString: OrbitBullet
@@ -116,11 +118,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 6444046386408131818}
+  rb: {fileID: 7864882703971176995}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  director: {fileID: -3318333837428250266}
+  director: {fileID: 727988068687592586}
   DestroyOnHit: 1
   DestroyAfterXHits: 0
   damageCooldown: 0.25
@@ -128,7 +131,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   DamagedEnemiesCount: 0
---- !u!114 &-3318333837428250266
+--- !u!114 &727988068687592586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,10 +140,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 755364497373067201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dbb38987931b54fb1f3aca3d5f3eec, type: 3}
+  m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   travelDirection: {x: 0, y: 0, z: 0}
+  offsetter: {fileID: -2071685634203281712}
   _transform: {fileID: 4540452098654643966}
   direction: 0
-  TimeScale: 10
+--- !u!114 &-2071685634203281712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755364497373067201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e42ee5a340f76545befcd7495a7ff45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 5
+--- !u!50 &7864882703971176995
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755364497373067201}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

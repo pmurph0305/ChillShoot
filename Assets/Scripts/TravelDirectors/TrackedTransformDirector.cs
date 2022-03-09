@@ -14,7 +14,7 @@ public class TrackedTransformDirector : TravelDirector
   }
 
   [SerializeField] protected ITargetProvider targetProvider;
-  [SerializeField] protected Transform target;
+  [SerializeField, Tooltip("Just visible for debugging, automatically set by an ITargetProvider attached to this object")] protected Transform target;
   protected override Vector3 GetNewTravelDirection()
   {
     target = targetProvider.GetTarget();

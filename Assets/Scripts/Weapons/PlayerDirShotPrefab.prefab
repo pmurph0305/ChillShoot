@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8068250853018516626}
   - component: {fileID: -8803565517505702046}
   - component: {fileID: 932891991653526923}
+  - component: {fileID: -3504462713427025441}
   m_Layer: 11
   m_Name: PlayerDirShotPrefab
   m_TagString: PlayerDirBullet
@@ -116,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 8068250853018516626}
+  rb: {fileID: -3504462713427025441}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
@@ -141,3 +143,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   travelDirection: {x: 0, y: 0, z: 0}
+  offsetter: {fileID: 0}
+--- !u!50 &-3504462713427025441
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390567009046939577}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

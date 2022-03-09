@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 3714744073347427314}
   - component: {fileID: 1132721477288996033}
   - component: {fileID: 7319299956565395249}
-  - component: {fileID: 2938658894919770732}
+  - component: {fileID: -6735842932802221467}
+  - component: {fileID: 6577008870072845836}
+  - component: {fileID: -6975291183529497512}
   m_Layer: 11
   m_Name: OscillateShot
   m_TagString: OscillateBullet
@@ -116,11 +118,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 1132721477288996033}
+  rb: {fileID: -6975291183529497512}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  director: {fileID: 2938658894919770732}
+  director: {fileID: -6735842932802221467}
   DestroyOnHit: 1
   DestroyAfterXHits: 0
   damageCooldown: 0.25
@@ -128,7 +131,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   DamagedEnemiesCount: 0
---- !u!114 &2938658894919770732
+--- !u!114 &-6735842932802221467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,12 +140,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 6678414005006489578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5bff1b3f85694241b4806a3a90efd6f, type: 3}
+  m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   travelDirection: {x: 0, y: 0, z: 0}
+  offsetter: {fileID: 6577008870072845836}
   _transform: {fileID: 7626576613723309781}
   direction: 0
+--- !u!114 &6577008870072845836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678414005006489578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71c847838c4e6648baaf6fa6aca6d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 1
+  transformDirection: 0
   frequency: 10
   amplitude: 1
-  phaseShift: 0
+--- !u!50 &-6975291183529497512
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678414005006489578}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

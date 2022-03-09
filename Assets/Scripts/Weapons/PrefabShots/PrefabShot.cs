@@ -17,6 +17,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   public WeaponInfo weaponInfo { get; protected set; }
 
   [SerializeField] Collider2D col;
+  [SerializeField] Rigidbody2D rb;
   [SerializeField] protected Timer lifeTimer;
 
   [SerializeField] TravelDirector director;
@@ -52,29 +53,44 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   }
 
   /// <summary>
-  /// Gets the travel direction of the shot
-  /// </summary>
-  /// <returns></returns>
-  protected virtual Vector3 GetTravelDirection()
-  {
-    return director.GetTravelDirection();
-  }
-
-  /// <summary>
   /// Updates the travel direction through GetTravelDirection(), and uses it to update the position of the gameobject.
   /// </summary>
-  protected virtual void UpdateMovement()
+  protected virtual void UpdateMovement(bool fixedDeltaTime = false)
   {
+    // so using the rigidbody, we have to do this, but it causes an issue if the spawn location isn't the initial
+    // position for an offset shot.
+    // update does not have the issue, but then needs to sync transforms.
+    if (justGotFromPool)
+    {
+      justGotFromPool = false;
+      return;
+    }
+    Vector3 delta = director.GetScaledMovement(weaponInfo.ShotSpeed, fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
     // transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
-    director.UpdateMovement(weaponInfo.ShotSpeed, Time.deltaTime);
+    // rb.MovePosition(transform.position + director.GetScaledMovement(weaponInfo.ShotSpeed, Time.deltaTime));
+    // rb.transform.position += director.GetScaledMovement(weaponInfo.ShotDamage, Time.deltaTime);
+    // rb.MovePosition(rb.position + (Vector2)director.GetScaledMovement(weaponInfo.ShotSpeed, Time.fixedDeltaTime));
+    // rb.position = transform.position + delta;
+    if (fixedDeltaTime)
+    {
+      rb.MovePosition(rb.position + (Vector2)delta);
+    }
+    else
+    {
+      transform.position += delta;
+    }
+    // director.UpdateMovement(weaponInfo.ShotSpeed, Time.deltaTime);
   }
 
+  //Because moving through the rigidbody, the moved psoition will use the last moved position.
+  bool justGotFromPool = false;
   /// <summary>
   /// Called when the object is gotten from the object pool. Use like you would OnEnable.<br></br>
   /// Useful for setting a specific target(s) or travel direction when the object is "Shot"
   /// </summary>
   public virtual void OnGetFromPool()
   {
+    justGotFromPool = true;
     DamagedEnemies.Clear();
     lifeTimer.Reset(weaponInfo.ShotLifeTime);
     NumberOfHits = 0;
@@ -108,13 +124,24 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   // Update is called once per frame
   void Update()
   {
-    UpdateMovement();
-    if (lifeTimer.Update())
+    UpdateMovement(false);
+    if (lifeTimer.Update(Time.deltaTime))
     {
       Release();
     }
-    OnUpdate();
+    OnUpdate(Time.deltaTime);
   }
+
+
+  // void FixedUpdate()
+  // {
+  //   UpdateMovement(true);
+  //   // if (lifeTimer.Update(Time.fixedDeltaTime))
+  //   // {
+  //   //   Release();
+  //   // }
+  //   // OnUpdate(Time.fixedDeltaTime);
+  // }
 
 
   CircleCollider2D circle;
@@ -125,7 +152,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// <summary>
   /// Called At the end of Update()
   /// </summary>
-  protected virtual void OnUpdate()
+  protected virtual void OnUpdate(float deltaTime)
   {
     DamagedEnemiesCount = DamagedEnemies.Count;
     if (DestroyOnHit && DestroyAfterXHits == 0 && DamagedEnemiesCount > 0)
@@ -193,7 +220,6 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   {
     weaponInfo = WeaponDictionary.Get(this.gameObject.tag);
     lifeTimer = new Timer(weaponInfo.ShotLifeTime);
-
     //Register this created gameobject to the weapon info's dictionary.
     weaponInfo.Add(this, col);
     OnCreateAction?.Invoke(this);

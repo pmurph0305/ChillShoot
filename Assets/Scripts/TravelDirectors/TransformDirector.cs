@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class TransformDirector : TravelDirector
 {
-  [SerializeField] Transform _transform;
-  [SerializeField] protected Direction direction;
-  public enum Direction
-  {
-    Up,
-    Down,
-    Left,
-    Right
-  }
-
+  [SerializeField, Tooltip("Oriented according to this transform's axis'")] Transform _transform;
+  [SerializeField, Tooltip("Axis direction of specified transform to follow")] protected Direction direction;
   protected override Vector3 GetNewTravelDirection()
   {
     switch (direction)

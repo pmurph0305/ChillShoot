@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3742237322961764883}
   - component: {fileID: 2633672018410860109}
   - component: {fileID: -5806275856119994195}
+  - component: {fileID: -1159196721202292946}
   m_Layer: 11
   m_Name: FlameBullet
   m_TagString: FlameBullet
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 3498506225980025904}
+  rb: {fileID: -1159196721202292946}
   lifeTimer:
     CurrentTime: 0
     _EndTime: 0
@@ -169,5 +171,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   travelDirection: {x: 0, y: 0, z: 0}
+  offsetter: {fileID: 0}
   _transform: {fileID: 7497882720171487041}
   direction: 1
+--- !u!50 &-1159196721202292946
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734185159865417342}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -19,10 +19,10 @@ public class SetParentDelayShot : PrefabShot
     parentDelayTimer.Reset(true);
   }
 
-  protected override void OnUpdate()
+  protected override void OnUpdate(float deltaTime)
   {
-    base.OnUpdate();
-    if (parentDelayTimer.Update())
+    base.OnUpdate(deltaTime);
+    if (parentDelayTimer.Update(deltaTime))
     {
       this.transform.SetParent(null);
     }
