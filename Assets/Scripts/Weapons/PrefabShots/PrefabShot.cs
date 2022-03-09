@@ -50,6 +50,9 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
         Release();
       }
     }
+    enemy.OnEnemyReleased += OnEnemyReleased;
+    enemy.OnHitFromShot(weaponInfo.ShotDamage);
+    DamagedEnemies.Add(enemy, new Timer(damageCooldown));
   }
 
   /// <summary>
@@ -160,18 +163,31 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
         Debug.LogWarning("Still damaging:", kvp.Key.gameObject);
       }
     }
-    foreach (var kvp in DamagedEnemies)
+    foreach (var item in EnteredEnemies)
     {
-      if (kvp.Value.Update())
+      if (!DamagedEnemies.ContainsKey(item))
       {
-        kvp.Value.Reset();
-        kvp.Key.OnHitFromShot(weaponInfo.ShotDamage);
+        OnHitEnemy(item);
       }
+    }
+    foreach (var item in ExitedEnemies)
+    {
+      DamagedEnemies.Remove(item);
     }
     foreach (var item in ReleasedEnemies)
     {
       DamagedEnemies.Remove(item);
     }
+    foreach (var kvp in DamagedEnemies)
+    {
+      if (kvp.Value.Update(deltaTime))
+      {
+        kvp.Value.Reset();
+        kvp.Key.OnHitFromShot(weaponInfo.ShotDamage);
+      }
+    }
+    EnteredEnemies.Clear();
+    ExitedEnemies.Clear();
     ReleasedEnemies.Clear();
   }
 
@@ -198,15 +214,14 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   }
 
 
+  HashSet<EnemyController> EnteredEnemies = new HashSet<EnemyController>();
+
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (EnemyDictionary.ContainsActive(other))
     {
       EnemyController ec = EnemyDictionary.GetActive(other);
-      ec.OnHitFromShot(weaponInfo.ShotDamage);
-      OnHitEnemy(ec);
-      DamagedEnemies.Add(ec, new Timer(damageCooldown));
-      ec.OnEnemyReleased += OnEnemyReleased;
+      EnteredEnemies.Add(ec);
     }
   }
 
@@ -218,13 +233,15 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // Debug.Log("Released.");
   }
 
+  HashSet<EnemyController> ExitedEnemies = new HashSet<EnemyController>();
   private void OnTriggerExit2D(Collider2D other)
   {
     if (EnemyDictionary.Contains(other))
     {
       // Debug.Log("Remove on exit.");
       EnemyController ec = EnemyDictionary.Get(other);
-      DamagedEnemies.Remove(ec);
+      // DamagedEnemies.Remove(ec);
+      ExitedEnemies.Add(ec);
     }
   }
 

@@ -362,7 +362,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -538,8 +538,8 @@ MonoBehaviour:
   weaponInfo:
     ShotDamage: 111
     ShotSpeed: 5
-    ShotLifeTime: 22
-    Cooldown: 0
+    ShotLifeTime: 5
+    Cooldown: 0.1
 --- !u!114 &603117696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,7 +773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &633326188
 Transform:
   m_ObjectHideFlags: 0
@@ -996,7 +996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &757012309
 Transform:
   m_ObjectHideFlags: 0
@@ -1575,14 +1575,14 @@ MonoBehaviour:
   m_Follow: {fileID: 1171662358}
   m_Lens:
     FieldOfView: 34
-    OrthographicSize: 5
+    OrthographicSize: 10
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7769231, y: 1}
+    m_SensorSize: {x: 1.7771204, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1854,7 +1854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1474936478
 Transform:
   m_ObjectHideFlags: 0
@@ -2695,7 +2695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2027540381
 Transform:
   m_ObjectHideFlags: 0
@@ -2797,7 +2797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2030189426
 Transform:
   m_ObjectHideFlags: 0
@@ -2857,8 +2857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo:
     ShotDamage: 111
-    ShotSpeed: 1
-    ShotLifeTime: 22
+    ShotSpeed: 2
+    ShotLifeTime: 5
     Cooldown: 0
 --- !u!114 &2030189430
 MonoBehaviour:
@@ -2899,7 +2899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2142409396
 Transform:
   m_ObjectHideFlags: 0

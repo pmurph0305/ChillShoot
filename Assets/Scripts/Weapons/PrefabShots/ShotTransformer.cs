@@ -13,7 +13,9 @@ public class ShotTransformer : MonoBehaviour
   [SerializeField] float TweenTime;
 
   LTDescr currentTween;
+  [SerializeField] bool isTweening = false;
 
+  int tweenId;
   private void Awake()
   {
     shot.OnCreateAction += OnCreate;
@@ -36,19 +38,21 @@ public class ShotTransformer : MonoBehaviour
 
   public virtual void StartTransformation()
   {
-    currentTween = transform.LeanScale(FinalScale, TweenTime).setFrom(transform.localScale).setEase(EaseType).setDelay(DelayForTransformation);
+    // I believe this is the correct way to do it..
+    tweenId = transform.LeanScale(FinalScale, TweenTime).setFrom(originalScale).setEase(EaseType).setDelay(DelayForTransformation).uniqueId;
   }
 
 
 
   public virtual void OnRelease(PrefabShot s)
   {
-    LeanTween.cancel(currentTween.id);
+    LeanTween.cancel(tweenId);
   }
 
 
   public virtual void OnGetFromPool(PrefabShot s)
   {
+    isTweening = false;
     transform.localScale = originalScale;
     StartTransformation();
   }
