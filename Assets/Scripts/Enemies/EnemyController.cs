@@ -79,9 +79,9 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
       // dir = (toPlayer).normalized;
       // dir = toPlayer.FastNormalized();
       // why fixed delta time?
-      Vector3 position = t.position + travelDirector.GetScaledMovement(speed, Time.deltaTime);
+      Vector3 position = t.position + travelDirector.GetScaledMovement(speed, Time.fixedDeltaTime);
       // rb2d.MovePosition(position);
-      rotationDirector.UpdateTransform(rotationSpeed, Time.deltaTime);
+      rotationDirector.UpdateTransform(rotationSpeed, Time.fixedDeltaTime);
       rb2d.MovePosition(position);
       damageTimer.FixedUpdate();
     }
@@ -143,14 +143,6 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     //   info.OnHitEnemy(other, this);
     // }
   }
-
-  // todo: if on trigger stay is used damage is taken every frame, need to be able to only take damage occasionally depending on weapon.
-  private void OnTriggerEnter2D(Collider2D other)
-  {
-
-  }
-
-
 
   public void OnGetFromPool()
   {

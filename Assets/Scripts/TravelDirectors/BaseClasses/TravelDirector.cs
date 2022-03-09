@@ -46,6 +46,8 @@ public abstract class TravelDirector : MonoBehaviour
     transform.position += GetScaledMovement(movementSpeed, deltaTime);
   }
 
+  Vector3 zero = Vector3.zero;
+
   /// <summary>
   /// Gets the offset from the offsetter if it is used.
   /// </summary>
@@ -53,7 +55,7 @@ public abstract class TravelDirector : MonoBehaviour
   /// <returns></returns>
   protected virtual Vector3 GetOffset(float deltaTime)
   {
-    return offsetter ? offsetter.GetOffset(deltaTime) : Vector3.zero;
+    return offsetter ? offsetter.GetOffset(deltaTime) : zero;
   }
 
   /// <summary>
