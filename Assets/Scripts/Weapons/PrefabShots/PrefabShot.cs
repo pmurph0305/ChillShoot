@@ -55,15 +55,28 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     DamagedEnemies.Add(enemy, new Timer(damageCooldown));
   }
 
+  [SerializeField] bool UseSpeedEaser;
+  [SerializeField] FloatEaser speedEase;
+
+  protected float GetSpeed()
+  {
+    if (UseSpeedEaser)
+    {
+      return speedEase.current;
+    }
+    return weaponInfo.ShotSpeed;
+  }
+
   /// <summary>
   /// Updates the travel direction through GetTravelDirection(), and uses it to update the position of the gameobject.
   /// </summary>
   protected virtual void UpdateMovement(bool fixedDeltaTime = false)
   {
+
     // so using the rigidbody, we have to do this, but it causes an issue if the spawn location isn't the initial
     // position for an offset shot.
     // update does not have the issue, but then needs to sync transforms.
-    Vector3 delta = director.GetScaledMovement(weaponInfo.ShotSpeed, fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
+    Vector3 delta = director.GetScaledMovement(GetSpeed(), fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
     // transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
     // rb.MovePosition(transform.position + director.GetScaledMovement(weaponInfo.ShotSpeed, Time.deltaTime));
     // rb.transform.position += director.GetScaledMovement(weaponInfo.ShotDamage, Time.deltaTime);
@@ -95,6 +108,10 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     lifeTimer.Reset(weaponInfo.ShotLifeTime);
     NumberOfHits = 0;
     OnGetFromPoolAction?.Invoke(this);
+    if (UseSpeedEaser)
+    {
+      speedEase.StartEase(weaponInfo.ShotSpeed);
+    }
   }
 
   /// <summary>
@@ -117,6 +134,10 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // released in on disable to prevent pool issues, see IPoolable comments
     pool.Release(this);
     OnReleaseAction?.Invoke(this);
+    if (UseSpeedEaser)
+    {
+      speedEase.Stop();
+    }
   }
 
 
