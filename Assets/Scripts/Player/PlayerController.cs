@@ -6,6 +6,11 @@ public class PlayerController : MonoBehaviour
 {
   [SerializeField] ExperienceAttractor expAttractor;
   public static Transform PlayerTransform { get; private set; }
+
+  public static Vector3 PlayerVelocity;
+  public static Vector3 PlayerDirection;
+  public static float PlayerSpeed;
+
   public static Vector3 PlayerPosition;
   [SerializeField] float Speed = 1.0f;
   [SerializeField] float Health = 100;
@@ -36,8 +41,11 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
     Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
-
+    Vector3 initial = transform.position;
     transform.position += Speed * Time.deltaTime * movement;
+    PlayerVelocity = (transform.position - initial) / Time.deltaTime;
+    PlayerDirection = PlayerVelocity.normalized;
+    PlayerSpeed = PlayerVelocity.magnitude;
 
     PlayerPosition = transform.position;
     if (movement.sqrMagnitude > 0.1f)

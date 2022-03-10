@@ -55,6 +55,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     DamagedEnemies.Add(enemy, new Timer(damageCooldown));
   }
 
+  [SerializeField] bool AddPlayerSpeed;
   [SerializeField] bool UseSpeedEaser;
   [SerializeField] FloatEaser speedEase;
 
@@ -62,9 +63,22 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   {
     if (UseSpeedEaser)
     {
-      return speedEase.current;
+      return speedEase.current + addedPlayerSpeed;
     }
-    return weaponInfo.ShotSpeed;
+    return weaponInfo.ShotSpeed + addedPlayerSpeed;
+  }
+
+  [SerializeField] float addedPlayerSpeed = 0.0f;
+  protected void SetPlayerSpeedParameters()
+  {
+    // unit vector, instead of using player velocity
+    Vector3 playerDirection = PlayerController.PlayerDirection;
+    // is a unit vector
+    Vector3 intialDir = director.GetTravelDirection();
+    // amount of player speed in the same direction of the travel direction.
+    float dot = Vector3.Dot(playerDirection, intialDir); // both unit vectors.
+    addedPlayerSpeed = dot * PlayerController.PlayerSpeed;
+    // }
   }
 
   /// <summary>
@@ -72,16 +86,10 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   protected virtual void UpdateMovement(bool fixedDeltaTime = false)
   {
-
     // so using the rigidbody, we have to do this, but it causes an issue if the spawn location isn't the initial
     // position for an offset shot.
     // update does not have the issue, but then needs to sync transforms.
     Vector3 delta = director.GetScaledMovement(GetSpeed(), fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
-    // transform.position += Time.deltaTime * weaponInfo.ShotSpeed * GetTravelDirection();
-    // rb.MovePosition(transform.position + director.GetScaledMovement(weaponInfo.ShotSpeed, Time.deltaTime));
-    // rb.transform.position += director.GetScaledMovement(weaponInfo.ShotDamage, Time.deltaTime);
-    // rb.MovePosition(rb.position + (Vector2)director.GetScaledMovement(weaponInfo.ShotSpeed, Time.fixedDeltaTime));
-    // rb.position = transform.position + delta;
     if (fixedDeltaTime)
     {
       rb.MovePosition(rb.position + (Vector2)delta);
@@ -90,11 +98,8 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     {
       transform.position += delta;
     }
-    // director.UpdateMovement(weaponInfo.ShotSpeed, Time.deltaTime);
   }
 
-  //Because moving through the rigidbody, the moved psoition will use the last moved position.
-  bool justGotFromPool = false;
   /// <summary>
   /// Called when the object is gotten from the object pool. Use like you would OnEnable.<br></br>
   /// Useful for setting a specific target(s) or travel direction when the object is "Shot"
@@ -111,6 +116,10 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     if (UseSpeedEaser)
     {
       speedEase.StartEase(weaponInfo.ShotSpeed);
+    }
+    if (AddPlayerSpeed)
+    {
+      SetPlayerSpeedParameters();
     }
   }
 

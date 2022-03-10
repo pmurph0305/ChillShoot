@@ -103,7 +103,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.2
 --- !u!114 &-8803565517505702046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,12 +126,14 @@ MonoBehaviour:
   DestroyOnHit: 1
   DestroyAfterXHits: 0
   damageCooldown: 0.25
+  AddPlayerSpeed: 1
   UseSpeedEaser: 1
   speedEase:
     start: 0
     current: 0
     duration: 1
     ease: 3
+  addedPlayerSpeed: 0
   mask:
     serializedVersion: 2
     m_Bits: 0
