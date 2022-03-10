@@ -36,10 +36,12 @@ public class ShotTransformer : MonoBehaviour
     originalScale = transform.localScale;
   }
 
+  [SerializeField] ScaleTweener scaleTweener;
   public virtual void StartTransformation()
   {
     // I believe this is the correct way to do it..
     tweenId = transform.LeanScale(FinalScale, TweenTime).setFrom(originalScale).setEase(EaseType).setDelay(DelayForTransformation).uniqueId;
+    // scaleTweener.StartTween(this.transform, () => { });
   }
 
 
@@ -47,6 +49,7 @@ public class ShotTransformer : MonoBehaviour
   public virtual void OnRelease(PrefabShot s)
   {
     LeanTween.cancel(tweenId);
+    // scaleTweener.Cancel();
   }
 
 

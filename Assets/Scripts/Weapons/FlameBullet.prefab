@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d63eaa03027d9a74698d28fbc9f21a4d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3464d1b41a1549345b7da20d89500a67, type: 3}
   m_Color: {r: 1, g: 0.14148241, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -159,6 +159,14 @@ MonoBehaviour:
   EaseType: 17
   TweenTime: 1
   isTweening: 0
+  scaleTweener:
+    easeOut: 17
+    easeIn: 17
+    tweenInTime: 0.2
+    tweenOutTime: 0.5
+    timeBetweenTweens: 1.3
+    tweenInToScale: {x: 1, y: 1, z: 1}
+    tweenOutToScale: {x: 0, y: 0, z: 0}
 --- !u!114 &-5806275856119994195
 MonoBehaviour:
   m_ObjectHideFlags: 0

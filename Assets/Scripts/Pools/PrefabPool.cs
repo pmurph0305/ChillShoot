@@ -21,7 +21,7 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   /// <summary>
   /// The parent object that pooled objects are created on.
   /// </summary>
-  Transform parent;
+  [SerializeField] Transform parent;
 
   public enum ParentType
   {
@@ -53,9 +53,12 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     }
     else if (parentType == ParentType.None)
     {
-      parent = null;
+      // parent = null;
     }
+    OnAwake();
   }
+
+  protected virtual void OnAwake() { }
 
 
   protected IObjectPool<T> Pool

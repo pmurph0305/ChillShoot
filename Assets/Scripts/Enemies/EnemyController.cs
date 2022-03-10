@@ -97,6 +97,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
   {
     // Debug.Log("Take damage:" + damage);
     health -= damage;
+    DamageDisplayPool.OnEnemyDamagedAction(transform.position, damage);
     if (health < 0)
     {
       // Destroy(this.gameObject);
