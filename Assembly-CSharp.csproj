@@ -112,6 +112,7 @@
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\ListTransformSpawn.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
+     <Compile Include="Assets\Scripts\Particles\BulletParticles.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\ConstantDirector.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperiencePickup.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\IWeaponInfoContainer.cs" />
@@ -133,7 +134,8 @@
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
-     <Compile Include="Assets\Scripts\Particles\BulletParticles.cs" />
+     <Compile Include="Assets\Scripts\Particles\EffectPlayer.cs" />
+     <Compile Include="Assets\Scripts\Particles\EffectPlayerPool.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

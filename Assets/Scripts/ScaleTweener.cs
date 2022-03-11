@@ -22,13 +22,13 @@ public class ScaleTweener
   public void StartTween(RectTransform r, Action OnTweenCompleted)
   {
     idIn = r.LeanScale(tweenInToScale, tweenInTime).setEase(easeIn).setFrom(tweenOutToScale).uniqueId;
-    idOut = r.LeanScale(tweenOutToScale, tweenOutTime).setEase(easeOut).setFrom(tweenInToScale).setDelay(timeBetweenTweens).setOnComplete(OnTweenCompleted).uniqueId;
+    idOut = r.LeanScale(tweenOutToScale, tweenOutTime).setEase(easeOut).setFrom(tweenInToScale).setDelay(tweenInTime + timeBetweenTweens).setOnComplete(OnTweenCompleted).uniqueId;
   }
 
   public void StartTween(Transform t, Action OnTweenCompleted)
   {
     idIn = t.LeanScale(tweenInToScale, tweenInTime).setEase(easeIn).setFrom(tweenOutToScale).uniqueId;
-    idOut = t.LeanScale(tweenOutToScale, tweenOutTime).setEase(easeOut).setFrom(tweenInToScale).setDelay(timeBetweenTweens).setOnComplete(OnTweenCompleted).uniqueId;
+    idOut = t.LeanScale(tweenOutToScale, tweenOutTime).setEase(easeOut).setFrom(tweenInToScale).setDelay(tweenInTime + timeBetweenTweens).setOnComplete(OnTweenCompleted).uniqueId;
   }
 
   public void Cancel()

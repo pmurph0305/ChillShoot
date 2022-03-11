@@ -51,6 +51,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
         Release();
       }
     }
+    EffectPlayerPool.StartEffect(transform.position);
     enemy.OnEnemyReleased += OnEnemyReleased;
     enemy.OnHitFromShot(weaponInfo.ShotDamage);
     DamagedEnemies.Add(enemy, new Timer(damageCooldown));

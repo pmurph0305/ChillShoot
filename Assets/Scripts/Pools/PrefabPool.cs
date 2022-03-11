@@ -21,7 +21,7 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   /// <summary>
   /// The parent object that pooled objects are created on.
   /// </summary>
-  [SerializeField] Transform parent;
+  [SerializeField, Tooltip("Allows for specifying a transform for pooled objects to spawn as a child of.")] Transform parent;
 
   public enum ParentType
   {
