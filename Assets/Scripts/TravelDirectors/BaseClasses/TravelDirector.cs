@@ -4,8 +4,10 @@ using UnityEngine;
 
 public abstract class TravelDirector : MonoBehaviour
 {
+  [SerializeField] Transform visual;
   [SerializeField] protected Vector3 travelDirection;
   [SerializeField] protected TravelOffsetter offsetter;
+  [SerializeField] bool FaceTravelDirection = true;
   public virtual void OnGetFromPool()
   {
     travelDirection = GetNewTravelDirection();
@@ -65,6 +67,11 @@ public abstract class TravelDirector : MonoBehaviour
   /// <returns>Movement vector already scaled by time and movementspeed.</returns>
   public virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
-    return deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
+    Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
+    if (FaceTravelDirection && visual != null)
+    {
+      visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
+    }
+    return val;
   }
 }

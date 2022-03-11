@@ -11,6 +11,8 @@ public class ScaleTweener
   [SerializeField] float tweenInTime = 0.2f;
   [SerializeField] float tweenOutTime = 0.2f;
 
+  public float TweenInTime => tweenInTime + timeBetweenTweens;
+
   [SerializeField] float timeBetweenTweens = 0.2f;
   [SerializeField] Vector3 tweenInToScale = Vector3.one;
   [SerializeField] Vector3 tweenOutToScale = Vector3.zero;

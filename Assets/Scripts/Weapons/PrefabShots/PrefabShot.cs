@@ -14,6 +14,7 @@ using System;
 /// </summary>
 public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITargetProvider
 {
+
   public WeaponInfo weaponInfo { get; protected set; }
 
   [SerializeField] Collider2D col;
@@ -78,6 +79,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // amount of player speed in the same direction of the travel direction.
     float dot = Vector3.Dot(playerDirection, intialDir); // both unit vectors.
     addedPlayerSpeed = dot * PlayerController.PlayerSpeed;
+    addedPlayerSpeed = addedPlayerSpeed < 0 ? 0 : addedPlayerSpeed;
     // }
   }
 

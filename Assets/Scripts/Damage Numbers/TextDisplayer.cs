@@ -23,6 +23,7 @@ public class TextDisplayer : MonoBehaviour, IPoolable<TextDisplayer>
     {
       Release();
     });
+    transform.LeanMove(transform.position + new Vector3(Random.Range(-1, 1), Random.Range(0.5f, 1), 0), tweener.TweenInTime);
   }
 
   public void Release()

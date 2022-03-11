@@ -13,6 +13,7 @@ public class TargetedWeaponInfo : WeaponInfo
 
   public virtual void UpdateTarget()
   {
+    if (weaponTransform == null) { Debug.LogWarning("Null weapon transform"); return; }
     List<Collider2D> cols = Physics2D.OverlapCircleAll(weaponTransform.position, 10f, TargetLayerMask).ToList();
     if (cols.Count > 0)
     {

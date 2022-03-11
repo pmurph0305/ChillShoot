@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: New Text 1234
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c64fbd903767b945b55da3ffdc13a1b, type: 2}
   m_sharedMaterial: {fileID: 5226863580179322259, guid: 4c64fbd903767b945b55da3ffdc13a1b, type: 2}
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 4
+  m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -152,10 +152,10 @@ MonoBehaviour:
   text: {fileID: 2767081223850300280}
   DisplayTime: 1
   tweener:
-    easeOut: 27
-    easeIn: 5
+    easeOut: 26
+    easeIn: 27
     tweenInTime: 1
     tweenOutTime: 1
     timeBetweenTweens: 1
-    tweenInToScale: {x: 1, y: 1, z: 1}
+    tweenInToScale: {x: 0.1, y: 0.1, z: 0.1}
     tweenOutToScale: {x: 0, y: 0, z: 0}
