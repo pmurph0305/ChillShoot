@@ -65,6 +65,11 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
   [SerializeField] float rotationSpeed = 10f;
   private void FixedUpdate()
   {
+    OnFixedUpdate();
+  }
+
+  public virtual void OnFixedUpdate()
+  {
     if (useAgent)
     {
       if (agentPathTimer.FixedUpdate())
@@ -126,24 +131,24 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     OnEnemyReleased?.Invoke(this);
   }
 
-  private void OnTriggerStay2D(Collider2D other)
-  {
-    if (other.gameObject.tag == "Player")
-    {
-      // somehow can be null?
-      if (damageTimer == null || !damageTimer.IsFinished) return;
-      damageTimer.Reset(true);
-      PlayerController pc = other.gameObject.GetComponent<PlayerController>();
-      pc.TakeDamage(damage);
-    }
-    // else if (pool != null)
-    // {
-    //   WeaponInfo info = WeaponDictionary.Get(other.gameObject.tag);
-    //   TakeDamage(info.ShotDamage);
-    //   // Destroy(other.gameObject);
-    //   info.OnHitEnemy(other, this);
-    // }
-  }
+  // private void OnTriggerStay2D(Collider2D other)
+  // {
+  //   if (other.gameObject.tag == "Player")
+  //   {
+  //     // somehow can be null?
+  //     if (damageTimer == null || !damageTimer.IsFinished) return;
+  //     damageTimer.Reset(true);
+  //     PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+  //     pc.TakeDamage(damage);
+  //   }
+  //   // else if (pool != null)
+  //   // {
+  //   //   WeaponInfo info = WeaponDictionary.Get(other.gameObject.tag);
+  //   //   TakeDamage(info.ShotDamage);
+  //   //   // Destroy(other.gameObject);
+  //   //   info.OnHitEnemy(other, this);
+  //   // }
+  // }
 
   public void OnGetFromPool()
   {
