@@ -160,22 +160,22 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   void Update()
   {
     UpdateMovement(false);
-    // OnUpdate(Time.deltaTime);
+    OnUpdate(Time.deltaTime);
   }
 
 
 
   // causes issues because on spawn
   // // if we call SyncTransform manually, with the new get initial offset method, it works.
-  void FixedUpdate()
-  {
-    // UpdateMovement(true);
-    // if (!lifeTimer.IsFinished && lifeTimer.Update(Time.fixedDeltaTime))
-    // {
-    //   Release();
-    // }
-    OnUpdate(Time.fixedDeltaTime);
-  }
+  // void FixedUpdate()
+  // {
+  //   // UpdateMovement(true);
+  //   // if (!lifeTimer.IsFinished && lifeTimer.Update(Time.fixedDeltaTime))
+  //   // {
+  //   //   Release();
+  //   // }
+  //   // OnUpdate(Time.fixedDeltaTime);
+  // }
 
   [SerializeField] int DamagedEnemiesCount;
   /// <summary>
