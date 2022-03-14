@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class TravelDirector : MonoBehaviour
 {
+  [SerializeField] RotationDirector rotationDirector;
   [SerializeField] Transform visual;
   [SerializeField] protected Vector3 travelDirection;
   [SerializeField] protected TravelOffsetter offsetter;
@@ -14,6 +15,10 @@ public abstract class TravelDirector : MonoBehaviour
     if (offsetter != null)
     {
       offsetter.Reset();
+    }
+    if (rotationDirector != null)
+    {
+      rotationDirector.OnGetFromPool();
     }
   }
 
@@ -46,7 +51,24 @@ public abstract class TravelDirector : MonoBehaviour
   public virtual void UpdateMovement(float movementSpeed, float deltaTime)
   {
     transform.position += GetScaledMovement(movementSpeed, deltaTime);
+    UpdateRotation(deltaTime);
   }
+
+  public virtual void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
+  {
+    rb2d.MovePosition(rb2d.position + (Vector2)GetScaledMovement(movementSpeed, deltaTime));
+    UpdateRotation(deltaTime);
+  }
+
+  protected virtual void UpdateRotation(float deltaTime)
+  {
+    if (rotationDirector != null)
+    {
+      rotationDirector.UpdateTransform(deltaTime);
+    }
+  }
+
+
 
   Vector3 zero = Vector3.zero;
 
@@ -65,7 +87,7 @@ public abstract class TravelDirector : MonoBehaviour
   /// </summary>
   /// <param name="movementSpeed"></param>
   /// <returns>Movement vector already scaled by time and movementspeed.</returns>
-  public virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
+  protected virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
     Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
     if (FaceTravelDirection && visual != null)
