@@ -14,25 +14,14 @@ using System;
 /// </summary>
 public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITargetProvider
 {
-
   public WeaponInfo weaponInfo { get; protected set; }
-
   [SerializeField] Collider2D col;
   [SerializeField] Rigidbody2D rb;
   [SerializeField] protected Timer lifeTimer;
-
   [SerializeField] TravelDirector director;
-
-  public IObjectPool<PrefabShot> pool;
-
-  //todo: number of hits before destroy/release
-  [SerializeField] bool DestroyOnHit = true;
-  [SerializeField] int DestroyAfterXHits = 0;
-  [SerializeField] float damageCooldown = 0.25f;
-
+  protected IObjectPool<PrefabShot> pool;
   Dictionary<EnemyController, Timer> DamagedEnemies = new Dictionary<EnemyController, Timer>();
-
-  int NumberOfHits = 0;
+  protected int NumberOfHits = 0;
 
   public event Action<PrefabShot> OnCreateAction;
   public event Action<PrefabShot> OnGetFromPoolAction;
@@ -43,10 +32,10 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   public virtual void OnHitEnemy(EnemyController enemy)
   {
-    if (DestroyOnHit)
+    if (weaponInfo.DestroyOnHit)
     {
       NumberOfHits++;
-      if (NumberOfHits >= DestroyAfterXHits)
+      if (NumberOfHits >= weaponInfo.DestroyAfterXHits)
       {
         Release();
       }
@@ -54,10 +43,9 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     EffectPlayerPool.StartEffect(transform.position);
     enemy.OnEnemyReleased += OnEnemyReleased;
     enemy.OnHitFromShot(weaponInfo.ShotDamage);
-    DamagedEnemies.Add(enemy, new Timer(damageCooldown));
+    DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
   }
 
-  [SerializeField] bool AddPlayerSpeed;
   [SerializeField] bool UseSpeedEaser;
   [SerializeField] FloatEaser speedEase;
 
@@ -92,15 +80,28 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // so using the rigidbody, we have to do this, but it causes an issue if the spawn location isn't the initial
     // position for an offset shot.
     // update does not have the issue, but then needs to sync transforms.
-    Vector3 delta = director.GetScaledMovement(GetSpeed(), fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
     if (fixedDeltaTime)
     {
-      rb.MovePosition(rb.position + (Vector2)delta);
+      director.UpdateMovement(rb, GetSpeed(), Time.fixedDeltaTime);
     }
     else
     {
-      transform.position += delta;
+      director.UpdateMovement(GetSpeed(), Time.deltaTime);
     }
+    // Vector3 delta = director.GetScaledMovement(GetSpeed(), fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
+    // if (fixedDeltaTime)
+    // {
+    //   rb.MovePosition(rb.position + (Vector2)delta);
+    // }
+    // else
+    // {
+    //   transform.position += delta;
+    // }
+    // if (rotationDirector != null)
+    // {
+    //   // rb.MoveRotation(rotationDirector.GetScaledRotation(10f, fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime));
+    //   rotationDirector.UpdateTransform(360f, fixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
+    // }
   }
 
   /// <summary>
@@ -116,16 +117,20 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     lifeTimer.Reset(weaponInfo.ShotLifeTime);
     NumberOfHits = 0;
     OnGetFromPoolAction?.Invoke(this);
+    transform.localScale = Vector3.one * weaponInfo.ScaleMultiplier;
     if (UseSpeedEaser)
     {
       speedEase.StartEase(weaponInfo.ShotSpeed);
     }
-    if (AddPlayerSpeed)
+    if (weaponInfo.AddPlayerSpeed)
     {
       SetPlayerSpeedParameters();
     }
+    releaseTweener.StartTweenIn(this.transform, transform.localScale, () => { });
   }
 
+
+  [SerializeField] ShotTweener releaseTweener;
   /// <summary>
   /// Called when the object is about to be released to the pool. Use like you would SetActive(false).
   /// Doesn't actually release the shot, instead that is done when it is actually disabled, otherwise you could re-use it before it is disabled,
@@ -133,7 +138,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   public void Release()
   {
-    this.gameObject.SetActive(false);
+    releaseTweener.StartTweenOut(this.transform, () => this.gameObject.SetActive(false));
   }
 
   private void OnDisable()
@@ -169,17 +174,12 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   void FixedUpdate()
   {
     UpdateMovement(true);
-    if (lifeTimer.Update(Time.fixedDeltaTime))
+    if (!lifeTimer.IsFinished && lifeTimer.Update(Time.fixedDeltaTime))
     {
       Release();
     }
     OnUpdate(Time.fixedDeltaTime);
   }
-
-
-  CircleCollider2D circle;
-  Collider2D[] hitColliders;
-  [SerializeField] LayerMask mask;
 
   [SerializeField] int DamagedEnemiesCount;
   /// <summary>
@@ -188,7 +188,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   protected virtual void OnUpdate(float deltaTime)
   {
     DamagedEnemiesCount = DamagedEnemies.Count;
-    if (DestroyOnHit && DestroyAfterXHits == 0 && DamagedEnemiesCount > 0)
+    if (weaponInfo.DestroyOnHit && weaponInfo.DestroyAfterXHits == 0 && DamagedEnemiesCount > 0)
     {
       Debug.LogWarning("Hit issue?", this.gameObject);
       foreach (var kvp in DamagedEnemies)

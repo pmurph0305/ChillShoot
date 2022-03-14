@@ -12,6 +12,7 @@ TagManager:
   - FlameBullet
   - OscillateBullet
   - OrbitBullet
+  - ShieldBullet
   layers:
   - Default
   - TransparentFX

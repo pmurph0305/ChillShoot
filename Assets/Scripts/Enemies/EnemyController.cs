@@ -38,7 +38,6 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 
 
   [SerializeField] TravelDirector travelDirector;
-  [SerializeField] RotationDirector rotationDirector;
   public event Action<EnemyController> OnEnemyReleased;
   // private void Update()
   // {
@@ -80,14 +79,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     }
     else
     {
-      // Vector3 toPlayer = (PlayerController.PlayerPosition - t.position);
-      // dir = (toPlayer).normalized;
-      // dir = toPlayer.FastNormalized();
-      // why fixed delta time?
-      Vector3 position = t.position + travelDirector.GetScaledMovement(speed, Time.fixedDeltaTime);
-      // rb2d.MovePosition(position);
-      rotationDirector.UpdateTransform(rotationSpeed, Time.fixedDeltaTime);
-      rb2d.MovePosition(position);
+      travelDirector.UpdateMovement(rb2d, speed, Time.fixedDeltaTime);
       damageTimer.FixedUpdate();
     }
   }
@@ -161,7 +153,6 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     }
     EnemyDictionary.AddActive(col, this);
     travelDirector.OnGetFromPool();
-    rotationDirector.OnGetFromPool();
   }
 
   IObjectPool<EnemyController> pool;

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3587576049261919546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.048715, y: -0.16822293, z: -3.0895224}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e5c6c59a1b7782a419fef1a80231175d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf33b3784221b3c4380f6bcd44f0f54b, type: 3}
   m_Color: {r: 0.4275362, g: 0.3647059, b: 0.9529412, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,6 +126,14 @@ MonoBehaviour:
   DestroyOnHit: 1
   DestroyAfterXHits: 0
   damageCooldown: 0.25
+  AddPlayerSpeed: 1
+  UseSpeedEaser: 0
+  speedEase:
+    start: 0
+    current: 0
+    duration: 0
+    ease: 0
+  addedPlayerSpeed: 0
   mask:
     serializedVersion: 2
     m_Bits: 0
@@ -142,8 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
   offsetter: {fileID: 0}
+  FaceTravelDirection: 1
   _transform: {fileID: 338003387198270469}
   direction: 0
 --- !u!50 &1362736697708873006
