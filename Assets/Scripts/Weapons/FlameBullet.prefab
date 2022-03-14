@@ -140,6 +140,7 @@ MonoBehaviour:
     duration: 0
     ease: 0
   addedPlayerSpeed: 0
+  playerVelocity: {x: 0, y: 0, z: 0}
   shotTweener:
     TweenIn: 1
     TweenOut: 1
@@ -162,11 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetter: {fileID: 0}
   rotationDirector: {fileID: 0}
+  FaceTravelDirection: 0
   visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
-  offsetter: {fileID: 0}
-  FaceTravelDirection: 1
+  additionalVelocity: {x: 0, y: 0, z: 0}
   _transform: {fileID: 7497882720171487041}
   direction: 1
 --- !u!50 &-1159196721202292946

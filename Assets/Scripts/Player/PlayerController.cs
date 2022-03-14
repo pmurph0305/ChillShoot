@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
   [SerializeField] Vector3 d;
   [SerializeField] Vector3 v;
   // Update is called once per frame
+  [SerializeField] Vector3 input;
   void Update()
   {
     Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
     if (movement.sqrMagnitude > 0.1f)
     {
       // todo: fix quick rotate to opposite movement direction?
+      // todo: fix rotating when no input.
       up = Vector3.SmoothDamp(up, movement, ref smoothVel, smoothTime);
       // forward.z = 0;
       transform.rotation = Quaternion.LookRotation(Vector3.forward, up);
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
     s = PlayerSpeed;
     v = PlayerVelocity;
     d = PlayerDirection;
+    input = movement;
   }
   [SerializeField] float AttractorDuration = 3f;
 }
