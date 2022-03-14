@@ -7,6 +7,9 @@ public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
 {
   private IObjectPool<ExperiencePickup> _pool;
   [SerializeField] SpriteRenderer spriteRenderer;
+
+  private Material m;
+
   [SerializeField] Collider2D col;
   public Collider2D GetCollider => col;
 
@@ -14,11 +17,12 @@ public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
 
   public float speed = 2f;
 
-
+  int ColorProperty = Shader.PropertyToID("_Color");
+  int EmissionProperty = Shader.PropertyToID("_EmissionColor");
 
   public void OnCreate()
   {
-
+    m = spriteRenderer.material;
   }
 
   public void OnGetFromPool()
@@ -43,10 +47,17 @@ public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
   }
   [SerializeField] private float ExpVal;
   public float ExperienceValue => ExpVal;
+
+  [SerializeField] Vector4 val;
+  [SerializeField, ColorUsageAttribute(false, true)] Color prop;
   public void SetValue(float value)
   {
     ExpVal = value;
-    spriteRenderer.color = colorList.GetColorForValue(value);
+    // spriteRenderer.color = colorList.GetColorForValue(value);
+    m.color = colorList.GetColorForValue(value);
+    val = colorList.GetEmission4ForValue(value);
+    prop = colorList.GetEmissionForValue(value);
+    m.SetVector(EmissionProperty, colorList.GetEmission4ForValue(value));
   }
 
   void SetColor()
