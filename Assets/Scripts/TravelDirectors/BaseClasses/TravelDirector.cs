@@ -4,12 +4,16 @@ using UnityEngine;
 
 public abstract class TravelDirector : MonoBehaviour
 {
-
-  [SerializeField] RotationDirector rotationDirector;
-  [SerializeField] Transform visual;
-  [SerializeField] protected Vector3 travelDirection;
+  [Header("Travel Director")]
   [SerializeField] protected TravelOffsetter offsetter;
+  [SerializeField] RotationDirector rotationDirector;
   [SerializeField] bool FaceTravelDirection = true;
+  [SerializeField] Transform visual;
+
+
+  [SerializeField] protected Vector3 travelDirection;
+  [SerializeField] Vector3 additionalVelocity;
+
   public virtual void OnGetFromPool()
   {
     travelDirection = GetNewTravelDirection();
@@ -21,9 +25,14 @@ public abstract class TravelDirector : MonoBehaviour
     {
       rotationDirector.OnGetFromPool();
     }
+    if (FaceTravelDirection && visual == null)
+    {
+      // Debug.LogWarning("No visual transform set, so face direction will not work correctly, but setting to this.transform.");
+      visual = this.transform;
+    }
   }
 
-  [SerializeField] Vector3 additionalVelocity;
+
   public void SetAdditionalVelocity(Vector3 velocity)
   {
     additionalVelocity = velocity;

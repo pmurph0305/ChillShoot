@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OscillateOffsetter : DirectionOffsetter
+public class OscillateOffsetter : TravelOffsetter
 {
-
+  [Header("Oscillate Offsetter")]
   [SerializeField] float frequency = 10f;
   [SerializeField] float amplitude = 1f;
 

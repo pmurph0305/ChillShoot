@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LerpOffsetter : DirectionOffsetter
+public class LerpOffsetter : TravelOffsetter
 {
+  [Header("Lerp Offsetter")]
   [SerializeField] float lerpTime = 1f;
   [SerializeField] float lerpAmount = 1f;
-
-
 
   bool toFrom = false;
   float val;

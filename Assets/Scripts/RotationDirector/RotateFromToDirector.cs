@@ -14,7 +14,6 @@ public class RotateFromToDirector : RotationDirector
 
   [SerializeField] Vector3 FromRotation;
   [SerializeField] Vector3 ToRotation;
-  [SerializeField] float rotationTime = 1.0f;
   Quaternion from;
   Quaternion to;
   float angle = 0.0f;
@@ -38,14 +37,12 @@ public class RotateFromToDirector : RotationDirector
     }
     if (goingTo)
     {
-      return Quaternion.RotateTowards(transform.rotation, to, deltaTime / rotationTime * angle);
+      return Quaternion.RotateTowards(transform.rotation, to, deltaTime * rotationSpeed * angle);
     }
     else
     {
-      return Quaternion.RotateTowards(transform.rotation, from, deltaTime / rotationTime * angle);
+      return Quaternion.RotateTowards(transform.rotation, from, deltaTime * rotationSpeed * angle);
     }
-    // t += deltaTime;
-    // return Quaternion.RotateTowards(from, to, )
   }
 
 }

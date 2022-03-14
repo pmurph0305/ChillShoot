@@ -50,7 +50,6 @@
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\IWeaponShot.cs" />
      <Compile Include="Assets\Scripts\ScaleTweener.cs" />
      <Compile Include="Assets\Scripts\TestVectors.cs" />
-     <Compile Include="Assets\Scripts\TravelDirectors\Offsetters\DirectionOffsetter.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\BaseWeaponInfoContainer.cs" />
@@ -137,6 +136,7 @@
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
      <Compile Include="Assets\Scripts\ShotTweener.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\Offsetters\MultiAxisOffsetter.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
