@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RotationDirector : MonoBehaviour
 {
+  [Header("Rotation Director")]
   [SerializeField] protected float rotationSpeed;
   protected Quaternion rotation;
   public virtual void OnGetFromPool()

@@ -5,6 +5,14 @@ using UnityEngine;
 public class RotateFromToDirector : RotationDirector
 {
 
+  [Header("RotatedFromToDirector")]
+  [SerializeField] Vector3 FromRotation;
+  [SerializeField] Vector3 ToRotation;
+  Quaternion from;
+  Quaternion to;
+  float angle = 0.0f;
+  bool goingTo;
+
   private void Awake()
   {
     from = Quaternion.Euler(FromRotation);
@@ -12,12 +20,6 @@ public class RotateFromToDirector : RotationDirector
     angle = Quaternion.Angle(from, to);
   }
 
-  [SerializeField] Vector3 FromRotation;
-  [SerializeField] Vector3 ToRotation;
-  Quaternion from;
-  Quaternion to;
-  float angle = 0.0f;
-  bool goingTo;
   protected override Quaternion GetNewRotation()
   {
     goingTo = true;

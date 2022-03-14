@@ -105,11 +105,12 @@ public abstract class TravelDirector : MonoBehaviour
   /// <returns>Movement vector already scaled by time and movementspeed.</returns>
   protected virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
-    Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime) + additionalVelocity * deltaTime;
+
+    Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
     if (FaceTravelDirection && visual != null)
     {
       visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
     }
-    return val;
+    return val + additionalVelocity * deltaTime;
   }
 }
