@@ -5,8 +5,8 @@ using System;
 [System.Serializable]
 public class ShotTweener
 {
-  [SerializeField] bool TweenIn;
-  [SerializeField] bool TweenOut;
+  [SerializeField] public bool TweenIn;
+  [SerializeField] public bool TweenOut;
   [SerializeField] LeanTweenType easeOut = LeanTweenType.easeInBack;
   [SerializeField] LeanTweenType easeIn = LeanTweenType.easeOutBack;
   [SerializeField] Vector3 StartScale = Vector3.zero;
@@ -21,6 +21,7 @@ public class ShotTweener
     {
       OnTweenCompleted?.Invoke(); return;
     }
+    if (idIn != -1) return;
     idIn = t.LeanScale(toScale, tweenInTime).setEase(easeIn).setFrom(StartScale).setOnComplete(() =>
     {
       OnTweenCompleted?.Invoke();
@@ -34,13 +35,28 @@ public class ShotTweener
     {
       OnTweenCompleted?.Invoke(); return;
     }
-    idOut = t.LeanScale(TweenOutEndScale, tweenOutTime).setEase(easeOut).setFrom(t.localScale).setOnComplete(OnTweenCompleted).uniqueId;
+    if (idOut != -1) return;
+    idOut = t.LeanScale(TweenOutEndScale, tweenOutTime).setEase(easeOut).setFrom(t.localScale).setOnComplete(() =>
+    {
+      OnTweenCompleted?.Invoke();
+      idOut = -1;
+    }).uniqueId;
   }
 
+  public float GetTweenOutDuration()
+  {
+    return TweenOut ? tweenOutTime : 0f;
+  }
 
   public void Cancel()
   {
     LeanTween.cancel(idIn);
     LeanTween.cancel(idOut);
+  }
+
+  public void OnGetFromPool()
+  {
+    idIn = -1;
+    idOut = -1;
   }
 }

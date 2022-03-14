@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+  [SerializeField] bool FollowPlayer;
   [SerializeField] EnemyPool enemyPool;
   Timer spawnTimer;
   [SerializeField] float spawnTime = 0.5f;
@@ -61,6 +62,10 @@ public class EnemySpawner : MonoBehaviour
 
   private void Update()
   {
+    if (FollowPlayer)
+    {
+      transform.position = PlayerController.PlayerPosition;
+    }
     OnUpdate();
   }
 

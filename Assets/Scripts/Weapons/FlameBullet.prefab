@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3627565471047844454}
   - component: {fileID: 3498506225980025904}
   - component: {fileID: 3742237322961764883}
-  - component: {fileID: 2633672018410860109}
   - component: {fileID: -5806275856119994195}
   - component: {fileID: -1159196721202292946}
   m_Layer: 11
@@ -134,10 +133,6 @@ MonoBehaviour:
     _EndTime: 0
     _IsFinished: 0
   director: {fileID: -5806275856119994195}
-  DestroyOnHit: 0
-  DestroyAfterXHits: 0
-  damageCooldown: 0.25
-  AddPlayerSpeed: 0
   UseSpeedEaser: 0
   speedEase:
     start: 0
@@ -145,36 +140,16 @@ MonoBehaviour:
     duration: 0
     ease: 0
   addedPlayerSpeed: 0
-  mask:
-    serializedVersion: 2
-    m_Bits: 0
-  DamagedEnemiesCount: 0
---- !u!114 &2633672018410860109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6734185159865417342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77371988c3f993f43bcef1f48d6bfc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shot: {fileID: 3742237322961764883}
-  DelayForTransformation: 1
-  FinalScale: {x: 0, y: 0, z: 0}
-  EaseType: 17
-  TweenTime: 1
-  isTweening: 0
-  scaleTweener:
+  shotTweener:
+    TweenIn: 1
+    TweenOut: 1
     easeOut: 17
-    easeIn: 17
+    easeIn: 18
+    StartScale: {x: 0, y: 0, z: 0}
+    TweenOutEndScale: {x: 0, y: 0, z: 0}
     tweenInTime: 0.2
     tweenOutTime: 0.5
-    timeBetweenTweens: 1.3
-    tweenInToScale: {x: 1, y: 1, z: 1}
-    tweenOutToScale: {x: 0, y: 0, z: 0}
+  DamagedEnemiesCount: 0
 --- !u!114 &-5806275856119994195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,8 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationDirector: {fileID: 0}
+  visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
   offsetter: {fileID: 0}
+  FaceTravelDirection: 1
   _transform: {fileID: 7497882720171487041}
   direction: 1
 --- !u!50 &-1159196721202292946

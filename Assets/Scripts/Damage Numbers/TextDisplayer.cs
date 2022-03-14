@@ -19,6 +19,7 @@ public class TextDisplayer : MonoBehaviour, IPoolable<TextDisplayer>
 
   public void OnGetFromPool()
   {
+    transform.localScale = Vector3.zero;
     tweener.StartTween(_rect, () =>
     {
       Release();

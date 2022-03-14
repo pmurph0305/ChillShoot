@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class TravelDirector : MonoBehaviour
 {
+
   [SerializeField] RotationDirector rotationDirector;
   [SerializeField] Transform visual;
   [SerializeField] protected Vector3 travelDirection;
@@ -20,6 +21,12 @@ public abstract class TravelDirector : MonoBehaviour
     {
       rotationDirector.OnGetFromPool();
     }
+  }
+
+  [SerializeField] Vector3 additionalVelocity;
+  public void SetAdditionalVelocity(Vector3 velocity)
+  {
+    additionalVelocity = velocity;
   }
 
   public virtual Vector3 GetInitialPosition()
@@ -89,7 +96,7 @@ public abstract class TravelDirector : MonoBehaviour
   /// <returns>Movement vector already scaled by time and movementspeed.</returns>
   protected virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
-    Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
+    Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime) + additionalVelocity * deltaTime;
     if (FaceTravelDirection && visual != null)
     {
       visual.rotation = Quaternion.LookRotation(Vector3.forward, val);

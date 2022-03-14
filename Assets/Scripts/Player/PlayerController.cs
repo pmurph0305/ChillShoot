@@ -25,8 +25,9 @@ public class PlayerController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    forward = transform.up;
+    up = transform.up;
     PlayerTransform = this.transform;
+    previous = transform.position;
   }
 
   public void TakeDamage(float damage)
@@ -34,34 +35,48 @@ public class PlayerController : MonoBehaviour
     Health -= damage;
   }
 
-  Vector3 forward;
+  Vector3 up;
   Vector3 smoothVel;
   [SerializeField] float smoothTime;
+
+  Vector3 smoothingVel;
+
+  [SerializeField] float s;
+  [SerializeField] Vector3 d;
+  [SerializeField] Vector3 v;
   // Update is called once per frame
   void Update()
   {
     Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
     Vector3 initial = transform.position;
     transform.position += Speed * Time.deltaTime * movement;
-    PlayerVelocity = (transform.position - initial) / Time.deltaTime;
-    PlayerDirection = PlayerVelocity.normalized;
-    PlayerSpeed = PlayerVelocity.magnitude;
 
-    PlayerPosition = transform.position;
+    // UpdatePlayerParameters(false);
     if (movement.sqrMagnitude > 0.1f)
     {
       // todo: fix quick rotate to opposite movement direction?
-      forward = Vector3.SmoothDamp(forward, movement, ref smoothVel, smoothTime);
+      up = Vector3.SmoothDamp(up, movement, ref smoothVel, smoothTime);
       // forward.z = 0;
-      transform.rotation = Quaternion.LookRotation(Vector3.forward, forward);
-      // Vector3 f = transform.rotation * Vector3.up;
-      // Debug.DrawLine(transform.position, transform.position + f * 5, Color.green, 10f);
+      transform.rotation = Quaternion.LookRotation(Vector3.forward, up);
     }
-
     if (Input.GetKeyDown(KeyCode.Space))
     {
       expAttractor.Activate(AttractorDuration);
     }
+
+    UpdatePlayerParameters(movement);
+  }
+
+  Vector3 previous;
+  void UpdatePlayerParameters(Vector3 movement)
+  {
+    PlayerDirection = movement;
+    PlayerSpeed = movement != Vector3.zero ? Speed : 0;
+    PlayerVelocity = transform.up * PlayerSpeed;
+    PlayerPosition = transform.position;
+    s = PlayerSpeed;
+    v = PlayerVelocity;
+    d = PlayerDirection;
   }
   [SerializeField] float AttractorDuration = 3f;
 }

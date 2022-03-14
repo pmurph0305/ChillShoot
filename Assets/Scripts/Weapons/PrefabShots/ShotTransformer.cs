@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using DentedPixel;
+[System.Serializable]
 public class ShotTransformer : MonoBehaviour
 {
   [SerializeField] PrefabShot shot;
@@ -16,6 +16,7 @@ public class ShotTransformer : MonoBehaviour
   [SerializeField] bool isTweening = false;
 
   int tweenId;
+
   private void Awake()
   {
     shot.OnCreateAction += OnCreate;

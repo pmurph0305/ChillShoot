@@ -14,7 +14,7 @@ public class WeaponInfo
   public float DamageCooldown = 0.25f;
   public bool DestroyOnHit = true;
   public int DestroyAfterXHits = 1;
-  public bool AddPlayerSpeed;
+  public bool AddPlayerSpeed = true;
 
   /// <summary>
   /// Dictionary used by enemies to tell the weapon info that a WeaponShot has hit an enemy.<br></br> 

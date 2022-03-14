@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e5c6c59a1b7782a419fef1a80231175d, type: 2}
+  - {fileID: 2100000, guid: a9749588214d31046b657b2a362c63af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cf33b3784221b3c4380f6bcd44f0f54b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 19eb1970474ffec43a32e35d24018413, type: 3}
   m_Color: {r: 0.4275362, g: 0.3647059, b: 0.9529412, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,9 +101,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00000023841858, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.24999999
 --- !u!114 &1200739048070270120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,10 +123,6 @@ MonoBehaviour:
     _EndTime: 0
     _IsFinished: 0
   director: {fileID: 351043473198996397}
-  DestroyOnHit: 1
-  DestroyAfterXHits: 0
-  damageCooldown: 0.25
-  AddPlayerSpeed: 1
   UseSpeedEaser: 0
   speedEase:
     start: 0
@@ -134,9 +130,16 @@ MonoBehaviour:
     duration: 0
     ease: 0
   addedPlayerSpeed: 0
-  mask:
-    serializedVersion: 2
-    m_Bits: 0
+  playerVelocity: {x: 0, y: 0, z: 0}
+  shotTweener:
+    TweenIn: 1
+    TweenOut: 1
+    easeOut: 26
+    easeIn: 27
+    StartScale: {x: 0, y: 0, z: 0}
+    TweenOutEndScale: {x: 0, y: 0, z: 0}
+    tweenInTime: 0.2
+    tweenOutTime: 0.2
   DamagedEnemiesCount: 0
 --- !u!114 &351043473198996397
 MonoBehaviour:
@@ -150,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationDirector: {fileID: 0}
   visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
   offsetter: {fileID: 0}

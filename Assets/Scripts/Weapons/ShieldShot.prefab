@@ -152,7 +152,7 @@ MonoBehaviour:
     duration: 0
     ease: 0
   addedPlayerSpeed: 0
-  releaseTweener:
+  shotTweener:
     TweenIn: 1
     TweenOut: 1
     easeOut: 26
