@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578be66db600e2d4ba9505583683d644, type: 3}
+  m_Name: StepCurve
+  m_EditorClassIdentifier: 
+  OutputClamp01: 0
+  InputClamp01: 0
+  OutputScale: 1
+  values:
+    curveType: 8
+    m: 1
+    k: 0.11
+    v: 0.47
+    h: 0.63
+    r: 0.96
+  presetLabels:
+  - Start 0.25 Wide
+  - Center 0.25 Wide
+  - End 0.25 Wide
+  - 2 Step Curve
+  presetValues:
+  - curveType: 8
+    m: 1
+    k: 0
+    v: 0.25
+    h: 1
+    r: 1
+  - curveType: 8
+    m: 1
+    k: 0.375
+    v: 0.625
+    h: 1
+    r: 1
+  - curveType: 8
+    m: 1
+    k: 0.75
+    v: 1
+    h: 1
+    r: 1
+  - curveType: 8
+    m: 1
+    k: 0.2
+    v: 0.3
+    h: 0.7
+    r: 0.8
