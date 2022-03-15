@@ -37,6 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\LeanTween\Editor\LeanTweenDocumentationEditor.cs" />
+     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurveValuesPropertyDrawer.cs" />
+     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurveEditor.cs" />
+     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurvePropertyDrawer.cs" />
+     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurvePresets.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\2021.2.7f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

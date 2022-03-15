@@ -23,10 +23,6 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   Dictionary<EnemyController, Timer> DamagedEnemies = new Dictionary<EnemyController, Timer>();
   protected int NumberOfHits = 0;
 
-  public event Action<PrefabShot> OnCreateAction;
-  public event Action<PrefabShot> OnGetFromPoolAction;
-  public event Action<PrefabShot> OnReleaseAction;
-
   /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
   /// </summary>
@@ -96,15 +92,16 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   public virtual void OnGetFromPool()
   {
+    Vector3 s = transform.localScale;
     director.OnGetFromPool();
-    rb.MovePosition(director.GetInitialPosition());
-    Physics2D.SyncTransforms();
+    // rb.MovePosition(director.GetInitialPosition());
+    // Physics2D.SyncTransforms();
     DamagedEnemies.Clear();
     shotTweener.OnGetFromPool();
     lifeTimer.Reset(weaponInfo.ShotLifeTime - shotTweener.GetTweenOutDuration());
     NumberOfHits = 0;
-    OnGetFromPoolAction?.Invoke(this);
-    transform.localScale = Vector3.one * weaponInfo.ScaleMultiplier;
+    // OnGetFromPoolAction?.Invoke(this);
+    // transform.localScale = Vector3.one * weaponInfo.ScaleMultiplier;
     if (UseSpeedEaser)
     {
       speedEase.StartEase(weaponInfo.ShotSpeed);
@@ -113,7 +110,8 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     {
       SetPlayerSpeedParameters();
     }
-    shotTweener.StartTweenIn(this.transform, transform.localScale, () => { });
+    shotTweener.StartTweenIn(this.transform, Vector3.one * weaponInfo.ScaleMultiplier, () => { });
+    Debug.Log(s + " : " + transform.localScale, this.transform);
   }
 
 
@@ -143,7 +141,6 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   protected virtual void OnDisabled()
   {
     // released in on disable to prevent pool issues, see IPoolable comments
-    OnReleaseAction?.Invoke(this);
     if (UseSpeedEaser)
     {
       speedEase.Stop();
@@ -243,7 +240,6 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     lifeTimer = new Timer(weaponInfo.ShotLifeTime - shotTweener.GetTweenOutDuration());
     //Register this created gameobject to the weapon info's dictionary.
     weaponInfo.Add(this, col);
-    OnCreateAction?.Invoke(this);
   }
 
 

@@ -208,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &93124607
 Transform:
   m_ObjectHideFlags: 0
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransform: {fileID: 93124607}
 --- !u!1 &117366790
 GameObject:
@@ -1211,7 +1212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &603117692
 Transform:
   m_ObjectHideFlags: 0
@@ -1240,6 +1241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransform: {fileID: 603117692}
 --- !u!114 &603117694
 MonoBehaviour:
@@ -1606,6 +1608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransform: {fileID: 633326188}
 --- !u!1 &647706885
 GameObject:
@@ -1794,7 +1797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &757012309
 Transform:
   m_ObjectHideFlags: 0
@@ -1864,6 +1867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c501300f2f9c72458c7f64ac7bd9553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransforms:
   - {fileID: 981680508}
   - {fileID: 1380619530}
@@ -1911,7 +1915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &923901273
 Transform:
   m_ObjectHideFlags: 0
@@ -2383,10 +2387,11 @@ MonoBehaviour:
   Speed: 5
   Health: 100
   Experience: 0
-  smoothTime: 0.1
+  smoothTime: 0.01
   s: 0
   d: {x: 0, y: 0, z: 0}
   v: {x: 0, y: 0, z: 0}
+  input: {x: 0, y: 0, z: 0}
   AttractorDuration: 3
 --- !u!61 &1171662360
 BoxCollider2D:
@@ -2424,10 +2429,6 @@ PrefabInstance:
     - target: {fileID: 6678414005006489578, guid: 0bfe9ea2cf2f54c44909ea52a989f10c, type: 3}
       propertyPath: m_Name
       value: OscillateShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 6678414005006489578, guid: 0bfe9ea2cf2f54c44909ea52a989f10c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7626576613723309781, guid: 0bfe9ea2cf2f54c44909ea52a989f10c, type: 3}
       propertyPath: m_RootOrder
@@ -2639,7 +2640,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7769517, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2829,6 +2830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c501300f2f9c72458c7f64ac7bd9553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransforms:
   - {fileID: 584845507}
   - {fileID: 667751759}
@@ -3002,6 +3004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransform: {fileID: 1517226361}
 --- !u!224 &1521978255 stripped
 RectTransform:
@@ -3764,6 +3767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 0, y: 0, z: 0}
   SpawnTransform: {fileID: 2027540381}
 --- !u!114 &2027540383
 MonoBehaviour:
@@ -3778,7 +3782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetActiveOnGet: 1
-  ResetScaleOnGet: 1
+  ResetScaleOnGet: 0
   parent: {fileID: 0}
   parentType: 2
   Prefab: {fileID: 6734185159865417342, guid: f16ed6d3139a5484c8382b4ce1102dbc, type: 3}
@@ -3874,6 +3878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransform: {fileID: 2030189426}
 --- !u!114 &2030189428
 MonoBehaviour:
@@ -4049,6 +4054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnScale: {x: 1, y: 1, z: 1}
   SpawnTransform: {fileID: 2142409396}
 --- !u!1001 &127504388879727836
 PrefabInstance:

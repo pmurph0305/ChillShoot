@@ -48,12 +48,15 @@ public abstract class TravelOffsetter : MonoBehaviour
     time = 0.0f;
     primaryAxis = GetTransformDirection(transformDirection);
     OnReset();
+    // sets up the "previous" value that offsets use, so the object doesn't jump position.
+    CalculateOffset();
   }
 
   /// <summary>
   /// Reset the variables used to calculate offsets
   /// </summary>
   protected abstract void OnReset();
+
 
 
   /// <summary>
@@ -63,8 +66,13 @@ public abstract class TravelOffsetter : MonoBehaviour
   /// <returns></returns>
   public virtual Vector3 GetOffset(float deltaTime)
   {
-    time += deltaTime * timeScale;
+    AddTime(deltaTime);
     return CalculateOffset();
+  }
+
+  protected virtual void AddTime(float deltaTime)
+  {
+    time += deltaTime * timeScale;
   }
 
   /// <summary>

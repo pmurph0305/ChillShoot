@@ -15,13 +15,15 @@ GameObject:
   - component: {fileID: -6735842932802221467}
   - component: {fileID: 6577008870072845836}
   - component: {fileID: 2539411111300903972}
+  - component: {fileID: 8558186511916924412}
+  - component: {fileID: 716618588027916560}
   m_Layer: 11
   m_Name: OscillateShot
   m_TagString: OscillateBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7626576613723309781
 Transform:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetter: {fileID: 6577008870072845836}
+  offsetter: {fileID: 716618588027916560}
   rotationDirector: {fileID: 0}
   FaceTravelDirection: 1
   visual: {fileID: 0}
@@ -199,3 +201,60 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8558186511916924412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678414005006489578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e49535bf9f7154c94fe3852f4c2ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 1
+  transformDirection: 3
+  primaryCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: -1
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopCurve: 1
+  lengthOfCurve: 1
+  multiplier: 1
+--- !u!114 &716618588027916560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678414005006489578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0433595f94874ba449fe1134f8d72753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 1
+  transformDirection: 3
+  lerpTime: 1
+  lerpAmount: 1
