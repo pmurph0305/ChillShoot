@@ -111,7 +111,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
       SetPlayerSpeedParameters();
     }
     shotTweener.StartTweenIn(this.transform, Vector3.one * weaponInfo.ScaleMultiplier, () => { });
-    Debug.Log(s + " : " + transform.localScale, this.transform);
+    // Debug.Log(s + " : " + transform.localScale, this.transform);
   }
 
 

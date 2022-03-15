@@ -19,6 +19,10 @@ public abstract class TravelOffsetter : MonoBehaviour
   // Vector is calculated once on reset so that you can keep transforming and rotating it without messing things up.
   [SerializeField, Tooltip("Transform's axis that will be used to offset the object.")] protected Direction transformDirection = Direction.Right;
 
+  protected virtual Vector3 CombineWithDirection(float delta, Vector3 dir)
+  {
+    return dir * delta;
+  }
   protected virtual Vector3 CombineWithDirection(float delta)
   {
     return primaryAxis * delta;
@@ -43,11 +47,11 @@ public abstract class TravelOffsetter : MonoBehaviour
   /// <summary>
   /// Called when the transform should re-start from zero offset. IE: when the object is gotten from a pool.
   /// </summary>
-  public virtual void Reset()
+  public virtual void ResetOffset()
   {
     time = 0.0f;
     primaryAxis = GetTransformDirection(transformDirection);
-    OnReset();
+    OnResetOffset();
     // sets up the "previous" value that offsets use, so the object doesn't jump position.
     CalculateOffset();
   }
@@ -55,7 +59,7 @@ public abstract class TravelOffsetter : MonoBehaviour
   /// <summary>
   /// Reset the variables used to calculate offsets
   /// </summary>
-  protected abstract void OnReset();
+  protected abstract void OnResetOffset();
 
 
 

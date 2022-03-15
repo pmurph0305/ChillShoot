@@ -22,7 +22,7 @@ public class OscillateOffsetter : TravelOffsetter
     return CombineWithDirection(deltaS);
   }
 
-  protected override void OnReset()
+  protected override void OnResetOffset()
   {
     previousS = 0.0f;
   }

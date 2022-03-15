@@ -19,7 +19,7 @@ public abstract class TravelDirector : MonoBehaviour
     travelDirection = GetNewTravelDirection();
     if (offsetter != null)
     {
-      offsetter.Reset();
+      offsetter.ResetOffset();
     }
     if (rotationDirector != null)
     {

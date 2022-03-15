@@ -17,10 +17,10 @@ public class OrbitOffsetter : MultiAxisOffsetter
     // return val;
   }
 
-  protected override void OnReset()
+  protected override void OnResetOffset()
   {
     // so that secondary axis get's recalculated.
-    base.OnReset();
+    base.OnResetOffset();
     previous = Vector2.zero;
     sincos = Vector2.zero;
   }

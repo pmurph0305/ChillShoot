@@ -31,7 +31,7 @@ public class LerpOffsetter : TravelOffsetter
     return CombineWithDirection(change);
   }
 
-  protected override void OnReset()
+  protected override void OnResetOffset()
   {
     // because we want to start at the "halfway" point in time.
     time = 0.5f;
