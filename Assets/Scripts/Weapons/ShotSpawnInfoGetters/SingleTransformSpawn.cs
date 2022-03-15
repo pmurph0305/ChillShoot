@@ -8,7 +8,7 @@ public class SingleTransformSpawn : ShotSpawnInfoGetter
 
   public override TransformSpawnInfo GetTransformSpawnInfo()
   {
-    return new TransformSpawnInfo(GetSpawnPosition(), GetSpawnRotation());
+    return new TransformSpawnInfo(GetSpawnPosition(), GetSpawnRotation(), GetScale());
   }
 
   protected override Vector3 GetSpawnPosition()
@@ -20,6 +20,4 @@ public class SingleTransformSpawn : ShotSpawnInfoGetter
   {
     return SpawnTransform.rotation;
   }
-
-
 }

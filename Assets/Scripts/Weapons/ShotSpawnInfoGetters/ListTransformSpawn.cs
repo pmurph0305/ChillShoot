@@ -18,10 +18,12 @@ public class ListTransformSpawn : ShotSpawnInfoGetter
     return SpawnTransforms[index].rotation;
   }
 
+
+
   TransformSpawnInfo info;
   public override TransformSpawnInfo GetTransformSpawnInfo()
   {
-    info = new TransformSpawnInfo(GetSpawnPosition(), GetSpawnRotation());
+    info = new TransformSpawnInfo(GetSpawnPosition(), GetSpawnRotation(), GetScale());
     index++;
     if (index >= SpawnTransforms.Count)
     {

@@ -102,6 +102,7 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     T t = Get();
     t.transform.position = spawnInfo.Position;
     t.transform.rotation = spawnInfo.Rotation;
+    t.transform.localScale = spawnInfo.Scale;
     t.OnGetFromPool();
     return t;
   }

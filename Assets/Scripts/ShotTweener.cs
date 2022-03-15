@@ -19,6 +19,7 @@ public class ShotTweener
   {
     if (!TweenIn)
     {
+      t.localScale = toScale;
       OnTweenCompleted?.Invoke(); return;
     }
     if (idIn != -1) return;
@@ -33,6 +34,7 @@ public class ShotTweener
   {
     if (!TweenOut)
     {
+      t.localScale = TweenOutEndScale;
       OnTweenCompleted?.Invoke(); return;
     }
     if (idOut != -1) return;

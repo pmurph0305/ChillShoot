@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class ShotSpawnInfoGetter : MonoBehaviour, IGetShotSpawnInfo
 {
+  [SerializeField] protected Vector3 SpawnScale = Vector3.one;
 
   /// <summary>
   /// Gets the position to spawn a weapon's shot at.
@@ -23,5 +24,7 @@ public abstract class ShotSpawnInfoGetter : MonoBehaviour, IGetShotSpawnInfo
   /// </summary>
   /// <returns></returns>
   public abstract TransformSpawnInfo GetTransformSpawnInfo();
+
+  public virtual Vector3 GetScale() { return SpawnScale; }
 
 }
