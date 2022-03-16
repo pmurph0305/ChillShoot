@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
   [SerializeField] float Experience = 0;
 
   [Header("Speed")]
+  [SerializeField] float BaseSpeed = 1.0f;
   [SerializeField] float Speed = 1.0f;
-
 
   [Header("HP")]
   [SerializeField] float BaseHealth = 100;
@@ -35,6 +35,13 @@ public class PlayerController : MonoBehaviour
     LevelUp.OnExperienceChanged(Experience);
   }
 
+  #region upgrades
+  private void Awake()
+  {
+    OnHealthUpgrade += OnHealthUpgradeHandler;
+    OnSpeedUpgrade += OnSpeedUpgradeHandler;
+  }
+
   public static Action<float> OnHealthUpgrade;
   void OnHealthUpgradeHandler(float value)
   {
@@ -43,11 +50,14 @@ public class PlayerController : MonoBehaviour
     CurrentHealth = MaxHealth * currentPercent;
   }
 
-  private void Awake()
+  public static Action<float> OnSpeedUpgrade;
+  void OnSpeedUpgradeHandler(float value)
   {
-    OnHealthUpgrade += OnHealthUpgradeHandler;
-
+    // Debug.Log("?");
+    Speed += BaseSpeed * value;
   }
+  #endregion
+
 
 
   // Start is called before the first frame update
@@ -80,7 +90,11 @@ public class PlayerController : MonoBehaviour
   [SerializeField] Vector3 input;
   void Update()
   {
-    Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
+    Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+    if (movement.sqrMagnitude > 1f)
+    {
+      movement = movement.normalized;
+    }
     Vector3 initial = transform.position;
     transform.position += Speed * Time.deltaTime * movement;
 
@@ -105,7 +119,7 @@ public class PlayerController : MonoBehaviour
   void UpdatePlayerParameters(Vector3 movement)
   {
     PlayerDirection = movement;
-    PlayerSpeed = movement != Vector3.zero ? Speed : 0;
+    PlayerSpeed = movement != Vector3.zero ? movement.magnitude * Speed : 0;
     PlayerVelocity = transform.up * PlayerSpeed;
     PlayerPosition = transform.position;
     s = PlayerSpeed;

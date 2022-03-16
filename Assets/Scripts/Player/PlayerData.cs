@@ -35,6 +35,11 @@ public class PlayerData : MonoBehaviour
     DurationMultiplier += amount;
   }
 
+  void ApplySpeed(float amount)
+  {
+    PlayerController.OnSpeedUpgrade.Invoke(amount);
+  }
+
   void OnPlayerUpgradeActionHandler(PlayerUpgradeType type, float amount)
   {
     switch (type)
@@ -50,6 +55,9 @@ public class PlayerData : MonoBehaviour
         break;
       case PlayerUpgradeType.Duration:
         ApplyDuration(amount);
+        break;
+      case PlayerUpgradeType.Speed:
+        ApplySpeed(amount);
         break;
     }
   }

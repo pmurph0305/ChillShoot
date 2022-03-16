@@ -5,4 +5,5 @@ public enum PlayerUpgradeType
   Cooldown,
   Area,
   Duration,
+  Speed,
 }
