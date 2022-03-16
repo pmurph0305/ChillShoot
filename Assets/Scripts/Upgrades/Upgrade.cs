@@ -11,6 +11,7 @@ public abstract class Upgrade : ScriptableObject
 
   [Header("Debug")]
   [SerializeField] protected int currentUpgrade = -1;
+
   public abstract void ApplyUpgrade();
 
   public abstract bool CanBeUpgraded();

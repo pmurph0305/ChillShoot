@@ -6,6 +6,8 @@ public class WeaponInfo
 {
   [SerializeField] protected WeaponKey _key;
   public WeaponKey key { get { return _key; } private set { _key = value; } }
+
+
   public float ShotDamage = 10f;
   public float ShotSpeed = 5f;
   [SerializeField] protected float ShotLifeTime = 2f;
@@ -64,5 +66,45 @@ public class WeaponInfo
     {
       s.OnHitEnemy(enemy);
     }
+  }
+
+  public void ApplyUpgrade(WeaponUpgradeType type, float value)
+  {
+    switch (type)
+    {
+      case WeaponUpgradeType.Damage:
+        ApplyDamageUpgrade(value);
+        break;
+      case WeaponUpgradeType.Area:
+        ApplyAreaUpgrade(value);
+        break;
+      case WeaponUpgradeType.Cooldown:
+        ApplyCooldownUpgrade(value);
+        break;
+      case WeaponUpgradeType.Speed:
+        ApplySpeedUpgrade(value);
+        break;
+    }
+  }
+
+  void ApplyDamageUpgrade(float value)
+  {
+    ShotDamage += ShotDamage * value;
+  }
+
+  void ApplyAreaUpgrade(float value)
+  {
+    ScaleMultiplier += ScaleMultiplier * value;
+  }
+
+  void ApplyCooldownUpgrade(float value)
+  {
+    Cooldown -= Cooldown * value;
+    if (Cooldown < 0) { Cooldown = 0; }
+  }
+
+  void ApplySpeedUpgrade(float value)
+  {
+    ShotSpeed += ShotSpeed * value;
   }
 }

@@ -1657,8 +1657,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5708b44c7b01f5449b686d6d233d8fc4, type: 2}
   - {fileID: 11400000, guid: 5cf9f435b12f97248a6362d5578ab11a, type: 2}
   - {fileID: 11400000, guid: 15ca0d779808dbc46bd79881da63f86f, type: 2}
+  - {fileID: 11400000, guid: 7516f44db6fc21e4281b0377e7cc8488, type: 2}
   UsedUpgrades: []
-  upgradesPerLevel: 5
+  upgradesPerLevel: 6
 --- !u!1 &617002056
 GameObject:
   m_ObjectHideFlags: 0
