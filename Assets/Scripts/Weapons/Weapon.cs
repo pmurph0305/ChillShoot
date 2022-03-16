@@ -30,18 +30,29 @@ public abstract class Weapon : MonoBehaviour
     WeaponDictionary.Add(this.gameObject.tag, weaponInfo);
   }
 
+  protected virtual float GetWeaponCooldown()
+  {
+    return weaponInfo.Cooldown - weaponInfo.Cooldown * PlayerData.CooldownReduction;
+  }
+
   private void Update()
   {
-    if (timer.EndTime != weaponInfo.Cooldown)
+    UpdateCooldownTimer();
+    OnUpdate();
+  }
+
+  protected virtual void UpdateCooldownTimer()
+  {
+    if (timer.EndTime != GetWeaponCooldown())
     {
-      timer = new Timer(weaponInfo.Cooldown);
+      // timer = new Timer(weaponInfo.Cooldown);
+      timer = new Timer(GetWeaponCooldown(), timer.CurrentTime);
     }
     if (timer.Update())
     {
       Shoot();
       timer.Reset(true);
     }
-    OnUpdate();
   }
 
   /// <summary>

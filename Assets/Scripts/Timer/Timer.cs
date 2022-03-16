@@ -6,7 +6,9 @@ using System;
 public class Timer
 {
   public Action OnTimerComplete;
-  [SerializeField] float CurrentTime;
+
+  [SerializeField] float _CurrentTime;
+  public float CurrentTime { get { return _CurrentTime; } private set { _CurrentTime = value; } }
   [SerializeField] float _EndTime;
   public float EndTime { get { return _EndTime; } private set { _EndTime = value; } }
   [SerializeField] bool _IsFinished;
@@ -29,6 +31,7 @@ public class Timer
     this.EndTime = t;
   }
 
+
   public void SetCurrentTime(float t)
   {
     CurrentTime = t;
@@ -37,6 +40,12 @@ public class Timer
   public Timer(float duration)
   {
     CurrentTime = 0.0f;
+    EndTime = duration;
+  }
+
+  public Timer(float duration, float currentTime)
+  {
+    CurrentTime = currentTime;
     EndTime = duration;
   }
 

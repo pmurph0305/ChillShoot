@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -36,11 +36,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\LeanTween\Editor\LeanTweenDocumentationEditor.cs" />
      <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurveValuesPropertyDrawer.cs" />
-     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurveEditor.cs" />
-     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurvePropertyDrawer.cs" />
      <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurvePresets.cs" />
+     <Compile Include="Assets\LeanTween\Editor\LeanTweenDocumentationEditor.cs" />
+     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurvePropertyDrawer.cs" />
+     <Compile Include="Assets\Scripts\Curves\Editor\ResponseCurveEditor.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity\2021.2.7f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -791,6 +791,9 @@
     <Reference Include="Unity.2D.Tilemap.Extras">
         <HintPath>F:\UnityProjects\ChillShootGame\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+        <HintPath>F:\UnityProjects\ChillShootGame\Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
         <HintPath>F:\UnityProjects\ChillShootGame\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
@@ -805,6 +808,9 @@
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
         <HintPath>F:\UnityProjects\ChillShootGame\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+        <HintPath>F:\UnityProjects\ChillShootGame\Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
         <HintPath>F:\UnityProjects\ChillShootGame\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>

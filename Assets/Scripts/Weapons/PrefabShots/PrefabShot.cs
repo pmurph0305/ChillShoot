@@ -54,22 +54,21 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     return weaponInfo.ShotSpeed;
   }
 
-  [SerializeField] float addedPlayerSpeed = 0.0f;
+
   [SerializeField] Vector3 playerVelocity;
   protected void SetPlayerSpeedParameters()
   {
-    // unit vector, instead of using player velocity
-    Vector3 playerDirection = PlayerController.PlayerDirection;
-    // is a unit vector
-    Vector3 intialDir = director.GetTravelDirection();
-    // amount of player speed in the same direction of the travel direction.
-    float dot = Vector3.Dot(playerDirection, intialDir); // both unit vectors.
-    addedPlayerSpeed = PlayerController.PlayerSpeed;
-    addedPlayerSpeed = addedPlayerSpeed < 0 ? 0 : addedPlayerSpeed;
     playerVelocity = PlayerController.PlayerVelocity;
-    director.SetAdditionalVelocity(playerVelocity);
-    // }
+    if (weaponInfo.AddPlayerSpeed)
+    {
+      director.SetAdditionalVelocity(playerVelocity);
+    }
+    else
+    {
+      director.SetAdditionalVelocity(Vector3.zero);
+    }
   }
+
 
   /// <summary>
   /// Updates the travel direction through GetTravelDirection(), and uses it to update the position of the gameobject.
@@ -83,6 +82,8 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     else
     {
       director.UpdateMovement(GetSpeed(), Time.deltaTime);
+      // since it only updates on the next fixed update, this doesn't actually preserve the speed correctly.
+      // director.UpdateMovement(rb, GetSpeed(), Time.deltaTime);
     }
   }
 
@@ -106,10 +107,8 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     {
       speedEase.StartEase(weaponInfo.ShotSpeed);
     }
-    if (weaponInfo.AddPlayerSpeed)
-    {
-      SetPlayerSpeedParameters();
-    }
+    SetPlayerSpeedParameters();
+
     shotTweener.StartTweenIn(this.transform, Vector3.one * weaponInfo.ScaleMultiplier, () => { });
     // Debug.Log(s + " : " + transform.localScale, this.transform);
   }
