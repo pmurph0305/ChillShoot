@@ -6,7 +6,7 @@ public class WeaponUpgrade : Upgrade
 {
   public WeaponKey weaponKey;
 
-
+  [SerializeField] protected List<WeaponUpgradeItem> Upgrades = new List<WeaponUpgradeItem>();
   public override void ApplyUpgrade()
   {
     throw new System.NotImplementedException();
@@ -21,5 +21,11 @@ public class WeaponUpgrade : Upgrade
   {
     throw new System.NotImplementedException();
   }
+
+}
+
+[System.Serializable]
+public class WeaponUpgradeItem
+{
 
 }
