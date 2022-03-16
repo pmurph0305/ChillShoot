@@ -6,10 +6,25 @@ public class WeaponInfo
 {
   public float ShotDamage = 10f;
   public float ShotSpeed = 5f;
-  public float ShotLifeTime = 2f;
-  public float Cooldown = 0.5f;
+  [SerializeField] protected float ShotLifeTime = 2f;
+  public float GetLifeTime()
+  {
+    return ShotLifeTime * PlayerData.DurationMultiplier;
+  }
 
-  public float ScaleMultiplier = 1.0f;
+  [SerializeField] protected float Cooldown = 0.5f;
+
+  public float GetCooldown()
+  {
+    return Cooldown * PlayerData.CooldownMultiplier;
+  }
+
+  [SerializeField] protected float ScaleMultiplier = 1.0f;
+  public float GetScaleMultiplier()
+  {
+    return ScaleMultiplier * PlayerData.AreaMultiplier;
+  }
+
 
   public float DamageCooldown = 0.25f;
   public bool DestroyOnHit = true;

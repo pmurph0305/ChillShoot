@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class LevelUp : MonoBehaviour
 {
-
+  [SerializeField] UpgradeList upgradeList;
   public static Action<float> OnExperienceChanged;
 
   [SerializeField] float MaxLevelExp = 10000;
@@ -52,7 +52,8 @@ public class LevelUp : MonoBehaviour
     CurrentLevel++;
     LevelNumber.OnLevelUpAction.Invoke(CurrentLevel);
     NextLevelExp = GetNextLevelExp(CurrentLevel);
-    LevelUpUI.OnLevelUpAction.Invoke();
+    List<Upgrade> ups = upgradeList.GetUpgradesToDisplay();
+    LevelUpUI.OnLevelUpAction.Invoke(ups);
   }
 
 }

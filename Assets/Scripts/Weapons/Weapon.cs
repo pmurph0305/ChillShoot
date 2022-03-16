@@ -18,7 +18,7 @@ public abstract class Weapon : MonoBehaviour
   {
     weaponInfo = weaponInfoContainer.GetWeaponInfo();
     AddWeaponInfoToDictionary();
-    timer = new Timer(weaponInfo.Cooldown);
+    timer = new Timer(GetWeaponCooldown());
     OnStart();
   }
 
@@ -32,7 +32,7 @@ public abstract class Weapon : MonoBehaviour
 
   protected virtual float GetWeaponCooldown()
   {
-    return weaponInfo.Cooldown - weaponInfo.Cooldown * PlayerData.CooldownReduction;
+    return weaponInfo.GetCooldown();
   }
 
   private void Update()

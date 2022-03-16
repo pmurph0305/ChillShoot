@@ -1,29 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerController : MonoBehaviour
 {
   [SerializeField] ExperienceAttractor expAttractor;
 
+  [SerializeField] float AttractorDuration = 3f;
 
   public static Transform PlayerTransform { get; private set; }
-
   public static Vector3 PlayerVelocity;
   public static Vector3 PlayerDirection;
   public static float PlayerSpeed;
 
   public static Vector3 PlayerPosition;
-  [SerializeField] float Speed = 1.0f;
-  [SerializeField] float Health = 100;
+
 
   [SerializeField] float Experience = 0;
+
+  [Header("Speed")]
+  [SerializeField] float Speed = 1.0f;
+
+
+  [Header("HP")]
+  [SerializeField] float BaseHealth = 100;
+  [SerializeField] float MaxHealth = 100;
+  float CurrentHealth = 100;
+
+
 
   public void GainExp(float value)
   {
     Experience += value;
     LevelUp.OnExperienceChanged(Experience);
   }
+
+  public static Action<float> OnHealthUpgrade;
+  void OnHealthUpgradeHandler(float value)
+  {
+    float currentPercent = CurrentHealth / MaxHealth;
+    MaxHealth += BaseHealth * value;
+    CurrentHealth = MaxHealth * currentPercent;
+  }
+
+  private void Awake()
+  {
+    OnHealthUpgrade += OnHealthUpgradeHandler;
+
+  }
+
 
   // Start is called before the first frame update
   void Start()
@@ -35,15 +60,19 @@ public class PlayerController : MonoBehaviour
 
   public void TakeDamage(float damage)
   {
-    Health -= damage;
+    CurrentHealth -= damage;
+    if (CurrentHealth < 0)
+    {
+      Debug.LogError("dead");
+    }
   }
 
   Vector3 up;
   Vector3 smoothVel;
-  [SerializeField] float smoothTime;
+  [SerializeField] float smoothTime = 0.01f;
 
-  Vector3 smoothingVel;
 
+  [Header("Input Debugging")]
   [SerializeField] float s;
   [SerializeField] Vector3 d;
   [SerializeField] Vector3 v;
@@ -84,5 +113,5 @@ public class PlayerController : MonoBehaviour
     d = PlayerDirection;
     input = movement;
   }
-  [SerializeField] float AttractorDuration = 3f;
+
 }

@@ -99,7 +99,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // Physics2D.SyncTransforms();
     DamagedEnemies.Clear();
     shotTweener.OnGetFromPool();
-    lifeTimer.Reset(weaponInfo.ShotLifeTime - shotTweener.GetTweenOutDuration());
+    lifeTimer.Reset(weaponInfo.GetLifeTime() - shotTweener.GetTweenOutDuration());
     NumberOfHits = 0;
     // OnGetFromPoolAction?.Invoke(this);
     // transform.localScale = Vector3.one * weaponInfo.ScaleMultiplier;
@@ -109,7 +109,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     }
     SetPlayerSpeedParameters();
 
-    shotTweener.StartTweenIn(this.transform, Vector3.one * weaponInfo.ScaleMultiplier, () => { });
+    shotTweener.StartTweenIn(this.transform, Vector3.one * weaponInfo.GetScaleMultiplier(), () => { });
     // Debug.Log(s + " : " + transform.localScale, this.transform);
   }
 
@@ -236,7 +236,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   public virtual void OnCreate()
   {
     weaponInfo = WeaponDictionary.Get(this.gameObject.tag);
-    lifeTimer = new Timer(weaponInfo.ShotLifeTime - shotTweener.GetTweenOutDuration());
+    lifeTimer = new Timer(weaponInfo.GetLifeTime() - shotTweener.GetTweenOutDuration());
     //Register this created gameobject to the weapon info's dictionary.
     weaponInfo.Add(this, col);
   }

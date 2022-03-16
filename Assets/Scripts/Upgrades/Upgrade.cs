@@ -4,5 +4,20 @@ using UnityEngine;
 
 public abstract class Upgrade : ScriptableObject
 {
+  private void OnEnable()
+  {
+    ResetUpgrade();
+  }
+
+  [Header("Debug")]
+  [SerializeField] protected int currentUpgrade = -1;
   public abstract void ApplyUpgrade();
+
+  public abstract bool CanBeUpgraded();
+
+  public abstract string GetDisplayString();
+  public virtual void ResetUpgrade()
+  {
+    currentUpgrade = -1;
+  }
 }

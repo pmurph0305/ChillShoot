@@ -143,7 +143,7 @@ MonoBehaviour:
   damageTimerLength: 0.2
   MaxHealth: 100
   health: 100
-  expValue: 10
+  expValue: 33
   UpdateDirToPlayerTime: 0.0133
   rb2d: {fileID: -6536042073960072785}
   col: {fileID: -6754030371237035193}
@@ -166,11 +166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ac630c4faf000418d52f5d701ca2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetter: {fileID: 0}
   rotationDirector: {fileID: 4674696689868162492}
+  FaceTravelDirection: 0
   visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
-  offsetter: {fileID: 0}
-  FaceTravelDirection: 1
+  additionalVelocity: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
 --- !u!114 &4674696689868162492
 MonoBehaviour:
@@ -184,7 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2e0c9050cf5e24c8dd5a35f9601520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  rotationSpeed: 1
   FromRotation: {x: 0, y: 0, z: 45}
   ToRotation: {x: 0, y: 0, z: -45}
-  rotationTime: 1
