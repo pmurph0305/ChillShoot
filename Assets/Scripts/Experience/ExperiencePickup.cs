@@ -48,16 +48,19 @@ public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
   [SerializeField] private float ExpVal;
   public float ExperienceValue => ExpVal;
 
-  [SerializeField] Vector4 val;
+
+  [Header("Debug")]
+  [SerializeField] Color color;
   [SerializeField, ColorUsageAttribute(false, true)] Color prop;
+
   public void SetValue(float value)
   {
     ExpVal = value;
     // spriteRenderer.color = colorList.GetColorForValue(value);
     m.color = colorList.GetColorForValue(value);
-    val = colorList.GetEmission4ForValue(value);
+    color = colorList.GetColorForValue(value);
     prop = colorList.GetEmissionForValue(value);
-    m.SetVector(EmissionProperty, colorList.GetEmission4ForValue(value));
+    m.SetVector(EmissionProperty, colorList.GetEmissionForValue(value));
   }
 
   void SetColor()
