@@ -11,6 +11,8 @@ public class ColorList
   [SerializeField] private FloatColorPair max;
   public Color GetColorForValue(float value)
   {
+    min = null;
+    max = null;
     for (int i = 0; i < ColorPairs.Count; i++)
     {
       if (ColorPairs[i].Value >= value)
@@ -33,6 +35,8 @@ public class ColorList
 
   public Color GetEmissionForValue(float value)
   {
+    min = null;
+    max = null;
     for (int i = 0; i < ColorPairs.Count; i++)
     {
       if (ColorPairs[i].Value >= value)
@@ -52,27 +56,27 @@ public class ColorList
       return ColorPairs[ColorPairs.Count - 1]._emission;
     }
   }
-  public Vector4 GetEmission4ForValue(float value)
-  {
-    for (int i = 0; i < ColorPairs.Count; i++)
-    {
-      if (ColorPairs[i].Value >= value)
-      {
-        if (i == 0) { return ColorPairs[0]._emission; }
-        min = (i - 1 > -1) ? ColorPairs[i - 1] : ColorPairs[i];
-        max = ColorPairs[i];
-        break;
-      }
-    }
-    if (min != null && max != null)
-    {
-      return Vector4.Lerp((Vector4)min._emission, (Vector4)max._emission, (value - min.Value) / (max.Value - min.Value));
-    }
-    else
-    {
-      return ColorPairs[ColorPairs.Count - 1]._emission;
-    }
-  }
+  // public Vector4 GetEmission4ForValue(float value)
+  // {
+  //   for (int i = 0; i < ColorPairs.Count; i++)
+  //   {
+  //     if (ColorPairs[i].Value >= value)
+  //     {
+  //       if (i == 0) { return ColorPairs[0]._emission; }
+  //       min = (i - 1 > -1) ? ColorPairs[i - 1] : ColorPairs[i];
+  //       max = ColorPairs[i];
+  //       break;
+  //     }
+  //   }
+  //   if (min != null && max != null)
+  //   {
+  //     return Vector4.Lerp((Vector4)min._emission, (Vector4)max._emission, (value - min.Value) / (max.Value - min.Value));
+  //   }
+  //   else
+  //   {
+  //     return ColorPairs[ColorPairs.Count - 1]._emission;
+  //   }
+  // }
 }
 
 
