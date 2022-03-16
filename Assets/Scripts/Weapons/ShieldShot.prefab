@@ -141,7 +141,7 @@ MonoBehaviour:
   col: {fileID: 2844668986282426180}
   rb: {fileID: -717841792227248861}
   lifeTimer:
-    CurrentTime: 0
+    _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
   director: {fileID: 7314801814952489908}
@@ -151,7 +151,7 @@ MonoBehaviour:
     current: 0
     duration: 0
     ease: 0
-  addedPlayerSpeed: 0
+  playerVelocity: {x: 0, y: 0, z: 0}
   shotTweener:
     TweenIn: 1
     TweenOut: 1
@@ -174,11 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fc32c61bc546d4ca5671e30fb813a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetter: {fileID: 0}
   rotationDirector: {fileID: 7957931814368812953}
+  FaceTravelDirection: 0
   visual: {fileID: 365942078843980856}
   travelDirection: {x: 0, y: 0, z: 0}
-  offsetter: {fileID: 0}
-  FaceTravelDirection: 0
+  additionalVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &7957931814368812953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,5 +192,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae747d29d48a644c99fddbaae9c7536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 45
+  rotationSpeed: 90
   axis: {x: 0, y: 0, z: 1}

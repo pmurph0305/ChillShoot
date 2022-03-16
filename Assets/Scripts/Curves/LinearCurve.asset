@@ -17,9 +17,9 @@ MonoBehaviour:
   OutputScale: 1
   values:
     curveType: 0
-    m: -1
+    m: 1
     k: 1
-    v: 1
+    v: 0
     h: 0
     r: 0
   presetLabels:

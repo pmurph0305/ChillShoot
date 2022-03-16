@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
   [SerializeField] ExperienceAttractor expAttractor;
+
+
   public static Transform PlayerTransform { get; private set; }
 
   public static Vector3 PlayerVelocity;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
   public void GainExp(float value)
   {
     Experience += value;
+    LevelUp.OnExperienceChanged(Experience);
   }
 
   // Start is called before the first frame update
