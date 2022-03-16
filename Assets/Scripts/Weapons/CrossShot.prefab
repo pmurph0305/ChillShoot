@@ -126,19 +126,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponKey: 4
   col: {fileID: 8438769003627133638}
   rb: {fileID: 1611234540101711438}
   lifeTimer:
-    CurrentTime: 0
+    _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
   director: {fileID: -1900515133732688777}
-  DestroyOnHit: 1
-  DestroyAfterXHits: 0
-  damageCooldown: 0.25
-  mask:
-    serializedVersion: 2
-    m_Bits: 0
+  UseSpeedEaser: 0
+  speedEase:
+    start: 0
+    current: 0
+    duration: 0
+    ease: 0
+  playerVelocity: {x: 0, y: 0, z: 0}
+  shotTweener:
+    TweenIn: 0
+    TweenOut: 0
+    easeOut: 26
+    easeIn: 27
+    StartScale: {x: 0, y: 0, z: 0}
+    TweenOutEndScale: {x: 0, y: 0, z: 0}
+    tweenInTime: 0.2
+    tweenOutTime: 0.2
   DamagedEnemiesCount: 0
 --- !u!114 &-1900515133732688777
 MonoBehaviour:
@@ -152,8 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fc32c61bc546d4ca5671e30fb813a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  travelDirection: {x: 0, y: 0, z: 0}
   offsetter: {fileID: 0}
+  rotationDirector: {fileID: 0}
+  FaceTravelDirection: 1
+  visual: {fileID: 0}
+  travelDirection: {x: 0, y: 0, z: 0}
+  additionalVelocity: {x: 0, y: 0, z: 0}
 --- !u!50 &1611234540101711438
 Rigidbody2D:
   serializedVersion: 4

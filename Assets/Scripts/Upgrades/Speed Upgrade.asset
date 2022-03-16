@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a787022fff2f04fbc01fa3ae017075, type: 3}
   m_Name: Speed Upgrade
   m_EditorClassIdentifier: 
-  currentUpgrade: -1
-  upgradeType: 0
+  currentUpgrade: 2
+  upgradeType: 5
   Values:
   - 0.1
   - 0.1

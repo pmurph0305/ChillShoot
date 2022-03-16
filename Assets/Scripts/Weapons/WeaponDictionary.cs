@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class WeaponDictionary
 {
-  static Dictionary<string, WeaponInfo> dict = new Dictionary<string, WeaponInfo>();
+  static Dictionary<WeaponKey, WeaponInfo> dict = new Dictionary<WeaponKey, WeaponInfo>();
 
-  public static WeaponInfo Get(string key)
+  public static WeaponInfo Get(WeaponKey key)
   {
     return dict[key];
   }
 
-  public static void Add(string key, WeaponInfo value)
+  // public static void Add(string key, WeaponInfo value)
+  // {
+  //   dict.Add(key, value);
+  // }
+
+  public static void Add(WeaponInfo value)
   {
-    dict.Add(key, value);
+    dict.Add(value.key, value);
   }
 }

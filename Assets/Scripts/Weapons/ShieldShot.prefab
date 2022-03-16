@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponKey: 8
   col: {fileID: 2844668986282426180}
   rb: {fileID: -717841792227248861}
   lifeTimer:

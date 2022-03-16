@@ -27,7 +27,7 @@ public abstract class Weapon : MonoBehaviour
   /// </summary>
   public virtual void AddWeaponInfoToDictionary()
   {
-    WeaponDictionary.Add(this.gameObject.tag, weaponInfo);
+    WeaponDictionary.Add(weaponInfo);
   }
 
   protected virtual float GetWeaponCooldown()

@@ -14,6 +14,7 @@ using System;
 /// </summary>
 public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITargetProvider
 {
+  [SerializeField] WeaponKey weaponKey;
   public WeaponInfo weaponInfo { get; protected set; }
   [SerializeField] Collider2D col;
   [SerializeField] Rigidbody2D rb;
@@ -235,7 +236,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   public virtual void OnCreate()
   {
-    weaponInfo = WeaponDictionary.Get(this.gameObject.tag);
+    weaponInfo = WeaponDictionary.Get(weaponKey);
     lifeTimer = new Timer(weaponInfo.GetLifeTime() - shotTweener.GetTweenOutDuration());
     //Register this created gameobject to the weapon info's dictionary.
     weaponInfo.Add(this, col);

@@ -4,6 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponInfo
 {
+  [SerializeField] protected WeaponKey _key;
+  public WeaponKey key { get { return _key; } private set { _key = value; } }
   public float ShotDamage = 10f;
   public float ShotSpeed = 5f;
   [SerializeField] protected float ShotLifeTime = 2f;

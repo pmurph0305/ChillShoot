@@ -126,10 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34be9be9ca9faa4ebda02863ae78e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponKey: 5
   col: {fileID: 3498506225980025904}
   rb: {fileID: -1159196721202292946}
   lifeTimer:
-    CurrentTime: 0
+    _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
   director: {fileID: -5806275856119994195}
@@ -139,7 +140,6 @@ MonoBehaviour:
     current: 0
     duration: 0
     ease: 0
-  addedPlayerSpeed: 0
   playerVelocity: {x: 0, y: 0, z: 0}
   shotTweener:
     TweenIn: 1

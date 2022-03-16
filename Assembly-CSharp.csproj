@@ -164,6 +164,8 @@
      <Compile Include="Assets\Scripts\Upgrades\PlayerUpgradeType.cs" />
      <Compile Include="Assets\Scripts\Upgrades\UpgradeList.cs" />
      <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
+     <Compile Include="Assets\Scripts\Upgrades\WeaponUpgrade.cs" />
+     <Compile Include="Assets\Scripts\Weapons\WeaponInfo-Data\WeaponKey.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
