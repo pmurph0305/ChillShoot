@@ -4,61 +4,15 @@ using UnityEngine;
 using System;
 public class PlayerController : MonoBehaviour
 {
+  [SerializeField] PlayerInfo playerData;
   [SerializeField] ExperienceAttractor expAttractor;
-
   [SerializeField] float AttractorDuration = 3f;
 
   public static Transform PlayerTransform { get; private set; }
   public static Vector3 PlayerVelocity;
   public static Vector3 PlayerDirection;
   public static float PlayerSpeed;
-
   public static Vector3 PlayerPosition;
-
-
-  [SerializeField] float Experience = 0;
-
-  [Header("Speed")]
-  [SerializeField] float BaseSpeed = 1.0f;
-  [SerializeField] float Speed = 1.0f;
-
-  [Header("HP")]
-  [SerializeField] float BaseHealth = 100;
-  [SerializeField] float MaxHealth = 100;
-  float CurrentHealth = 100;
-
-
-
-  public void GainExp(float value)
-  {
-    Experience += value;
-    LevelUp.OnExperienceChanged(Experience);
-  }
-
-  #region upgrades
-  private void Awake()
-  {
-    OnHealthUpgrade += OnHealthUpgradeHandler;
-    OnSpeedUpgrade += OnSpeedUpgradeHandler;
-  }
-
-  public static Action<float> OnHealthUpgrade;
-  void OnHealthUpgradeHandler(float value)
-  {
-    float currentPercent = CurrentHealth / MaxHealth;
-    MaxHealth += BaseHealth * value;
-    CurrentHealth = MaxHealth * currentPercent;
-  }
-
-  public static Action<float> OnSpeedUpgrade;
-  void OnSpeedUpgradeHandler(float value)
-  {
-    // Debug.Log("?");
-    Speed += BaseSpeed * value;
-  }
-  #endregion
-
-
 
   // Start is called before the first frame update
   void Start()
@@ -70,11 +24,7 @@ public class PlayerController : MonoBehaviour
 
   public void TakeDamage(float damage)
   {
-    CurrentHealth -= damage;
-    if (CurrentHealth < 0)
-    {
-      Debug.LogError("dead");
-    }
+    playerData.pData.TakeDamage(damage);
   }
 
   Vector3 up;
@@ -96,7 +46,7 @@ public class PlayerController : MonoBehaviour
       movement = movement.normalized;
     }
     Vector3 initial = transform.position;
-    transform.position += Speed * Time.deltaTime * movement;
+    transform.position += playerData.GetPlayerSpeed() * Time.deltaTime * movement;
 
     // UpdatePlayerParameters(false);
     if (movement.sqrMagnitude > 0.1f)
@@ -119,7 +69,7 @@ public class PlayerController : MonoBehaviour
   void UpdatePlayerParameters(Vector3 movement)
   {
     PlayerDirection = movement;
-    PlayerSpeed = movement != Vector3.zero ? movement.magnitude * Speed : 0;
+    PlayerSpeed = movement != Vector3.zero ? movement.magnitude * playerData.GetPlayerSpeed() : 0;
     PlayerVelocity = transform.up * PlayerSpeed;
     PlayerPosition = transform.position;
     s = PlayerSpeed;

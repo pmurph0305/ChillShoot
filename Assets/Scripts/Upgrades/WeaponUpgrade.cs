@@ -31,9 +31,9 @@ public class WeaponUpgrade : Upgrade
     string s = "";
     foreach (var item in Values[currentUpgrade + 1].Upgrades)
     {
-      s += item.GetDisplayString() + "\n";
+      s += "- " + item.GetDisplayString() + "\n";
     }
-    return currentUpgrade.ToString() + ":" + DisplayString + s;
+    return currentUpgrade.ToString() + ":" + DisplayString + "\n" + s;
   }
 
 }

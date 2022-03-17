@@ -8,7 +8,7 @@ public class DistancePrefabSpawnWeapon : PrefabSpawnWeapon
 
   float GetRequiredDistance()
   {
-    return distancePerShot * PlayerData.CooldownMultiplier;
+    return distancePerShot * PlayerInfo.GetCooldownMultiplier();
   }
 
   Vector3 previousPosition;

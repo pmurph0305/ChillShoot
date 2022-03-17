@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 [CreateAssetMenu(menuName = "Upgrades/Player")]
 public class PlayerUpgrade : Upgrade
 {
@@ -9,12 +10,18 @@ public class PlayerUpgrade : Upgrade
   [SerializeField] List<float> Values = new List<float>(1) { 0.1f };
 
   [SerializeField] string DisplayString;
+  [SerializeField] string DisplaySuffix = "%";
+
+
+
+  public static event Action<PlayerUpgradeType, float> OnPlayerUpgradeEvent;
   public override void ApplyUpgrade()
   {
     currentUpgrade++;
     if (currentUpgrade < Values.Count)
     {
-      PlayerData.OnPlayerUpgradeAction(upgradeType, Values[currentUpgrade]);
+      // PlayerInfo.OnPlayerUpgradeAction(upgradeType, Values[currentUpgrade]);
+      OnPlayerUpgradeEvent?.Invoke(upgradeType, Values[currentUpgrade]);
     }
   }
 
@@ -30,7 +37,7 @@ public class PlayerUpgrade : Upgrade
 
   public override string GetDisplayString()
   {
-    Debug.Log(currentUpgrade.ToString() + ":" + DisplayString);
-    return currentUpgrade.ToString() + ":" + DisplayString + " " + GetPercentUpgrade().ToString();
+    // Debug.Log(currentUpgrade.ToString() + ":" + DisplayString);
+    return DisplayString + " +" + GetPercentUpgrade().ToString() + DisplaySuffix;
   }
 }

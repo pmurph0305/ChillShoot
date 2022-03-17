@@ -2,63 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class PlayerData : MonoBehaviour
+[System.Serializable]
+public class PlayerData
 {
-  public static float CooldownMultiplier = 1.0f;
-  public static float AreaMultiplier = 1.0f;
-  public static float DurationMultiplier = 1.0f;
+  [Header("Weapons")]
+  public float CooldownMultiplier = 1.0f;
+  public float AreaMultiplier = 1.0f;
+  public float DurationMultiplier = 1.0f;
 
-  public static Action<PlayerUpgradeType, float> OnPlayerUpgradeAction;
+  [Header("Speed")]
+  [SerializeField] public float BaseSpeed = 1.0f;
+  [SerializeField] public float Speed = 1.0f;
 
-  private void Awake()
-  {
-    OnPlayerUpgradeAction += OnPlayerUpgradeActionHandler;
-  }
+  [Header("HP")]
+  [SerializeField] public float BaseHealth = 100;
+  [SerializeField] public float MaxHealth = 100;
+  public float CurrentHealth = 100;
 
-  void IncreaseHealth(float amount)
-  {
-    PlayerController.OnHealthUpgrade.Invoke(amount);
-  }
+  [Header("Exp")]
+  [SerializeField] public float Experience = 0;
 
-  void ApplyCooldown(float amount)
+  public void ApplyCooldown(float amount)
   {
     CooldownMultiplier -= amount;
   }
 
-  void ApplyArea(float amount)
+  public void ApplyArea(float amount)
   {
     AreaMultiplier += amount;
   }
 
-  void ApplyDuration(float amount)
+  public void ApplyDuration(float amount)
   {
     DurationMultiplier += amount;
   }
 
-  void ApplySpeed(float amount)
+  public void IncreaseHealth(float amount)
   {
-    PlayerController.OnSpeedUpgrade.Invoke(amount);
+    float currentPercent = CurrentHealth / MaxHealth;
+    MaxHealth += BaseHealth * amount;
+    CurrentHealth = MaxHealth * currentPercent;
   }
 
-  void OnPlayerUpgradeActionHandler(PlayerUpgradeType type, float amount)
+
+  public void ApplySpeed(float amount)
   {
-    switch (type)
+    Speed += BaseSpeed * amount;
+  }
+
+  public static event Action<float> OnPlayerExperienceChangedAction;
+  public void GainExp(float value)
+  {
+    Experience += value;
+    OnPlayerExperienceChangedAction?.Invoke(Experience);
+  }
+
+  public bool TakeDamage(float damage)
+  {
+    CurrentHealth -= damage;
+    if (CurrentHealth < 0)
     {
-      case PlayerUpgradeType.Health:
-        IncreaseHealth(amount);
-        break;
-      case PlayerUpgradeType.Cooldown:
-        ApplyCooldown(amount);
-        break;
-      case PlayerUpgradeType.Area:
-        ApplyArea(amount);
-        break;
-      case PlayerUpgradeType.Duration:
-        ApplyDuration(amount);
-        break;
-      case PlayerUpgradeType.Speed:
-        ApplySpeed(amount);
-        break;
+      return true;
     }
+    return false;
   }
 }

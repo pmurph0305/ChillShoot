@@ -18,4 +18,5 @@ MonoBehaviour:
   - 0.1
   - 0.1
   - 0.1
-  DisplayString: cooldown
+  DisplayString: Cooldown Reduction
+  DisplaySuffix: '%'

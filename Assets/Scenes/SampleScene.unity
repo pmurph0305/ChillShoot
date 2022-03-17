@@ -3166,8 +3166,8 @@ GameObject:
   - component: {fileID: 1171662358}
   - component: {fileID: 1171662357}
   - component: {fileID: 1171662360}
-  - component: {fileID: 1171662359}
   - component: {fileID: 1171662361}
+  - component: {fileID: 1171662359}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -3258,13 +3258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db5fa4f457f3cf47b4518c236cbd49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 1171662361}
   expAttractor: {fileID: 475871632}
   AttractorDuration: 3
-  Experience: 0
-  BaseSpeed: 1
-  Speed: 5
-  BaseHealth: 100
-  MaxHealth: 100
   smoothTime: 0.01
   s: 0
   d: {x: 0, y: 0, z: 0}
@@ -3308,6 +3304,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5ea948edb0b124f96b8bce5ff1afc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pData:
+    CooldownMultiplier: 1
+    AreaMultiplier: 1
+    DurationMultiplier: 1
+    BaseSpeed: 3
+    Speed: 3
+    BaseHealth: 100
+    MaxHealth: 100
+    CurrentHealth: 100
+    Experience: 0
 --- !u!1001 &1217532518
 PrefabInstance:
   m_ObjectHideFlags: 0

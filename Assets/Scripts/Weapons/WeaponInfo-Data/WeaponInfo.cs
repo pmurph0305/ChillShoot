@@ -13,20 +13,20 @@ public class WeaponInfo
   [SerializeField] protected float ShotLifeTime = 2f;
   public float GetLifeTime()
   {
-    return ShotLifeTime * PlayerData.DurationMultiplier;
+    return ShotLifeTime * PlayerInfo.GetDurationMultiplier();
   }
 
   [SerializeField] protected float Cooldown = 0.5f;
 
   public float GetCooldown()
   {
-    return Cooldown * PlayerData.CooldownMultiplier;
+    return Cooldown * PlayerInfo.GetCooldownMultiplier();
   }
 
   [SerializeField] protected float ScaleMultiplier = 1.0f;
   public float GetScaleMultiplier()
   {
-    return ScaleMultiplier * PlayerData.AreaMultiplier;
+    return ScaleMultiplier * PlayerInfo.GetAreaMultiplier();
   }
 
 

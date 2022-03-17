@@ -18,4 +18,5 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  DisplayString: area
+  DisplayString: Area
+  DisplaySuffix: '%'

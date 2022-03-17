@@ -4,18 +4,17 @@ using UnityEngine;
 using System;
 public class LevelUpUI : MonoBehaviour
 {
-  public static Action<List<Upgrade>> OnLevelUpAction;
 
   private void Awake()
   {
     this.gameObject.SetActive(false);
-    OnLevelUpAction += OnLevelUpActionHandler;
+    LevelUp.OnLevelUpUpgradeAction += OnLevelUpUpgradeActionHandler;
   }
 
   [SerializeField] RectTransform buttonParent;
   [SerializeField] GameObject buttonPrefab;
   List<GameObject> CreatedButtons = new List<GameObject>();
-  void OnLevelUpActionHandler(List<Upgrade> ups)
+  void OnLevelUpUpgradeActionHandler(List<Upgrade> ups)
   {
     Time.timeScale = 0.0f;
     foreach (var upgrade in ups)
@@ -28,6 +27,8 @@ public class LevelUpUI : MonoBehaviour
     this.gameObject.SetActive(true);
   }
 
+
+  public static event Action<Upgrade> OnUpgradeChosenAction;
   public void OnLevelUpButtonClicked(Upgrade upgrade)
   {
     Time.timeScale = 1.0f;
@@ -36,7 +37,7 @@ public class LevelUpUI : MonoBehaviour
       Destroy(go);
     }
     upgrade.ApplyUpgrade();
-    UpgradeList.OnUpgradeChosenAction.Invoke(upgrade);
+    OnUpgradeChosenAction?.Invoke(upgrade);
     this.gameObject.SetActive(false);
   }
 

@@ -5,7 +5,6 @@ using System;
 public class LevelUp : MonoBehaviour
 {
   [SerializeField] UpgradeList upgradeList;
-  public static Action<float> OnExperienceChanged;
 
   [SerializeField] float MaxLevelExp = 10000;
   [SerializeField] float StartExp = 100;
@@ -16,16 +15,20 @@ public class LevelUp : MonoBehaviour
 
   [SerializeField] AnimationCurve ExpCurve;
 
+  public static event Action<float> OnPercentLevelChangedAction;
+  public static event Action<int> OnLevelUpAction;
+  public static event Action<List<Upgrade>> OnLevelUpUpgradeAction;
   private void Awake()
   {
-    OnExperienceChanged += OnExperienceChangedHandler;
+    // OnExperienceChanged += OnExperienceChangedHandler;
+    PlayerData.OnPlayerExperienceChangedAction += OnPlayerExperienceChangedHandler;
     NextLevelExp = GetNextLevelExp(0);
   }
 
   private void Start()
   {
-    ExperienceBar.OnPercentLevelChangedAction.Invoke(0);
-    LevelNumber.OnLevelUpAction.Invoke(0);
+    OnPercentLevelChangedAction?.Invoke(0);
+    OnLevelUpAction?.Invoke(0);
   }
 
   [SerializeField] float evaluatedValue;
@@ -37,23 +40,23 @@ public class LevelUp : MonoBehaviour
     return NextLevelExp + StartExp + MaxLevelExp * ExpCurve.Evaluate(percentMax);
   }
 
-  void OnExperienceChangedHandler(float value)
+  void OnPlayerExperienceChangedHandler(float value)
   {
     if (value > NextLevelExp)
     {
       // level up.
       IncreaseCurrentLevel();
     }
-    ExperienceBar.OnPercentLevelChangedAction.Invoke((value - previousLevelExp) / (NextLevelExp - previousLevelExp));
+    OnPercentLevelChangedAction?.Invoke((value - previousLevelExp) / (NextLevelExp - previousLevelExp));
   }
 
   void IncreaseCurrentLevel()
   {
     CurrentLevel++;
-    LevelNumber.OnLevelUpAction.Invoke(CurrentLevel);
+    OnLevelUpAction?.Invoke(CurrentLevel);
     NextLevelExp = GetNextLevelExp(CurrentLevel);
     List<Upgrade> ups = upgradeList.GetUpgradesToDisplay();
-    LevelUpUI.OnLevelUpAction.Invoke(ups);
+    OnLevelUpUpgradeAction?.Invoke(ups);
   }
 
 }

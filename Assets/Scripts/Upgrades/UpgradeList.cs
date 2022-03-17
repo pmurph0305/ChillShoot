@@ -13,10 +13,10 @@ public class UpgradeList : MonoBehaviour
 
   [SerializeField] int upgradesPerLevel = 2;
 
-  public static Action<Upgrade> OnUpgradeChosenAction;
+
   private void Awake()
   {
-    OnUpgradeChosenAction += OnUpgradeChosenActionHandler;
+    LevelUpUI.OnUpgradeChosenAction += OnUpgradeChosenActionHandler;
   }
 
   void OnUpgradeChosenActionHandler(Upgrade upgrade)
