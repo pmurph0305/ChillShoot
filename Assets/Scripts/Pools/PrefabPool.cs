@@ -139,7 +139,7 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   protected virtual T CreatePooledItem()
   {
     GameObject o = Instantiate(Prefab, transform.position, Quaternion.identity, parent);
-    T val = o.GetComponent<T>();
+    T val = o.GetComponentInChildren<T>();
     val.SetPool(Pool);
     val.OnCreate();
     // Since OnDisable releases a pooled item, we can't set active here or it causes issues.

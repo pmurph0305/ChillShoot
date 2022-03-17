@@ -14,4 +14,5 @@ public enum WeaponKey
   Orbit,
   Shield,
   SideWeapon,
+  TargetedLaser,
 }

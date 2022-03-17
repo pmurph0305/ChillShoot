@@ -59,14 +59,14 @@ public class WeaponInfo : IGetShotSpawnInfo
   /// Called when an enemy is hit by a collider2d that is also a IWeaponShit.
   /// </summary>
   /// <param name="Col"></param>
-  public void OnHitEnemy(Collider2D Col, EnemyController enemy)
-  {
-    IWeaponShot s = null;
-    if (ShotDict.TryGetValue(Col, out s))
-    {
-      s.OnHitEnemy(enemy);
-    }
-  }
+  // public void OnHitEnemy(Collider2D Col, EnemyController enemy)
+  // {
+  //   IWeaponShot s = null;
+  //   if (ShotDict.TryGetValue(Col, out s))
+  //   {
+  //     s.OnHitNewEnemy(enemy);
+  //   }
+  // }
 
   public void ApplyUpgrade(WeaponUpgradeType type, float value)
   {

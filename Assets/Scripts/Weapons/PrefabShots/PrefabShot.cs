@@ -24,11 +24,14 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   Dictionary<EnemyController, Timer> DamagedEnemies = new Dictionary<EnemyController, Timer>();
   protected int NumberOfHits = 0;
 
+  public event Action OnGetFromPoolAction;
+
   /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
   /// </summary>
   public virtual void OnHitEnemy(EnemyController enemy)
   {
+    Debug.Log("Hit", enemy);
     if (weaponInfo.DestroyOnHit)
     {
       NumberOfHits++;
@@ -38,9 +41,12 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
       }
     }
     EffectPlayerPool.StartEffect(transform.position);
-    enemy.OnEnemyReleased += OnEnemyReleased;
+    if (!DamagedEnemies.ContainsKey(enemy))
+    {
+      enemy.OnEnemyReleased += OnEnemyReleased;
+      DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
+    }
     enemy.OnHitFromShot(weaponInfo.ShotDamage);
-    DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
   }
 
   [SerializeField] bool UseSpeedEaser;
@@ -111,6 +117,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     SetPlayerSpeedParameters();
 
     shotTweener.StartTweenIn(this.transform, Vector3.one * weaponInfo.GetScaleMultiplier(), () => { });
+    OnGetFromPoolAction?.Invoke();
     // Debug.Log(s + " : " + transform.localScale, this.transform);
   }
 
@@ -213,7 +220,8 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
       if (kvp.Value.Update(deltaTime))
       {
         kvp.Value.Reset();
-        kvp.Key.OnHitFromShot(weaponInfo.ShotDamage);
+        // kvp.Key.OnHitFromShot(weaponInfo.ShotDamage);
+        OnHitEnemy(kvp.Key);
       }
     }
     EnteredEnemies.Clear();
