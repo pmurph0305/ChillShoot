@@ -87,6 +87,10 @@ public class WeaponInfo : IGetShotSpawnInfo
       case WeaponUpgradeType.AdditionalProjectiles:
         ApplyProjectileUpgrade(Mathf.RoundToInt(value));
         break;
+      case WeaponUpgradeType.AdditionalHitsBeforeDestroy:
+        ApplyAdditionalHitsBeforeDestroy(Mathf.RoundToInt(value));
+        break;
+
     }
   }
 
@@ -114,6 +118,11 @@ public class WeaponInfo : IGetShotSpawnInfo
   void ApplySpeedUpgrade(float value)
   {
     ShotSpeed += ShotSpeed * value;
+  }
+
+  void ApplyAdditionalHitsBeforeDestroy(int value)
+  {
+    DestroyAfterXHits += value;
   }
 
   int currentSpawnIndex = 0;

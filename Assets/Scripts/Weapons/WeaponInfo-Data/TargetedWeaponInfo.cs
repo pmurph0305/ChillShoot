@@ -5,6 +5,7 @@ using System.Linq;
 [System.Serializable]
 public class TargetedWeaponInfo : WeaponInfo
 {
+  [Header("Targeted Weapon info")]
   [SerializeField] public Transform weaponTransform;
   [SerializeField] public Transform target;
   [SerializeField] LayerMask TargetLayerMask;

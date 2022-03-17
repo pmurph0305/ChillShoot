@@ -68,4 +68,5 @@ public enum WeaponUpgradeType
   Area,
   Cooldown,
   AdditionalProjectiles,
+  AdditionalHitsBeforeDestroy
 }
