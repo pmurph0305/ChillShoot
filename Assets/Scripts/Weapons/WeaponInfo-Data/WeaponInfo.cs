@@ -84,7 +84,15 @@ public class WeaponInfo : IGetShotSpawnInfo
       case WeaponUpgradeType.Speed:
         ApplySpeedUpgrade(value);
         break;
+      case WeaponUpgradeType.AdditionalProjectiles:
+        ApplyProjectileUpgrade(Mathf.RoundToInt(value));
+        break;
     }
+  }
+
+  void ApplyProjectileUpgrade(int value)
+  {
+    ValidSpawnPositions += value;
   }
 
   void ApplyDamageUpgrade(float value)

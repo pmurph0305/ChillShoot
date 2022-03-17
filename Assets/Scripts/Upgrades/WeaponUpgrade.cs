@@ -66,5 +66,6 @@ public enum WeaponUpgradeType
   Damage,
   Speed,
   Area,
-  Cooldown
+  Cooldown,
+  AdditionalProjectiles,
 }
