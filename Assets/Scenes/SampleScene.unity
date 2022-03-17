@@ -1636,6 +1636,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15ca0d779808dbc46bd79881da63f86f, type: 2}
   - {fileID: 11400000, guid: 7516f44db6fc21e4281b0377e7cc8488, type: 2}
   - {fileID: 11400000, guid: e3b0776472baeae43af7d20774b0519c, type: 2}
+  - {fileID: 11400000, guid: 195fd62f13fddb649b08bd870f9fd98d, type: 2}
   UsedUpgrades: []
   upgradesPerLevel: 6
 --- !u!1 &617002056
@@ -2071,7 +2072,7 @@ MonoBehaviour:
     ShotSpeed: 5
     ShotLifeTime: 0.5
     Cooldown: 1
-    ScaleMultiplier: 1
+    ScaleMultiplier: 5
     DamageCooldown: 0.25
     DestroyOnHit: 0
     DestroyAfterXHits: 1
@@ -6293,6 +6294,10 @@ PrefabInstance:
     - target: {fileID: 9155012296389039391, guid: 8f9acbfe28bc0a240967a897147acadb, type: 3}
       propertyPath: m_Name
       value: LaserShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155012296389039391, guid: 8f9acbfe28bc0a240967a897147acadb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f9acbfe28bc0a240967a897147acadb, type: 3}

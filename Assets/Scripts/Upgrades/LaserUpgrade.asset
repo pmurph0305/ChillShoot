@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: LaserUpgrade
   m_EditorClassIdentifier: 
   currentUpgrade: -1
-  weaponKey: 0
-  DisplayString: 
-  Values: []
+  weaponKey: 10
+  DisplayString: Laser
+  Values:
+  - Upgrades:
+    - upgradeType: 5
+      value: 2

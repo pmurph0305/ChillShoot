@@ -28,13 +28,17 @@ public class StretchToTarget : MonoBehaviour
     target = targetProvider.GetTarget();
     if (target != null)
     {
+      //todo: area causes this to not work correctly.
+      // box collider is way too large when scaling non-uniformly.
+      // but with the collider settings now its... good enough
       Vector3 dir = target.position - transform.position;
       Quaternion rotation = Quaternion.LookRotation(Vector3.forward, dir);
       transformToStretch.rotation = rotation;
       float distance = Vector3.Distance(target.position, transform.position);
+      targetMatcher.position = target.position;
       transformToStretch.position = transform.position + (dir.normalized) * distance / 2;
       Vector3 s = transform.localScale;
-      s.y = distance / BaseLength;
+      s.y = distance / (BaseLength * transform.lossyScale.y);
       transformToStretch.localScale = s;
     }
   }
