@@ -13,5 +13,5 @@ public enum WeaponKey
   Oscillate,
   Orbit,
   Shield,
-  ListTransformWeapon,
+  SideWeapon,
 }

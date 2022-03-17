@@ -335,14 +335,13 @@ GameObject:
   - component: {fileID: 93124610}
   - component: {fileID: 93124609}
   - component: {fileID: 93124608}
-  - component: {fileID: 93124611}
   m_Layer: 0
   m_Name: ShieldWeapon
   m_TagString: ShieldBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &93124607
 Transform:
   m_ObjectHideFlags: 0
@@ -394,9 +393,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 93124611}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 93124608}
-  ShotsPerShoot: 1
 --- !u!114 &93124610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,20 +418,9 @@ MonoBehaviour:
     DestroyOnHit: 0
     DestroyAfterXHits: 1
     AddPlayerSpeed: 0
---- !u!114 &93124611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93124606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransform: {fileID: 93124607}
+    ValidSpawnPositions: 1
+    SpawnLocations:
+    - {fileID: 93124607}
 --- !u!1 &117366790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,14 +1451,13 @@ GameObject:
   - component: {fileID: 603117696}
   - component: {fileID: 603117695}
   - component: {fileID: 603117694}
-  - component: {fileID: 603117693}
   m_Layer: 8
   m_Name: OscillateWeapon
   m_TagString: OscillateBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &603117692
 Transform:
   m_ObjectHideFlags: 0
@@ -1488,20 +1474,6 @@ Transform:
   m_Father: {fileID: 738651181}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &603117693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 603117691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransform: {fileID: 603117692}
 --- !u!114 &603117694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,6 +1515,9 @@ MonoBehaviour:
     DestroyOnHit: 1
     DestroyAfterXHits: 1
     AddPlayerSpeed: 1
+    ValidSpawnPositions: 1
+    SpawnLocations:
+    - {fileID: 603117692}
 --- !u!114 &603117696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1560,9 +1535,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 603117693}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 603117694}
-  ShotsPerShoot: 1
 --- !u!1 &607231778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,14 +1844,13 @@ GameObject:
   - component: {fileID: 633326189}
   - component: {fileID: 633326190}
   - component: {fileID: 633326191}
-  - component: {fileID: 633326192}
   m_Layer: 8
   m_Name: RandomDirWeapon
   m_TagString: RandomDirBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &633326188
 Transform:
   m_ObjectHideFlags: 0
@@ -1911,9 +1884,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 633326192}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 633326191}
-  ShotsPerShoot: 1
 --- !u!114 &633326190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1937,6 +1909,9 @@ MonoBehaviour:
     DestroyOnHit: 1
     DestroyAfterXHits: 1
     AddPlayerSpeed: 1
+    ValidSpawnPositions: 1
+    SpawnLocations:
+    - {fileID: 633326188}
 --- !u!114 &633326191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,20 +1930,6 @@ MonoBehaviour:
   parentType: 2
   Prefab: {fileID: 4387108056059798180, guid: 9e9222e2ed0beff4c8c5c4f773696644, type: 3}
   capacity: 100
---- !u!114 &633326192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633326187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransform: {fileID: 633326188}
 --- !u!1 &647706885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,9 +2378,8 @@ GameObject:
   - component: {fileID: 757012313}
   - component: {fileID: 757012311}
   - component: {fileID: 757012310}
-  - component: {fileID: 757012312}
   m_Layer: 0
-  m_Name: ListTransformWeapon
+  m_Name: SideWeapon
   m_TagString: ListTransformBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2484,22 +2444,10 @@ MonoBehaviour:
     DestroyOnHit: 1
     DestroyAfterXHits: 1
     AddPlayerSpeed: 1
---- !u!114 &757012312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 757012308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c501300f2f9c72458c7f64ac7bd9553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransforms:
-  - {fileID: 981680508}
-  - {fileID: 1380619530}
+    ValidSpawnPositions: 2
+    SpawnLocations:
+    - {fileID: 981680508}
+    - {fileID: 1380619530}
 --- !u!114 &757012313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2517,9 +2465,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 757012312}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 757012310}
-  ShotsPerShoot: 2
 --- !u!1 &845164150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,8 +2879,7 @@ Transform:
   m_LocalPosition: {x: 0.3, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1096992208}
+  m_Children: []
   m_Father: {fileID: 757012309}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -62.5}
@@ -3089,72 +3035,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031213983}
   m_CullTransparentMesh: 1
---- !u!1001 &1096992207
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 981680508}
-    m_Modifications:
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.302
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3587576049261919546, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_Name
-      value: TransformShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 3587576049261919546, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
---- !u!4 &1096992208 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 338003387198270469, guid: 52cf236b28c1dde48ad9d84b3e6a4109, type: 3}
-  m_PrefabInstance: {fileID: 1096992207}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1171662356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3672,7 +3552,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785548, y: 1}
+    m_SensorSize: {x: 1.7773851, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3995,14 +3875,13 @@ GameObject:
   - component: {fileID: 1474936482}
   - component: {fileID: 1474936481}
   - component: {fileID: 1474936480}
-  - component: {fileID: 1474936479}
   m_Layer: 0
   m_Name: CrossLineShot
   m_TagString: CrossTransformBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1474936478
 Transform:
   m_ObjectHideFlags: 0
@@ -4023,24 +3902,6 @@ Transform:
   m_Father: {fileID: 738651181}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1474936479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1474936477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c501300f2f9c72458c7f64ac7bd9553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransforms:
-  - {fileID: 584845507}
-  - {fileID: 667751759}
-  - {fileID: 1627019866}
-  - {fileID: 1809039991}
 --- !u!114 &1474936480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4082,6 +3943,12 @@ MonoBehaviour:
     DestroyOnHit: 1
     DestroyAfterXHits: 1
     AddPlayerSpeed: 1
+    ValidSpawnPositions: 4
+    SpawnLocations:
+    - {fileID: 584845507}
+    - {fileID: 667751759}
+    - {fileID: 1627019866}
+    - {fileID: 1809039991}
 --- !u!114 &1474936482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4099,9 +3966,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 1474936479}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 1474936480}
-  ShotsPerShoot: 4
 --- !u!4 &1506132064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6686872759568759909, guid: 84551c7e808ba68478291df3a85e690f, type: 3}
@@ -4119,14 +3985,13 @@ GameObject:
   - component: {fileID: 1517226363}
   - component: {fileID: 1517226362}
   - component: {fileID: 1517226364}
-  - component: {fileID: 1517226365}
   m_Layer: 8
   m_Name: PlayerDirWeapon
   m_TagString: PlayerDirBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1517226361
 Transform:
   m_ObjectHideFlags: 0
@@ -4166,6 +4031,9 @@ MonoBehaviour:
     DestroyOnHit: 1
     DestroyAfterXHits: 1
     AddPlayerSpeed: 1
+    ValidSpawnPositions: 1
+    SpawnLocations:
+    - {fileID: 1517226361}
 --- !u!114 &1517226363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4183,9 +4051,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 1517226365}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 1517226364}
-  ShotsPerShoot: 1
 --- !u!114 &1517226364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4204,20 +4071,6 @@ MonoBehaviour:
   parentType: 2
   Prefab: {fileID: 4390567009046939577, guid: b3cabfd138045c54a87ed01b44318a82, type: 3}
   capacity: 100
---- !u!114 &1517226365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1517226360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransform: {fileID: 1517226361}
 --- !u!224 &1521978255 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3570463014548305620, guid: 9aed981b2aabc22478f17f58ff843b27, type: 3}
@@ -5539,7 +5392,6 @@ GameObject:
   - component: {fileID: 2027540381}
   - component: {fileID: 2027540384}
   - component: {fileID: 2027540383}
-  - component: {fileID: 2027540382}
   - component: {fileID: 2027540385}
   m_Layer: 0
   m_Name: EngineFlamesWeapon
@@ -5547,7 +5399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2027540381
 Transform:
   m_ObjectHideFlags: 0
@@ -5564,20 +5416,6 @@ Transform:
   m_Father: {fileID: 738651181}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2027540382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027540380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 0, y: 0, z: 0}
-  SpawnTransform: {fileID: 2027540381}
 --- !u!114 &2027540383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5619,6 +5457,9 @@ MonoBehaviour:
     DestroyOnHit: 0
     DestroyAfterXHits: 1
     AddPlayerSpeed: 0
+    ValidSpawnPositions: 1
+    SpawnLocations:
+    - {fileID: 2027540381}
 --- !u!114 &2027540385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5636,9 +5477,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 2027540382}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 2027540383}
-  ShotsPerShoot: 1
   distancePerShot: 0.2
 --- !u!1 &2030189425
 GameObject:
@@ -5652,14 +5492,13 @@ GameObject:
   - component: {fileID: 2030189430}
   - component: {fileID: 2030189429}
   - component: {fileID: 2030189428}
-  - component: {fileID: 2030189427}
   m_Layer: 8
   m_Name: OrbitWeapon
   m_TagString: OrbitBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2030189426
 Transform:
   m_ObjectHideFlags: 0
@@ -5676,20 +5515,6 @@ Transform:
   m_Father: {fileID: 738651181}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030189427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030189425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransform: {fileID: 2030189426}
 --- !u!114 &2030189428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5731,6 +5556,9 @@ MonoBehaviour:
     DestroyOnHit: 1
     DestroyAfterXHits: 1
     AddPlayerSpeed: 1
+    ValidSpawnPositions: 1
+    SpawnLocations:
+    - {fileID: 2030189426}
 --- !u!114 &2030189430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5748,9 +5576,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 2030189427}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 2030189428}
-  ShotsPerShoot: 1
 --- !u!1 &2142409395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5763,14 +5590,13 @@ GameObject:
   - component: {fileID: 2142409397}
   - component: {fileID: 2142409398}
   - component: {fileID: 2142409399}
-  - component: {fileID: 2142409400}
   m_Layer: 8
   m_Name: HomingWeapon
   m_TagString: HomingDirBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2142409396
 Transform:
   m_ObjectHideFlags: 0
@@ -5804,9 +5630,8 @@ MonoBehaviour:
     _CurrentTime: 0
     _EndTime: 0
     _IsFinished: 0
-  spawnInfoGetter: {fileID: 2142409400}
+  spawnInfoGetter: {fileID: 0}
   pool: {fileID: 2142409399}
-  ShotsPerShoot: 1
   targetUpdateTimer: 0.2
 --- !u!114 &2142409398
 MonoBehaviour:
@@ -5831,6 +5656,9 @@ MonoBehaviour:
     DestroyOnHit: 1
     DestroyAfterXHits: 1
     AddPlayerSpeed: 0
+    ValidSpawnPositions: 1
+    SpawnLocations:
+    - {fileID: 2142409396}
     weaponTransform: {fileID: 2142409396}
     target: {fileID: 0}
     TargetLayerMask:
@@ -5854,20 +5682,6 @@ MonoBehaviour:
   parentType: 2
   Prefab: {fileID: 7835464467613785700, guid: 4451b937ea799014eafdc119c29e7a43, type: 3}
   capacity: 100
---- !u!114 &2142409400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142409395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274cd068660f31548a848e53a8c960d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnScale: {x: 1, y: 1, z: 1}
-  SpawnTransform: {fileID: 2142409396}
 --- !u!1001 &127504388879727836
 PrefabInstance:
   m_ObjectHideFlags: 0

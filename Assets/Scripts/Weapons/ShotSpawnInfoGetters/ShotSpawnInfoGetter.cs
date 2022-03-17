@@ -6,6 +6,8 @@ public abstract class ShotSpawnInfoGetter : MonoBehaviour, IGetShotSpawnInfo
 {
   [SerializeField] protected Vector3 SpawnScale = Vector3.one;
 
+  public abstract int GetNumberOfSpawnLocations();
+
   /// <summary>
   /// Gets the position to spawn a weapon's shot at.
   /// </summary>

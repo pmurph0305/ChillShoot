@@ -7,6 +7,7 @@ public class ListTransformSpawn : ShotSpawnInfoGetter
   [SerializeField] List<Transform> SpawnTransforms = new List<Transform>();
   int index = 0;
 
+  [SerializeField] List<Transform> UnlockableTransforms = new List<Transform>();
 
   protected override Vector3 GetSpawnPosition()
   {
@@ -30,5 +31,10 @@ public class ListTransformSpawn : ShotSpawnInfoGetter
       index = 0;
     }
     return info;
+  }
+
+  public override int GetNumberOfSpawnLocations()
+  {
+    return SpawnTransforms.Count;
   }
 }

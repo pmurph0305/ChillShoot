@@ -6,6 +6,11 @@ public class SingleTransformSpawn : ShotSpawnInfoGetter
 {
   [SerializeField] Transform SpawnTransform;
 
+  public override int GetNumberOfSpawnLocations()
+  {
+    return 1;
+  }
+
   public override TransformSpawnInfo GetTransformSpawnInfo()
   {
     return new TransformSpawnInfo(GetSpawnPosition(), GetSpawnRotation(), GetScale());

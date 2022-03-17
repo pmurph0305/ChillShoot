@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class WeaponInfo
+public class WeaponInfo : IGetShotSpawnInfo
 {
   [SerializeField] protected WeaponKey _key;
   public WeaponKey key { get { return _key; } private set { _key = value; } }
@@ -107,4 +107,21 @@ public class WeaponInfo
   {
     ShotSpeed += ShotSpeed * value;
   }
+
+  int currentSpawnIndex = 0;
+  public TransformSpawnInfo GetTransformSpawnInfo()
+  {
+    TransformSpawnInfo info = new TransformSpawnInfo(SpawnLocations[currentSpawnIndex]);
+    currentSpawnIndex++;
+    if (currentSpawnIndex >= ValidSpawnPositions)
+    {
+      currentSpawnIndex = 0;
+    }
+    return info;
+  }
+
+  public int NumberOfShots => ValidSpawnPositions;
+  [SerializeField] int ValidSpawnPositions = 1;
+
+  [SerializeField] List<Transform> SpawnLocations = new List<Transform>();
 }

@@ -14,4 +14,11 @@ public struct TransformSpawnInfo
     this.Rotation = rotation;
     this.Scale = scale;
   }
+
+  public TransformSpawnInfo(Transform t)
+  {
+    this.Position = t.position;
+    this.Rotation = t.rotation;
+    this.Scale = t.localScale;
+  }
 }

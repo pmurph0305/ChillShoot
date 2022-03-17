@@ -9,19 +9,16 @@ using UnityEngine.Pool;
 /// </summary>
 public class PrefabSpawnWeapon : Weapon
 {
-  [SerializeField] protected ShotSpawnInfoGetter spawnInfoGetter;
   //TODO: seperate component to get the transform to spawn at.
   // [SerializeField] protected Transform ShotSpawnTransform; 
   [SerializeField] protected PrefabPool<PrefabShot> pool;
 
-  [SerializeField] protected int ShotsPerShoot = 1;
-
   protected override void Shoot()
   {
-    for (int i = 0; i < ShotsPerShoot; i++)
+    for (int i = 0; i < weaponInfo.NumberOfShots; i++)
     {
       // get position and rotation for where to spawn the shot.
-      PrefabShot s = pool.Get(spawnInfoGetter.GetTransformSpawnInfo());
+      PrefabShot s = pool.Get(weaponInfo.GetTransformSpawnInfo());
       // Debug.Log("Shoot:" + i, s.gameObject);
     }
   }
