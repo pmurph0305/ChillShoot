@@ -1628,16 +1628,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef3566c206b3f643ba7ee38927ca53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllUpgrades:
+  PlayerUpgrades:
   - {fileID: 11400000, guid: a878f3246d1c2324b87e9b2dcbd4471a, type: 2}
   - {fileID: 11400000, guid: 2f0836b3961ef3346b5bad1340b8e805, type: 2}
   - {fileID: 11400000, guid: 5708b44c7b01f5449b686d6d233d8fc4, type: 2}
+  - {fileID: 11400000, guid: d1d9069ba88a0b9488daa0b5cc617eec, type: 2}
   - {fileID: 11400000, guid: 5cf9f435b12f97248a6362d5578ab11a, type: 2}
   - {fileID: 11400000, guid: 15ca0d779808dbc46bd79881da63f86f, type: 2}
-  - {fileID: 11400000, guid: 7516f44db6fc21e4281b0377e7cc8488, type: 2}
+  WeaponUpgrades:
   - {fileID: 11400000, guid: e3b0776472baeae43af7d20774b0519c, type: 2}
+  - {fileID: 11400000, guid: 7516f44db6fc21e4281b0377e7cc8488, type: 2}
   - {fileID: 11400000, guid: 195fd62f13fddb649b08bd870f9fd98d, type: 2}
-  UsedUpgrades: []
+  OldUpgradeChance: 0.5
+  WeaponUpgradeChance: 0.5
+  UsedPlayerUpgrades: []
+  UsedWeaponUpgrades: []
   upgradesPerLevel: 6
 --- !u!1 &617002056
 GameObject:
@@ -2068,11 +2073,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo:
     _key: 10
-    ShotDamage: 5
+    ShotDamage: 111
     ShotSpeed: 5
     ShotLifeTime: 0.5
     Cooldown: 1
-    ScaleMultiplier: 5
+    ScaleMultiplier: 1
     DamageCooldown: 0.25
     DestroyOnHit: 0
     DestroyAfterXHits: 1
@@ -3191,6 +3196,7 @@ GameObject:
   - component: {fileID: 1171662360}
   - component: {fileID: 1171662361}
   - component: {fileID: 1171662359}
+  - component: {fileID: 1171662362}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -3337,6 +3343,26 @@ MonoBehaviour:
     MaxHealth: 100
     CurrentHealth: 100
     Experience: 0
+    ExperienceMultiplier: 1
+--- !u!114 &1171662362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171662356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bab4bf10d3844429342e2499cc893a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerWeaponData:
+  - gameObject: {fileID: 667007019}
+    key: 10
+  - gameObject: {fileID: 93124606}
+    key: 8
+  - gameObject: {fileID: 757012308}
+    key: 9
 --- !u!1001 &1217532518
 PrefabInstance:
   m_ObjectHideFlags: 0

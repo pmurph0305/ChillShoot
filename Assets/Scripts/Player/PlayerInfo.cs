@@ -78,6 +78,9 @@ public class PlayerInfo : MonoBehaviour
       case PlayerUpgradeType.Speed:
         pData.ApplySpeed(amount);
         break;
+      case PlayerUpgradeType.ExpGain:
+        pData.ApplyExperienceUpgrade(amount);
+        break;
     }
   }
 }

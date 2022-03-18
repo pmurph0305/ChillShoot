@@ -5,10 +5,16 @@ using System.Linq;
 using System;
 public class UpgradeList : MonoBehaviour
 {
-  [SerializeField] List<Upgrade> AllUpgrades = new List<Upgrade>();
+  [SerializeField] List<Upgrade> PlayerUpgrades = new List<Upgrade>();
+
+  [SerializeField] List<Upgrade> WeaponUpgrades = new List<Upgrade>();
+
+  [SerializeField] float OldUpgradeChance = 0.5f;
+  [SerializeField] float WeaponUpgradeChance = 0.5f;
 
   [Header("Debug")]
-  [SerializeField] List<Upgrade> UsedUpgrades = new List<Upgrade>();
+  [SerializeField] List<Upgrade> UsedPlayerUpgrades = new List<Upgrade>();
+  [SerializeField] List<Upgrade> UsedWeaponUpgrades = new List<Upgrade>();
 
 
   [SerializeField] int upgradesPerLevel = 2;
@@ -21,7 +27,14 @@ public class UpgradeList : MonoBehaviour
 
   void OnUpgradeChosenActionHandler(Upgrade upgrade)
   {
-    UsedUpgrades.Add(upgrade);
+    if (upgrade is WeaponUpgrade)
+    {
+      UsedWeaponUpgrades.Add(upgrade);
+    }
+    else
+    {
+      UsedPlayerUpgrades.Add(upgrade);
+    }
   }
 
   Upgrade GetRandom(List<Upgrade> list)
@@ -34,27 +47,53 @@ public class UpgradeList : MonoBehaviour
   {
     List<Upgrade> ups = new List<Upgrade>();
 
-    List<Upgrade> alreadyUpgraded = new List<Upgrade>(UsedUpgrades);
-    List<Upgrade> notYetUpgraded = AllUpgrades.Except(UsedUpgrades).ToList();
-    int i = alreadyUpgraded.RemoveAll(item => !item.CanBeUpgraded());
-    Debug.Log("Removed already upgraded:" + i);
+
+    List<Upgrade> alreadyUpgradedPlayer = new List<Upgrade>(UsedPlayerUpgrades);
+    List<Upgrade> alreadyUpgradedWeapons = new List<Upgrade>(UsedWeaponUpgrades);
+
+
+    List<Upgrade> newPlayerUpgrades = PlayerUpgrades.Except(UsedPlayerUpgrades).ToList();
+    List<Upgrade> newWeaponUpgrades = WeaponUpgrades.Except(UsedWeaponUpgrades).ToList();
+
+    int i = alreadyUpgradedPlayer.RemoveAll(item => !item.CanBeUpgraded());
+    int b = alreadyUpgradedWeapons.RemoveAll(item => !item.CanBeUpgraded());
+
+
+    Debug.Log("Removed already upgraded p:" + i + " w: " + b);
     while (ups.Count < upgradesPerLevel)
     {
-      bool useNewUpgrade = UnityEngine.Random.Range(0f, 1f) > 0.5f ? true : false;
-      if (alreadyUpgraded.Count == 0)
+      bool useNewUpgrade = UnityEngine.Random.Range(0f, 1f) > OldUpgradeChance ? true : false;
+      bool useWeaponUpgrade = UnityEngine.Random.Range(0f, 1f) > WeaponUpgradeChance ? false : true;
+      if (alreadyUpgradedPlayer.Count == 0)
       {
         useNewUpgrade = true;
       }
       Upgrade u = null;
-      if (useNewUpgrade && notYetUpgraded.Count > 0)
+      if (useNewUpgrade)
       {
-        u = GetRandom(notYetUpgraded);
-        notYetUpgraded.Remove(u);
+        if ((useWeaponUpgrade || newPlayerUpgrades.Count == 0) && newWeaponUpgrades.Count > 0)
+        {
+          u = GetRandom(newWeaponUpgrades);
+          newWeaponUpgrades.Remove(u);
+        }
+        else if (newPlayerUpgrades.Count > 0)
+        {
+          u = GetRandom(newPlayerUpgrades);
+          newPlayerUpgrades.Remove(u);
+        }
       }
-      if (!useNewUpgrade || u == null && alreadyUpgraded.Count > 0)
+      if (!useNewUpgrade || u == null)
       {
-        u = GetRandom(alreadyUpgraded);
-        alreadyUpgraded.Remove(u);
+        if ((useWeaponUpgrade || alreadyUpgradedPlayer.Count == 0) && alreadyUpgradedWeapons.Count > 0)
+        {
+          u = GetRandom(alreadyUpgradedWeapons);
+          alreadyUpgradedWeapons.Remove(u);
+        }
+        else if (alreadyUpgradedPlayer.Count > 0)
+        {
+          u = GetRandom(alreadyUpgradedPlayer);
+          alreadyUpgradedPlayer.Remove(u);
+        }
       }
       if (u != null)
       {

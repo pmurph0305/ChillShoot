@@ -6,4 +6,5 @@ public enum PlayerUpgradeType
   Area,
   Duration,
   Speed,
+  ExpGain,
 }

@@ -21,6 +21,7 @@ public class PlayerData
 
   [Header("Exp")]
   [SerializeField] public float Experience = 0;
+  [SerializeField] public float ExperienceMultiplier = 1.0f;
 
   public void ApplyCooldown(float amount)
   {
@@ -50,10 +51,15 @@ public class PlayerData
     Speed += BaseSpeed * amount;
   }
 
+  public void ApplyExperienceUpgrade(float amount)
+  {
+    ExperienceMultiplier += ExperienceMultiplier * amount;
+  }
+
   public static event Action<float> OnPlayerExperienceChangedAction;
   public void GainExp(float value)
   {
-    Experience += value;
+    Experience += value * ExperienceMultiplier;
     OnPlayerExperienceChangedAction?.Invoke(Experience);
   }
 

@@ -11,6 +11,11 @@ public class WeaponDictionary
     return dict[key];
   }
 
+  public static bool Contains(WeaponKey key)
+  {
+    return dict.ContainsKey(key);
+  }
+
   // public static void Add(string key, WeaponInfo value)
   // {
   //   dict.Add(key, value);

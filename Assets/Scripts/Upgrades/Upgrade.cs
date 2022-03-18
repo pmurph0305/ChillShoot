@@ -10,7 +10,7 @@ public abstract class Upgrade : ScriptableObject
   }
 
   [Header("Debug")]
-  [SerializeField] protected int currentUpgrade = -1;
+  [SerializeField] protected int currentUpgrade = 0;
 
   public abstract void ApplyUpgrade();
 
@@ -19,6 +19,6 @@ public abstract class Upgrade : ScriptableObject
   public abstract string GetDisplayString();
   public virtual void ResetUpgrade()
   {
-    currentUpgrade = -1;
+    currentUpgrade = 0;
   }
 }

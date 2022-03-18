@@ -17,22 +17,22 @@ public class PlayerUpgrade : Upgrade
   public static event Action<PlayerUpgradeType, float> OnPlayerUpgradeEvent;
   public override void ApplyUpgrade()
   {
-    currentUpgrade++;
     if (currentUpgrade < Values.Count)
     {
       // PlayerInfo.OnPlayerUpgradeAction(upgradeType, Values[currentUpgrade]);
       OnPlayerUpgradeEvent?.Invoke(upgradeType, Values[currentUpgrade]);
     }
+    currentUpgrade++;
   }
 
   public override bool CanBeUpgraded()
   {
-    return currentUpgrade + 1 < Values.Count;
+    return currentUpgrade < Values.Count;
   }
 
   public float GetPercentUpgrade()
   {
-    return (Values[currentUpgrade + 1] * 100);
+    return (Values[currentUpgrade] * 100);
   }
 
   public override string GetDisplayString()
