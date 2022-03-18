@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
   [SerializeField] ExperienceAttractor expAttractor;
   [SerializeField] float AttractorDuration = 3f;
 
+  [SerializeField] float CurrentHealth = 100f;
+
   public static Transform PlayerTransform { get; private set; }
   public static Vector3 PlayerVelocity;
   public static Vector3 PlayerDirection;
@@ -20,12 +22,10 @@ public class PlayerController : MonoBehaviour
     up = transform.up;
     PlayerTransform = this.transform;
     previous = transform.position;
+    CurrentHealth = playerData.pData.MaxHealth;
   }
 
-  public void TakeDamage(float damage)
-  {
-    playerData.pData.TakeDamage(damage);
-  }
+
 
   Vector3 up;
   Vector3 smoothVel;
@@ -61,8 +61,25 @@ public class PlayerController : MonoBehaviour
     {
       expAttractor.Activate(AttractorDuration);
     }
-
+    HealthRegen(Time.deltaTime);
     UpdatePlayerParameters(movement);
+  }
+
+
+  public bool TakeDamage(float damage)
+  {
+    CurrentHealth -= damage;
+    if (CurrentHealth < 0)
+    {
+      return true;
+    }
+    return false;
+  }
+
+  void HealthRegen(float deltaTime)
+  {
+    CurrentHealth += playerData.GetPlayerHealthRegen() * deltaTime;
+    if (CurrentHealth > playerData.pData.MaxHealth) CurrentHealth = playerData.pData.MaxHealth;
   }
 
   Vector3 previous;

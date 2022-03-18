@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 {
   [SerializeField] public float speed = 1;
 
-  [SerializeField] float damage = 10;
+  [SerializeField] float enemyDamage = 10;
 
   [SerializeField] float damageTimerLength = 0.2f;
   [SerializeField] float MaxHealth = 100;
@@ -79,15 +79,19 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     }
     else
     {
+      travelDirector.SetAdditionalVelocity(HitKnockback);
       travelDirector.UpdateMovement(rb2d, speed, Time.fixedDeltaTime);
       damageTimer.FixedUpdate();
+      HitKnockback = Vector3.zero;
     }
   }
 
 
-  public void OnHitFromShot(float damage)
+  Vector3 HitKnockback;
+  public void OnHitFromShot(PrefabShot shot)
   {
-    TakeDamage(damage);
+    TakeDamage(shot.weaponInfo.GetShotDamage());
+    HitKnockback += shot.transform.up * shot.weaponInfo.GetShotKnockback();
   }
 
   void TakeDamage(float damage)

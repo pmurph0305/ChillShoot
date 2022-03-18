@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06a787022fff2f04fbc01fa3ae017075, type: 3}
-  m_Name: ExperienceUpgrade
+  m_Name: Health Regen
   m_EditorClassIdentifier: 
-  currentUpgrade: -1
-  upgradeType: 6
+  currentUpgrade: 0
+  upgradeType: 0
   Values:
-  - 0.1
-  - 0.1
   - 0.1
   DisplayString: 
   DisplaySuffix: '%'

@@ -29,11 +29,17 @@ public class UpgradeList : MonoBehaviour
   {
     if (upgrade is WeaponUpgrade)
     {
-      UsedWeaponUpgrades.Add(upgrade);
+      if (!UsedWeaponUpgrades.Contains(upgrade))
+      {
+        UsedWeaponUpgrades.Add(upgrade);
+      }
     }
     else
     {
-      UsedPlayerUpgrades.Add(upgrade);
+      if (!UsedPlayerUpgrades.Contains(upgrade))
+      {
+        UsedPlayerUpgrades.Add(upgrade);
+      }
     }
   }
 
@@ -42,7 +48,10 @@ public class UpgradeList : MonoBehaviour
     return list[UnityEngine.Random.Range(0, list.Count)];
   }
 
-
+  /// <summary>
+  /// Somehow getting duplicate entries
+  /// </summary>
+  /// <returns></returns>
   public List<Upgrade> GetUpgradesToDisplay()
   {
     List<Upgrade> ups = new List<Upgrade>();
@@ -74,12 +83,18 @@ public class UpgradeList : MonoBehaviour
         if ((useWeaponUpgrade || newPlayerUpgrades.Count == 0) && newWeaponUpgrades.Count > 0)
         {
           u = GetRandom(newWeaponUpgrades);
-          newWeaponUpgrades.Remove(u);
+          if (!newWeaponUpgrades.Remove(u))
+          {
+            LogFailedRemove(u, newWeaponUpgrades);
+          }
         }
         else if (newPlayerUpgrades.Count > 0)
         {
           u = GetRandom(newPlayerUpgrades);
-          newPlayerUpgrades.Remove(u);
+          if (!newPlayerUpgrades.Remove(u))
+          {
+            LogFailedRemove(u, newPlayerUpgrades);
+          }
         }
       }
       if (!useNewUpgrade || u == null)
@@ -87,12 +102,18 @@ public class UpgradeList : MonoBehaviour
         if ((useWeaponUpgrade || alreadyUpgradedPlayer.Count == 0) && alreadyUpgradedWeapons.Count > 0)
         {
           u = GetRandom(alreadyUpgradedWeapons);
-          alreadyUpgradedWeapons.Remove(u);
+          if (!alreadyUpgradedWeapons.Remove(u))
+          {
+            LogFailedRemove(u, alreadyUpgradedWeapons);
+          }
         }
         else if (alreadyUpgradedPlayer.Count > 0)
         {
           u = GetRandom(alreadyUpgradedPlayer);
-          alreadyUpgradedPlayer.Remove(u);
+          if (!alreadyUpgradedPlayer.Remove(u))
+          {
+            LogFailedRemove(u, alreadyUpgradedPlayer);
+          }
         }
       }
       if (u != null)
@@ -105,5 +126,10 @@ public class UpgradeList : MonoBehaviour
       }
     }
     return ups;
+  }
+
+  void LogFailedRemove(Upgrade u, List<Upgrade> list)
+  {
+    Debug.Log("Failed to remove " + u.name + " from " + list);
   }
 }

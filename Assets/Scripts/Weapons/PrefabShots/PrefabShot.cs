@@ -31,7 +31,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   public virtual void OnHitEnemy(EnemyController enemy)
   {
-    Debug.Log("Hit", enemy);
+    // Debug.Log("Hit", enemy);
     if (weaponInfo.DestroyOnHit)
     {
       NumberOfHits++;
@@ -40,13 +40,13 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
         Release();
       }
     }
-    EffectPlayerPool.StartEffect(transform.position);
+    EffectPlayerPool.StartEffect(enemy.transform.position);
     if (!DamagedEnemies.ContainsKey(enemy))
     {
       enemy.OnEnemyReleased += OnEnemyReleased;
       DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
     }
-    enemy.OnHitFromShot(weaponInfo.ShotDamage);
+    enemy.OnHitFromShot(this);
   }
 
   [SerializeField] bool UseSpeedEaser;
@@ -58,7 +58,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     {
       return speedEase.current;
     }
-    return weaponInfo.ShotSpeed;
+    return weaponInfo.GetShotSpeed();
   }
 
 
@@ -112,7 +112,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // transform.localScale = Vector3.one * weaponInfo.ScaleMultiplier;
     if (UseSpeedEaser)
     {
-      speedEase.StartEase(weaponInfo.ShotSpeed);
+      speedEase.StartEase(weaponInfo.GetShotSpeed());
     }
     SetPlayerSpeedParameters();
 

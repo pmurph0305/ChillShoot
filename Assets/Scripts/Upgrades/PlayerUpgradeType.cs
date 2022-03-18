@@ -7,4 +7,10 @@ public enum PlayerUpgradeType
   Duration,
   Speed,
   ExpGain,
+  Knockback,
+  Damage,
+  WeaponSpeed,
+  WeaponCritChance,
+  WeaponCritDamage,
+  HealthRegeneration,
 }

@@ -20,8 +20,8 @@ public class DamageDisplayPool : PrefabPool<TextDisplayer>
     Vector3 v = _camera.WorldToScreenPoint(position);
     v = position;
     // v.z = 0;
-    damage = UnityEngine.Random.Range(0, 99);
+    // damage = UnityEngine.Random.Range(0, 99);
     TextDisplayer td = Get(v);
-    td.SetText(damage.ToString());
+    td.SetText(((int)damage).ToString());
   }
 }

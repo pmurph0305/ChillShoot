@@ -9,6 +9,11 @@ public class PlayerData
   public float CooldownMultiplier = 1.0f;
   public float AreaMultiplier = 1.0f;
   public float DurationMultiplier = 1.0f;
+  public float KnockbackMultiplier = 1.0f;
+  public float DamageMultiplier = 1.0f;
+  public float WeaponSpeedMultiplier = 1.0f;
+  public float CriticalHitDamageMultiplier = 1.0f;
+  public float CriticalHitChanceMultiplier = 1.0f;
 
   [Header("Speed")]
   [SerializeField] public float BaseSpeed = 1.0f;
@@ -17,41 +22,69 @@ public class PlayerData
   [Header("HP")]
   [SerializeField] public float BaseHealth = 100;
   [SerializeField] public float MaxHealth = 100;
-  public float CurrentHealth = 100;
+  [SerializeField] public float HealthRegen = 0.0f;
 
   [Header("Exp")]
   [SerializeField] public float Experience = 0;
   [SerializeField] public float ExperienceMultiplier = 1.0f;
 
-  public void ApplyCooldown(float amount)
+  #region weapons
+  public void UpgradeCooldownMultiplier(float amount)
   {
     CooldownMultiplier -= amount;
   }
 
-  public void ApplyArea(float amount)
+  public void UpgradeAreaMultiplier(float amount)
   {
     AreaMultiplier += amount;
   }
 
-  public void ApplyDuration(float amount)
+  public void UpgradeDurationMultiplier(float amount)
   {
     DurationMultiplier += amount;
   }
 
-  public void IncreaseHealth(float amount)
+  public void UpgradeKnockbackMultiplier(float amount)
   {
-    float currentPercent = CurrentHealth / MaxHealth;
-    MaxHealth += BaseHealth * amount;
-    CurrentHealth = MaxHealth * currentPercent;
+    KnockbackMultiplier += amount;
   }
 
+  public void UpgradeDamageMultiplier(float amount)
+  {
+    DamageMultiplier += amount;
+  }
 
-  public void ApplySpeed(float amount)
+  public void UpgradeWeaponSpeedMultiplier(float amount)
+  {
+    WeaponSpeedMultiplier += amount;
+  }
+
+  public void UpgradeCriticalHitDamageMultiplier(float amount)
+  {
+    CriticalHitDamageMultiplier += amount;
+  }
+
+  public void UpgradeCriticalHitChanceMultiplier(float amount)
+  {
+    CriticalHitChanceMultiplier += amount;
+  }
+  #endregion
+
+  public void UpgradeMaxHealth(float amount)
+  {
+    MaxHealth += BaseHealth * amount;
+  }
+
+  public void UpgradeHealthRegen(float amount)
+  {
+    HealthRegen += amount;
+  }
+  public void UpgradeMovementSpeed(float amount)
   {
     Speed += BaseSpeed * amount;
   }
 
-  public void ApplyExperienceUpgrade(float amount)
+  public void UpgradeExperienceGain(float amount)
   {
     ExperienceMultiplier += ExperienceMultiplier * amount;
   }
@@ -63,13 +96,5 @@ public class PlayerData
     OnPlayerExperienceChangedAction?.Invoke(Experience);
   }
 
-  public bool TakeDamage(float damage)
-  {
-    CurrentHealth -= damage;
-    if (CurrentHealth < 0)
-    {
-      return true;
-    }
-    return false;
-  }
+
 }

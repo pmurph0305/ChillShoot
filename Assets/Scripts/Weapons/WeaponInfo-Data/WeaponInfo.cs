@@ -8,8 +8,35 @@ public class WeaponInfo : IGetShotSpawnInfo
   public WeaponKey key { get { return _key; } private set { _key = value; } }
 
 
-  public float ShotDamage = 10f;
-  public float ShotSpeed = 5f;
+  [SerializeField] protected float ShotDamage = 10f;
+  [SerializeField] protected float CritChance = 5f;
+  [SerializeField] protected float CritMultiplier = 1.5f;
+
+  protected float CriticalHitMultiplier()
+  {
+    if (Random.Range(0f, 100f) < CritChance * PlayerInfo.GetCriticalHitChanceMultiplier())
+    {
+      return CritMultiplier * PlayerInfo.GetCritcalDamageMultiplier();
+    }
+    return 1.0f;
+  }
+  public float GetShotDamage()
+  {
+    return ShotDamage * PlayerInfo.GetDamageMultiplier() * CriticalHitMultiplier();
+  }
+
+  [SerializeField] protected float ShotSpeed = 5f;
+  public float GetShotSpeed()
+  {
+    return ShotSpeed * PlayerInfo.GetWeaponSpeedMultiplier();
+  }
+
+  [SerializeField] protected float ShotKnockBack = 0.1f;
+  public float GetShotKnockback()
+  {
+    return ShotKnockBack * PlayerInfo.GetKnockBackMultiplier();
+  }
+
   [SerializeField] protected float ShotLifeTime = 2f;
   public float GetLifeTime()
   {
@@ -130,7 +157,7 @@ public class WeaponInfo : IGetShotSpawnInfo
   {
     TransformSpawnInfo info = new TransformSpawnInfo(SpawnLocations[currentSpawnIndex]);
     currentSpawnIndex++;
-    if (currentSpawnIndex >= ValidSpawnPositions)
+    if (currentSpawnIndex >= ValidSpawnPositions || currentSpawnIndex >= SpawnLocations.Count)
     {
       currentSpawnIndex = 0;
     }

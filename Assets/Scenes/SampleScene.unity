@@ -409,7 +409,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 8
     ShotDamage: 111
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 0.1
     ShotLifeTime: 4
     Cooldown: 6
     ScaleMultiplier: 2
@@ -983,7 +986,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475871628}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -991,7 +994,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 25
 --- !u!50 &475871631
 Rigidbody2D:
   serializedVersion: 4
@@ -1511,7 +1514,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 6
     ShotDamage: 111
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 0.1
     ShotLifeTime: 5
     Cooldown: 0.1
     ScaleMultiplier: 1
@@ -1635,6 +1641,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1d9069ba88a0b9488daa0b5cc617eec, type: 2}
   - {fileID: 11400000, guid: 5cf9f435b12f97248a6362d5578ab11a, type: 2}
   - {fileID: 11400000, guid: 15ca0d779808dbc46bd79881da63f86f, type: 2}
+  - {fileID: 11400000, guid: 384b84d2cb77e544285f01d0d77161d6, type: 2}
+  - {fileID: 11400000, guid: 2d198501a6790a94aa5ed35b813f4df0, type: 2}
+  - {fileID: 11400000, guid: 5fa4d1845aacc6a46a14474aac57a3b4, type: 2}
   WeaponUpgrades:
   - {fileID: 11400000, guid: e3b0776472baeae43af7d20774b0519c, type: 2}
   - {fileID: 11400000, guid: 7516f44db6fc21e4281b0377e7cc8488, type: 2}
@@ -1643,7 +1652,7 @@ MonoBehaviour:
   WeaponUpgradeChance: 0.5
   UsedPlayerUpgrades: []
   UsedWeaponUpgrades: []
-  upgradesPerLevel: 6
+  upgradesPerLevel: 10
 --- !u!1 &617002056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,7 +1919,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 1
     ShotDamage: 111
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 0.1
     ShotLifeTime: 2
     Cooldown: 0.1
     ScaleMultiplier: 1
@@ -2002,7 +2014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &667007020
 Transform:
   m_ObjectHideFlags: 0
@@ -2073,8 +2085,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo:
     _key: 10
-    ShotDamage: 111
+    ShotDamage: 1
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 5
     ShotLifeTime: 0.5
     Cooldown: 1
     ScaleMultiplier: 1
@@ -2554,7 +2569,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 9
     ShotDamage: 111
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 0.1
     ShotLifeTime: 2
     Cooldown: 0.1
     ScaleMultiplier: 1
@@ -3337,6 +3355,11 @@ MonoBehaviour:
     CooldownMultiplier: 1
     AreaMultiplier: 1
     DurationMultiplier: 1
+    KnockbackMultiplier: 1
+    DamageMultiplier: 1
+    WeaponSpeedMultiplier: 1
+    CriticalHitDamageMultiplier: 1
+    CriticalHitChanceMultiplier: 1
     BaseSpeed: 3
     Speed: 3
     BaseHealth: 100
@@ -3721,7 +3744,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773851, y: 1}
+    m_SensorSize: {x: 1.7771318, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4135,7 +4158,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 4
     ShotDamage: 10
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 0.1
     ShotLifeTime: 0.1
     Cooldown: 0.1
     ScaleMultiplier: 1
@@ -4222,7 +4248,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 3
     ShotDamage: 111
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 0.1
     ShotLifeTime: 22
     Cooldown: 0.1
     ScaleMultiplier: 1
@@ -5647,7 +5676,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 5
     ShotDamage: 111
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 1
+    ShotKnockBack: 0.1
     ShotLifeTime: 2
     Cooldown: 10000000
     ScaleMultiplier: 1
@@ -5745,7 +5777,10 @@ MonoBehaviour:
   weaponInfo:
     _key: 7
     ShotDamage: 111
+    CritChance: 5
+    CritMultiplier: 1.5
     ShotSpeed: 1
+    ShotKnockBack: 0.1
     ShotLifeTime: 5
     Cooldown: 0.1
     ScaleMultiplier: 1
@@ -5823,7 +5858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2142409396
 Transform:
   m_ObjectHideFlags: 0
@@ -5873,8 +5908,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo:
     _key: 2
-    ShotDamage: 111
+    ShotDamage: 55
+    CritChance: 50
+    CritMultiplier: 1.5
     ShotSpeed: 5
+    ShotKnockBack: 25
     ShotLifeTime: 2
     Cooldown: 0.1
     ScaleMultiplier: 1
