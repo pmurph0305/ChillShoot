@@ -96,12 +96,17 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     HitKnockback += shot.transform.up * shot.weaponInfo.GetShotKnockback();
   }
 
+  public void OnHitFromAbility(float damage)
+  {
+    TakeDamage(damage);
+  }
+
   void TakeDamage(float damage)
   {
     // Debug.Log("Take damage:" + damage);
     health -= damage;
     OnEnemyDamagedAction?.Invoke(transform.position, damage);
-    if (health < 0)
+    if (health <= 0)
     {
       // Destroy(this.gameObject);
       Release();

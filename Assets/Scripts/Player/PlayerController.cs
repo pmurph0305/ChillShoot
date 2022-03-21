@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
   [SerializeField] float smoothTime = 0.01f;
 
 
+  [Header("Skills")]
+  [SerializeField] ChargeSkill chargeSkill;
+
+
   [Header("Input Debugging")]
   [SerializeField] float s;
   [SerializeField] Vector3 d;
@@ -63,6 +67,20 @@ public class PlayerController : MonoBehaviour
     }
     HealthRegen(Time.deltaTime);
     UpdatePlayerParameters(movement);
+
+    if (Input.GetKeyDown(KeyCode.LeftShift))
+    {
+      chargeSkill.StartCharging(Time.deltaTime);
+    }
+    else if (Input.GetKey(KeyCode.LeftShift))
+    {
+      chargeSkill.Update(Time.deltaTime);
+    }
+    if (Input.GetKeyUp(KeyCode.LeftShift))
+    {
+      Vector3 p = chargeSkill.Finish();
+      transform.position = p;
+    }
   }
 
 
