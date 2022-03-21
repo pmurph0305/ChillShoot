@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 public class DamageDisplayPool : PrefabPool<TextDisplayer>
 {
-  public static Action<Vector3, float> OnEnemyDamagedAction;
 
   [SerializeField] Camera _camera;
 
@@ -12,10 +11,10 @@ public class DamageDisplayPool : PrefabPool<TextDisplayer>
   {
     base.OnAwake();
     _camera = Camera.main;
-    OnEnemyDamagedAction += OnCreateElementHandler;
+    EnemyController.OnEnemyDamagedAction += OnEnemyDamagedActionHandler;
   }
 
-  public void OnCreateElementHandler(Vector3 position, float damage)
+  public void OnEnemyDamagedActionHandler(Vector3 position, float damage)
   {
     Vector3 v = _camera.WorldToScreenPoint(position);
     v = position;
