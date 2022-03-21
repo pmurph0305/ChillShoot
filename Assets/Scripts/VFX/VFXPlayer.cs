@@ -15,6 +15,11 @@ public class VFXPlayer : MonoBehaviour, IPoolable<VFXPlayer>
 
   public void OnGetFromPool()
   {
+    // beacuse of issue with prefab shot calling on hit enemy if enemy is already deactivated.
+    // if (transform.localPosition == Vector3.zero)
+    // {
+    //   Debug.LogError("local zero", this.gameObject);
+    // }
     vfxGraph.Play();
   }
 
