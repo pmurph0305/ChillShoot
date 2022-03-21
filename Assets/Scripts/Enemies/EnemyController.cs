@@ -39,6 +39,8 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 
   [SerializeField] TravelDirector travelDirector;
   public event Action<EnemyController> OnEnemyReleased;
+
+  public static event Action<Vector3, float> OnEnemyDamagedAction;
   // private void Update()
   // {
   //   if (useAgent)
@@ -98,7 +100,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
   {
     // Debug.Log("Take damage:" + damage);
     health -= damage;
-    DamageDisplayPool.OnEnemyDamagedAction(transform.position, damage);
+    OnEnemyDamagedAction?.Invoke(transform.position, damage);
     if (health < 0)
     {
       // Destroy(this.gameObject);
