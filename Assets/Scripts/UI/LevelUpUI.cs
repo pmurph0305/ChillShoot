@@ -16,15 +16,22 @@ public class LevelUpUI : MonoBehaviour
   List<GameObject> CreatedButtons = new List<GameObject>();
   void OnLevelUpUpgradeActionHandler(List<Upgrade> ups)
   {
-    Time.timeScale = 0.0f;
-    foreach (var upgrade in ups)
+    if (ups.Count > 0)
     {
-      GameObject o = Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity, buttonParent);
-      UpgradeButton ub = o.GetComponent<UpgradeButton>();
-      ub.SetUpgrade(upgrade, this);
-      CreatedButtons.Add(o);
+      Time.timeScale = 0.0f;
+      foreach (var upgrade in ups)
+      {
+        GameObject o = Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity, buttonParent);
+        UpgradeButton ub = o.GetComponent<UpgradeButton>();
+        ub.SetUpgrade(upgrade, this);
+        CreatedButtons.Add(o);
+      }
+      this.gameObject.SetActive(true);
     }
-    this.gameObject.SetActive(true);
+    else
+    {
+      //?
+    }
   }
 
 
