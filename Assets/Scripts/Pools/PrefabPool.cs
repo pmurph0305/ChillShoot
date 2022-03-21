@@ -33,8 +33,10 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   [SerializeField] GameObject Prefab;
   IObjectPool<T> _pool;
 
-  [SerializeField] int capacity = 100;
+  [SerializeField] int cap = 1024;
 
+  [Header("Debug")]
+  [SerializeField] int active = 0;
 
   public event Action<T> OnReturnedToPoolAction;
   public event Action<T> OnGetFromPoolAction;
@@ -73,7 +75,7 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
         // instead we manually handle calling OnGetFromPool.
 
         // we fixed this by removing the <T>.OnGetFromPool() call after the Get() and settings of position and rotation.
-        _pool = new ObjectPool<T>(CreatePooledItem, OnGetFromPool, OnReturnedToPool, OnDestroyPoolObject, false, capacity);
+        _pool = new ObjectPool<T>(CreatePooledItem, OnGetFromPool, OnReturnedToPool, OnDestroyPoolObject, false, cap);
       }
       return _pool;
     }
@@ -182,6 +184,7 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
       item.gameObject.SetActive(true);
     }
     OnGetFromPoolAction?.Invoke(item);
+    active++;
   }
 
   /// <summary>
@@ -196,6 +199,7 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
     //   item.gameObject.SetActive(false);
     // }
     OnReturnedToPoolAction?.Invoke(item);
+    active--;
   }
 
   /// <summary>
