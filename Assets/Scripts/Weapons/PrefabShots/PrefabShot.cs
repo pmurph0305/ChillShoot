@@ -36,23 +36,27 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// </summary>
   public virtual void OnHitEnemy(EnemyController enemy)
   {
-    // Debug.Log("Hit", enemy);
-    if (weaponInfo.DestroyOnHit)
+    if (enemy.isActiveAndEnabled)
     {
-      NumberOfHits++;
-      if (NumberOfHits >= weaponInfo.DestroyAfterXHits)
+      // Debug.Log("Hit", enemy);
+      if (weaponInfo.DestroyOnHit)
       {
-        Release();
+        NumberOfHits++;
+        if (NumberOfHits >= weaponInfo.DestroyAfterXHits)
+        {
+          Release();
+        }
       }
+      EffectPlayerPool.StartEffect(enemy.transform.position);
+      if (!DamagedEnemies.ContainsKey(enemy))
+      {
+        enemy.OnEnemyReleased += OnEnemyReleased;
+        DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
+      }
+
+      OnHitEnemyAction?.Invoke(new ShotHitEventArgs(weaponKey, transform.position, enemy.transform.position, director.GetTravelDirection()));
+      enemy.OnHitFromShot(this);
     }
-    EffectPlayerPool.StartEffect(enemy.transform.position);
-    if (!DamagedEnemies.ContainsKey(enemy))
-    {
-      enemy.OnEnemyReleased += OnEnemyReleased;
-      DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
-    }
-    OnHitEnemyAction?.Invoke(new ShotHitEventArgs(weaponKey, transform.position, enemy.transform.position, director.GetTravelDirection()));
-    enemy.OnHitFromShot(this);
   }
 
   [SerializeField] bool UseSpeedEaser;
