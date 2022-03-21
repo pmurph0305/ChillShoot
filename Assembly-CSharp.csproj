@@ -88,6 +88,7 @@
      <Compile Include="Assets\Scripts\Weapons\DistancePrefabSpawnWeapon.cs" />
      <Compile Include="Assets\Scripts\Curves\ResponseCurves\StepResponseCurve.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabSpawnWeapon.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerWeapons.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\Offsetters\CurveOffsetter.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\Offsetters\TwoCurveOffsetter.cs" />
      <Compile Include="Assets\Scripts\Damage Numbers\TextDisplayer.cs" />
@@ -164,11 +165,14 @@
      <Compile Include="Assets\Scripts\ColorList.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
      <Compile Include="Assets\Scripts\Curves\BaseClasses\IResponseCurve.cs" />
-     <Compile Include="Assets\FpsCounter.cs" />
+     <Compile Include="Assets\Scripts\UI\FpsCounter.cs" />
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerWeapons.cs" />
+     <Compile Include="Assets\Scripts\VFX\VFXPool.cs" />
+     <Compile Include="Assets\Scripts\VFX\VFXPlayer.cs" />
+     <Compile Include="Assets\Scripts\VFX\VFXManager.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\ShotHitEventArgs.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

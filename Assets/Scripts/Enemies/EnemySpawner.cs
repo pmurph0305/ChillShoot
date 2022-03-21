@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
     {
       spawnTimer.SetEndTime(spawnTime);
     }
-    if (EnemyCount < maxEnemyCount && spawnTimer.Update())
+    if (EnemyCount < maxEnemyCount && spawnTimer.Update(Time.deltaTime) && Time.timeScale > 0)
     {
       spawnTimer.Reset(false);
       OnSpawnTimerFinished();

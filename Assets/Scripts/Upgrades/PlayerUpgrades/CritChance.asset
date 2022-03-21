@@ -15,8 +15,8 @@ MonoBehaviour:
   currentUpgrade: 0
   upgradeType: 10
   Values:
-  - 1
-  - 1
-  - 1
+  - 0.1
+  - 0.1
+  - 0.1
   DisplayString: Crit Chance
   DisplaySuffix: '%'

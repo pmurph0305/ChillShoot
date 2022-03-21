@@ -17,6 +17,11 @@ public class StretchToTarget : MonoBehaviour
     targetProvider = GetComponent<ITargetProvider>();
   }
 
+  private void OnDestroy()
+  {
+    shot.OnGetFromPoolAction -= OnGetFromPool;
+  }
+
   [SerializeField] Transform target;
   void OnGetFromPool()
   {
@@ -38,7 +43,12 @@ public class StretchToTarget : MonoBehaviour
       targetMatcher.position = target.position;
       transformToStretch.position = transform.position + (dir.normalized) * distance / 2;
       Vector3 s = transform.localScale;
+      //transform.localScale assign attempt for 'Visual' is not valid. Input localScale is { 0.000000, Infinity, 0.000000 }.
       s.y = distance / (BaseLength * transform.lossyScale.y);
+      if (float.IsInfinity(s.y))
+      {
+        return;
+      }
       transformToStretch.localScale = s;
     }
   }

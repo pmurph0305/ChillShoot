@@ -140,6 +140,12 @@ public abstract class PrefabPool<T> : MonoBehaviour where T : Component, IPoolab
   {
     GameObject o = Instantiate(Prefab, transform.position, Quaternion.identity, parent);
     T val = o.GetComponentInChildren<T>();
+#if (UNITY_EDITOR)
+    if (val == null)
+    {
+      Debug.LogError("Pooled prefab does not have the requirementy component attached:" + typeof(T), this.gameObject);
+    }
+#endif
     val.SetPool(Pool);
     val.OnCreate();
     // Since OnDisable releases a pooled item, we can't set active here or it causes issues.

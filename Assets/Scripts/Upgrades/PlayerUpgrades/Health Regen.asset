@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Health Regen
   m_EditorClassIdentifier: 
   currentUpgrade: 0
-  upgradeType: 0
+  upgradeType: 12
   Values:
   - 0.1
-  DisplayString: 
+  - 0.1
+  - 0.1
+  DisplayString: Health Regeneration
   DisplaySuffix: '%'

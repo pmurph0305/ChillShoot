@@ -27,6 +27,11 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   public event Action OnGetFromPoolAction;
 
   /// <summary>
+  /// Key of weapon that hit enemy, position of weapon that hit enemy, position of enemy that was hit.
+  /// </summary>
+  public static event Action<ShotHitEventArgs> OnHitEnemyAction;
+
+  /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
   /// </summary>
   public virtual void OnHitEnemy(EnemyController enemy)
@@ -46,6 +51,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
       enemy.OnEnemyReleased += OnEnemyReleased;
       DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
     }
+    OnHitEnemyAction?.Invoke(new ShotHitEventArgs(weaponKey, transform.position, enemy.transform.position, director.GetTravelDirection()));
     enemy.OnHitFromShot(this);
   }
 
