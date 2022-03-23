@@ -42,6 +42,7 @@
      <Compile Include="Assets\Scripts\Weapons\TargetedPrefabSpawnWeapon.cs" />
      <Compile Include="Assets\Scripts\Experience\ExperiencePickupPool.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
+     <Compile Include="Assets\Scripts\Player\ChargeSkill.cs" />
      <Compile Include="Assets\Scripts\RotationDirector\RotateFromToDirector.cs" />
      <Compile Include="Assets\Scripts\Pools\EnemyPool.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\Offsetters\MultiAxisOffsetter.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\LogoCinematic.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInfo.cs" />
      <Compile Include="Assets\Scripts\Curves\BaseClasses\ResponseCurveValues.cs" />
+     <Compile Include="Assets\Scripts\VFX\VFXPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
      <Compile Include="Assets\Scripts\Curves\ResponseCurves\PolynomialResponseCurve.cs" />
      <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
@@ -74,6 +76,7 @@
      <Compile Include="Assets\Scripts\LeanInit.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\TransformDirector.cs" />
      <Compile Include="Assets\Scripts\Pools\IPoolable.cs" />
+     <Compile Include="Assets\Scripts\VFX\VFXPool.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\PlayerTransformDirector.cs" />
      <Compile Include="Assets\Scripts\Vector3Extensions.cs" />
@@ -95,6 +98,7 @@
      <Compile Include="Assets\Scripts\TravelDirectors\RandomDirectionDirector.cs" />
      <Compile Include="Assets\Scripts\Upgrades\Upgrade.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\TransformSpawnInfo.cs" />
+     <Compile Include="Assets\Scripts\VFX\VFXManager.cs" />
      <Compile Include="Assets\Scripts\Weapons\IWeaponInfoContainers\WeaponInfoComponent.cs" />
      <Compile Include="Assets\Scripts\Curves\ResponseCurves\ReflectedCurves\ReflectedPolynomialCurve.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\TrackedTransformDirector.cs" />
@@ -123,6 +127,7 @@
      <Compile Include="Assets\Scripts\Curves\ResponseCurves\LogarithmicResponseCurve.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\BaseClasses\TravelDirector.cs" />
      <Compile Include="Assets\Scripts\RotationDirector\RotationDirector.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\ShotHitEventArgs.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
@@ -169,11 +174,6 @@
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
-     <Compile Include="Assets\Scripts\VFX\VFXPool.cs" />
-     <Compile Include="Assets\Scripts\VFX\VFXPlayer.cs" />
-     <Compile Include="Assets\Scripts\VFX\VFXManager.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\ShotHitEventArgs.cs" />
-     <Compile Include="Assets\Scripts\Player\ChargeSkill.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
