@@ -16,16 +16,18 @@ public abstract class TravelOffsetter : MonoBehaviour
   // primary world space vector axis.
   protected Vector3 primaryAxis;
 
+
+
   // Vector is calculated once on reset so that you can keep transforming and rotating it without messing things up.
   [SerializeField, Tooltip("Transform's axis that will be used to offset the object.")] protected Direction transformDirection = Direction.Right;
-
+  [SerializeField, Tooltip("When true, the offset is always relative to the transforms rotation. Otherwise, the direction is calculated once on spawn.")] bool AlwaysRelativeToTransform;
   protected virtual Vector3 CombineWithDirection(float delta, Vector3 dir)
   {
     return dir * delta;
   }
   protected virtual Vector3 CombineWithDirection(float delta)
   {
-    return primaryAxis * delta;
+    return (AlwaysRelativeToTransform ? GetTransformDirection(transformDirection) : primaryAxis) * delta;
   }
 
   protected Vector3 GetTransformDirection(Direction dir)

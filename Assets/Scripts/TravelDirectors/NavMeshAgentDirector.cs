@@ -6,11 +6,10 @@ public class NavMeshAgentDirector : TrackedTransformDirector
 {
   NavMeshPath path;
   [Header("Nav Mesh Director")]
-  [SerializeField] float Radius = 1.0f;
-  float SqrStoppingDistance = 0.0f;
-  int currentIndex;
   [SerializeField] NavMeshAgent agent;
   [SerializeField] bool UpdatePosition;
+  float SqrStoppingDistance;
+  [SerializeField] float minWarpDistanceSqr = 0.1f;
   public override void OnGetFromPool()
   {
     recalcTimer = new Timer(RecalcTime);
@@ -34,14 +33,13 @@ public class NavMeshAgentDirector : TrackedTransformDirector
       transform.position = hit.position;
       if (agent.Warp(hit.position))
       {
-        // Debug.Log("Agent warped to position.");
+        Debug.Log("Agent warped to position.");
       }
     }
     if (agent.isOnNavMesh)
     {
       agent.SetDestination(targetProvider.GetTarget().position);
     }
-    SqrStoppingDistance = Radius * Radius;
     return Vector3.zero;
   }
 
@@ -52,23 +50,16 @@ public class NavMeshAgentDirector : TrackedTransformDirector
   Timer recalcTimer;
   public override Vector3 GetTravelDirection()
   {
-    return (agent.nextPosition - transform.position).normalized;
+    // travelDirection = Vector3.MoveTowards(travelDirection, (agent.nextPosition - transform.position).normalized, 1f * Time.deltaTime);
+    travelDirection = agent.desiredVelocity.normalized;
+    return travelDirection;
   }
 
   protected void RecalculatePath()
   {
     if (!agent.isOnNavMesh)
     {
-      NavMeshHit hit;
-      if (NavMesh.SamplePosition(transform.position, out hit, 1f, NavMesh.AllAreas))
-      {
-        // Debug.Log("Sampled.");
-        transform.position = hit.position;
-        if (agent.Warp(hit.position))
-        {
-          // Debug.Log("Agent warped to position.");
-        }
-      }
+      Warp();
     }
     if (agent.isOnNavMesh)
     {
@@ -76,7 +67,22 @@ public class NavMeshAgentDirector : TrackedTransformDirector
     }
   }
 
-  public override void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
+  protected void Warp()
+  {
+    NavMeshHit hit;
+    if (NavMesh.SamplePosition(transform.position, out hit, 1f, NavMesh.AllAreas))
+    {
+      // Debug.Log("Sampled.");
+      // transform.position = hit.position;
+      if (agent.Warp(hit.position))
+      {
+        Debug.Log("Agent warped to position.");
+      }
+      RecalculatePath();
+    }
+  }
+
+  private void PreMoveChecks(float deltaTime)
   {
     recalcTimer.Update(deltaTime);
     if (recalcTimer.IsFinished || agent.isStopped || agent.isPathStale || !agent.isOnNavMesh)
@@ -84,18 +90,34 @@ public class NavMeshAgentDirector : TrackedTransformDirector
       RecalculatePath();
       recalcTimer.Reset();
     }
-    base.UpdateMovement(rb2d, movementSpeed, deltaTime);
-    // if (agent.isStopped || agent.isPathStale || !agent.hasPath)
-    // {
-    //   Debug.Log("update movement." + travelDirection);
-    //   // base.UpdateMovement(rb2d, movementSpeed, deltaTime);
-    // }
-    // else
-    // {
-    //   travelDirection = (agent.nextPosition - transform.position).normalized;
-    //   // rb2d.MovePosition(agent.nextPosition);
-    // }
-    // rb2d.MovePosition(agent.nextPosition);
+    float distance = Vector3.SqrMagnitude(agent.nextPosition - transform.position);
+    if (distance > minWarpDistanceSqr)
+    {
+      Warp();
+    }
+  }
+
+  public override void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
+  {
+    UpdateMovement(movementSpeed, deltaTime);
+  }
+
+  public override void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
+  {
+    UpdateMovement(movementSpeed, deltaTime);
+  }
+
+
+  public override void UpdateMovement(float movementSpeed, float deltaTime)
+  {
+    PreMoveChecks(deltaTime);
+    agent.Move(instantVelocity + GetOffset(deltaTime) + additionalVelocity * deltaTime);
+    Vector3 val = agent.desiredVelocity;
+    if (FaceTravelDirection && visual != null && deltaTime > 0)
+    {
+      visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
+    }
+    UpdateRotation(deltaTime);
   }
 
   void SetDebugValues()
@@ -103,6 +125,12 @@ public class NavMeshAgentDirector : TrackedTransformDirector
     debug.isPathStale = agent.isPathStale;
     debug.isStopped = agent.isStopped;
     debug.remainingDistance = agent.remainingDistance;
+  }
+
+  private void OnDrawGizmosSelected()
+  {
+    Gizmos.color = Color.red;
+    Gizmos.DrawLine(transform.position, transform.position + GetTravelDirection());
   }
 }
 

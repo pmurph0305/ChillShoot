@@ -7,12 +7,13 @@ public abstract class TravelDirector : MonoBehaviour
   [Header("Travel Director")]
   [SerializeField] protected TravelOffsetter offsetter;
   [SerializeField] RotationDirector rotationDirector;
-  [SerializeField] bool FaceTravelDirection = true;
-  [SerializeField] Transform visual;
+  [SerializeField] protected bool FaceTravelDirection = true;
+  [SerializeField] protected Transform visual;
 
 
   [SerializeField] protected Vector3 travelDirection;
-  [SerializeField] Vector3 additionalVelocity;
+  [SerializeField] protected Vector3 additionalVelocity;
+  [SerializeField] protected Vector3 instantVelocity;
 
   public virtual void OnGetFromPool()
   {
@@ -36,6 +37,11 @@ public abstract class TravelDirector : MonoBehaviour
   public void SetAdditionalVelocity(Vector3 velocity)
   {
     additionalVelocity = velocity;
+  }
+
+  public void SetInstantVelocity(Vector3 velocity)
+  {
+    instantVelocity = velocity;
   }
 
   public virtual Vector3 GetInitialPosition()
@@ -111,14 +117,13 @@ public abstract class TravelDirector : MonoBehaviour
   /// <returns>Movement vector already scaled by time and movementspeed.</returns>
   protected virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
-
     Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
     if (FaceTravelDirection && visual != null && deltaTime > 0)
     {
       visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
-      // visual.rotation = Quaternion.RotateTowards(visual.rotation, Quaternion.LookRotation(Vector3.forward, val), 90f * Time.deltaTime);
-      // visual.rotation = Quaternion.RotateTowards(visual.rotation, Quaternion.LookRotation(Vector3.forward, val), 36000f * deltaTime);
     }
-    return val + additionalVelocity;
+    Vector3 instantVel = instantVelocity;
+    instantVelocity = Vector3.zero;
+    return val + additionalVelocity * deltaTime + instantVel;
   }
 }

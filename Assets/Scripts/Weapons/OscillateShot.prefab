@@ -141,12 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponKey: 6
-  col: {fileID: 1132721477288996033}
-  rb: {fileID: -6975291183529497512}
-  lifeTimer:
-    _CurrentTime: 0
-    _EndTime: 0
-    _IsFinished: 0
   director: {fileID: -6735842932802221467}
   UseSpeedEaser: 0
   speedEase:
@@ -154,7 +148,6 @@ MonoBehaviour:
     current: 0
     duration: 0
     ease: 0
-  playerVelocity: {x: 0, y: 0, z: 0}
   shotTweener:
     TweenIn: 0
     TweenOut: 0
@@ -164,7 +157,14 @@ MonoBehaviour:
     TweenOutEndScale: {x: 0, y: 0, z: 0}
     tweenInTime: 0.2
     tweenOutTime: 0.2
+  lifeTimer:
+    _CurrentTime: 0
+    _EndTime: 0
+    _IsFinished: 0
+  playerVelocity: {x: 0, y: 0, z: 0}
   DamagedEnemiesCount: 0
+  rb: {fileID: -6975291183529497512}
+  col: {fileID: 1132721477288996033}
 --- !u!114 &-6735842932802221467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
   additionalVelocity: {x: 0, y: 0, z: 0}
+  instantVelocity: {x: 0, y: 0, z: 0}
   _transform: {fileID: 7626576613723309781}
   direction: 0
 --- !u!114 &6577008870072845836
@@ -199,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 1
   transformDirection: 3
+  AlwaysRelativeToTransform: 0
   frequency: 10
   amplitude: 1
 --- !u!114 &8558186511916924412
@@ -215,6 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 1
   transformDirection: 3
+  AlwaysRelativeToTransform: 0
   primaryCurve:
     serializedVersion: 2
     m_Curve:
@@ -256,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 1
   transformDirection: 3
+  AlwaysRelativeToTransform: 0
   primaryCurve:
     serializedVersion: 2
     m_Curve:

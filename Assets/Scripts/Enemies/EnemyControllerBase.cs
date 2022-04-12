@@ -78,10 +78,10 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
     }
     else
     {
-      // travelDirector.SetAdditionalVelocity(HitKnockback);
+      travelDirector.SetInstantVelocity(HitKnockback);
       UpdateMovement(speed, true);
+      HitKnockback = Vector3.zero;
       damageTimer.FixedUpdate();
-      // HitKnockback -= HitKnockback * Time.fixedDeltaTime;
     }
   }
 
