@@ -77,6 +77,7 @@
      <Compile Include="Assets\Scripts\TravelDirectors\TransformDirector.cs" />
      <Compile Include="Assets\Scripts\Pools\IPoolable.cs" />
      <Compile Include="Assets\Scripts\VFX\VFXPool.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShotBase.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\PlayerTransformDirector.cs" />
      <Compile Include="Assets\Scripts\Vector3Extensions.cs" />
@@ -125,6 +126,7 @@
      <Compile Include="Assets\Scripts\Particles\EffectPlayer.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
      <Compile Include="Assets\Scripts\Curves\ResponseCurves\LogarithmicResponseCurve.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShot3D.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\BaseClasses\TravelDirector.cs" />
      <Compile Include="Assets\Scripts\RotationDirector\RotationDirector.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\ShotHitEventArgs.cs" />
@@ -172,10 +174,10 @@
      <Compile Include="Assets\Scripts\Curves\BaseClasses\IResponseCurve.cs" />
      <Compile Include="Assets\Scripts\UI\FpsCounter.cs" />
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
-     <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyController2D.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShotBase.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShot3D.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyControllerBase.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyController3D.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

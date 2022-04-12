@@ -5,27 +5,27 @@ using UnityEngine;
 public class EnemyDictionary
 {
 
-  public static Dictionary<Transform, EnemyController> activeDict = new Dictionary<Transform, EnemyController>();
-  public static Dictionary<Transform, EnemyController> dict = new Dictionary<Transform, EnemyController>();
+  public static Dictionary<Transform, EnemyControllerBase> activeDict = new Dictionary<Transform, EnemyControllerBase>();
+  public static Dictionary<Transform, EnemyControllerBase> dict = new Dictionary<Transform, EnemyControllerBase>();
 
 
 
-  public static EnemyController Get(Transform key)
+  public static EnemyControllerBase Get(Transform key)
   {
     return dict[key];
   }
 
-  public static EnemyController GetActive(Transform key)
+  public static EnemyControllerBase GetActive(Transform key)
   {
     return activeDict[key];
   }
 
-  public static void Add(Transform key, EnemyController value)
+  public static void Add(Transform key, EnemyControllerBase value)
   {
     dict.Add(key, value);
   }
 
-  public static void AddActive(Transform key, EnemyController value)
+  public static void AddActive(Transform key, EnemyControllerBase value)
   {
     activeDict.Add(key, value);
   }

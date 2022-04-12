@@ -40,12 +40,12 @@ public class EnemySpawner : MonoBehaviour
     enemyPool.OnReturnedToPoolAction -= OnReturnedToPool;
   }
 
-  protected virtual void OnGetFromPool(EnemyController obj)
+  protected virtual void OnGetFromPool(EnemyControllerBase obj)
   {
     EnemyCount++;
   }
 
-  protected virtual void OnReturnedToPool(EnemyController obj)
+  protected virtual void OnReturnedToPool(EnemyControllerBase obj)
   {
     EnemyCount--;
   }

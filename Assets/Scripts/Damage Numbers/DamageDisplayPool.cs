@@ -11,7 +11,7 @@ public class DamageDisplayPool : PrefabPool<TextDisplayer>
   {
     base.OnAwake();
     _camera = Camera.main;
-    EnemyController.OnEnemyDamagedAction += OnEnemyDamagedActionHandler;
+    EnemyControllerBase.OnEnemyDamagedAction += OnEnemyDamagedActionHandler;
   }
 
   public void OnEnemyDamagedActionHandler(Vector3 position, float damage)

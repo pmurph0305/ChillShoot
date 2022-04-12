@@ -53,9 +53,9 @@ public class EnemyJobs : MonoBehaviour
   }
 
 
-  Queue<EnemyController> QueuedEnemys = new Queue<EnemyController>();
+  Queue<EnemyControllerBase> QueuedEnemys = new Queue<EnemyControllerBase>();
 
-  public void RegisterEnemy(EnemyController enemy)
+  public void RegisterEnemy(EnemyControllerBase enemy)
   {
     // Debug.Log("Register enemy");
     QueuedEnemys.Enqueue(enemy);
@@ -68,7 +68,7 @@ public class EnemyJobs : MonoBehaviour
     return EnemyList[JobIndex].direction;
   }
 
-  void AddEnemy(EnemyController enemy)
+  void AddEnemy(EnemyControllerBase enemy)
   {
     int lLength = EnemyList.Length;
     int tLength = EnemyTransforms.length;
@@ -76,7 +76,7 @@ public class EnemyJobs : MonoBehaviour
     Debug.Assert(tLength == lLength);
     EnemyTransforms.Add(enemy.transform);
     EnemyList.Add(new EnemyStruct());
-    enemy.JobIndex = lLength;
+    // enemy.JobIndex = lLength;
     currentIndex = lLength;
     // Debug.Log("add enemy.");
   }

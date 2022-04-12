@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class TestVectors : MonoBehaviour
 {
   public bool runTests;
-  int testsRun = 0;
   public int tests = 100000;
   // Start is called before the first frame update
   void Start()

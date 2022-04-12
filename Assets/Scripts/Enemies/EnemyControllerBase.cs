@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 using System;
-public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITargetProvider
+public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyControllerBase>, ITargetProvider
 {
-  [SerializeField] public float speed = 1;
+  [SerializeField] protected float speed = 1;
 
   [SerializeField] float enemyDamage = 10;
 
@@ -22,13 +22,10 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 
   Timer updateDirectionTimer;
   Transform t;
-  [SerializeField] Rigidbody2D rb2d;
-  [SerializeField] Collider2D col;
 
+  IObjectPool<EnemyControllerBase> pool;
   [SerializeField] NavMeshAgent agent;
   [SerializeField] Vector3 dir;
-
-  public int JobIndex;
 
   public bool useAgent;
 
@@ -37,10 +34,11 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
   Timer agentPathTimer;
 
 
-  [SerializeField] TravelDirector travelDirector;
-  public event Action<EnemyController> OnEnemyReleased;
+  [SerializeField] protected TravelDirector travelDirector;
+  public event Action<EnemyControllerBase> OnEnemyReleased;
 
   public static event Action<Vector3, float> OnEnemyDamagedAction;
+
   // private void Update()
   // {
   //   if (useAgent)
@@ -63,7 +61,6 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
   //   }
   // }
 
-  [SerializeField] float rotationSpeed = 10f;
   private void FixedUpdate()
   {
     OnFixedUpdate();
@@ -82,12 +79,14 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     else
     {
       travelDirector.SetAdditionalVelocity(HitKnockback);
-      travelDirector.UpdateMovement(rb2d, speed, Time.fixedDeltaTime);
+      UpdateMovement(speed, true);
       damageTimer.FixedUpdate();
       HitKnockback = Vector3.zero;
     }
   }
 
+
+  protected abstract void UpdateMovement(float speed, bool useFixedUpdate);
 
   Vector3 HitKnockback;
 
@@ -129,30 +128,11 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 
   protected virtual void OnDisabled()
   {
+    EnemyDictionary.RemoveActive(transform);
     // Debug.Log("Release");
     pool.Release(this);
-    EnemyDictionary.RemoveActive(transform);
     OnEnemyReleased?.Invoke(this);
   }
-
-  // private void OnTriggerStay2D(Collider2D other)
-  // {
-  //   if (other.gameObject.tag == "Player")
-  //   {
-  //     // somehow can be null?
-  //     if (damageTimer == null || !damageTimer.IsFinished) return;
-  //     damageTimer.Reset(true);
-  //     PlayerController pc = other.gameObject.GetComponent<PlayerController>();
-  //     pc.TakeDamage(damage);
-  //   }
-  //   // else if (pool != null)
-  //   // {
-  //   //   WeaponInfo info = WeaponDictionary.Get(other.gameObject.tag);
-  //   //   TakeDamage(info.ShotDamage);
-  //   //   // Destroy(other.gameObject);
-  //   //   info.OnHitEnemy(other, this);
-  //   // }
-  // }
 
   public void OnGetFromPool()
   {
@@ -167,8 +147,8 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     travelDirector.OnGetFromPool();
   }
 
-  IObjectPool<EnemyController> pool;
-  public void SetPool(IObjectPool<EnemyController> pool)
+
+  public void SetPool(IObjectPool<EnemyControllerBase> pool)
   {
     this.pool = pool;
   }

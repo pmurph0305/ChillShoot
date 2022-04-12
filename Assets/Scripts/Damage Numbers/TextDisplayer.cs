@@ -8,8 +8,6 @@ public class TextDisplayer : MonoBehaviour, IPoolable<TextDisplayer>
 {
   [SerializeField] RectTransform _rect;
   [SerializeField] TMP_Text text;
-  [SerializeField] float DisplayTime = 1.0f;
-
   [SerializeField] ScaleTweener tweener;
 
   public void OnCreate()

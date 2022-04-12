@@ -10,7 +10,7 @@ public class TargetedWeaponInfo : WeaponInfo
   [SerializeField] public Transform target;
   [SerializeField] LayerMask TargetLayerMask;
 
-  EnemyController trackedEnemy;
+  EnemyControllerBase trackedEnemy;
 
   public virtual void UpdateTarget()
   {
@@ -45,7 +45,7 @@ public class TargetedWeaponInfo : WeaponInfo
     return trackedEnemy == null || !trackedEnemy.isActiveAndEnabled;
   }
 
-  public void OnTargetReleasedHandler(EnemyController enemyController)
+  public void OnTargetReleasedHandler(EnemyControllerBase enemyController)
   {
     trackedEnemy.OnEnemyReleased -= OnTargetReleasedHandler;
     UpdateTarget();

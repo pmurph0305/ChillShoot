@@ -19,17 +19,25 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   public WeaponInfo weaponInfo { get; protected set; }
   [SerializeField] protected TravelDirector director;
 
-
+  [SerializeField] bool UseSpeedEaser;
+  [SerializeField] FloatEaser speedEase;
+  [SerializeField] ShotTweener shotTweener;
 
   [Header("Debug")]
   [SerializeField] protected Timer lifeTimer;
+  [SerializeField] Vector3 playerVelocity;
 
   protected IObjectPool<PrefabShotBase> pool;
-  Dictionary<EnemyController, Timer> DamagedEnemies = new Dictionary<EnemyController, Timer>();
+  Dictionary<EnemyControllerBase, Timer> DamagedEnemies = new Dictionary<EnemyControllerBase, Timer>();
+  [SerializeField] int DamagedEnemiesCount;
+  protected HashSet<EnemyControllerBase> EnteredEnemies = new HashSet<EnemyControllerBase>();
+  protected HashSet<EnemyControllerBase> ExitedEnemies = new HashSet<EnemyControllerBase>();
+  List<EnemyControllerBase> ReleasedEnemies = new List<EnemyControllerBase>();
+
   protected int NumberOfHits = 0;
 
-  public event Action OnGetFromPoolAction;
 
+  public event Action OnGetFromPoolAction;
   /// <summary>
   /// Key of weapon that hit enemy, position of weapon that hit enemy, position of enemy that was hit.
   /// </summary>
@@ -38,7 +46,7 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
   /// </summary>
-  public virtual void OnHitEnemy(EnemyController enemy)
+  public virtual void OnHitEnemy(EnemyControllerBase enemy)
   {
     if (enemy.isActiveAndEnabled)
     {
@@ -63,9 +71,6 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
     }
   }
 
-  [SerializeField] bool UseSpeedEaser;
-  [SerializeField] FloatEaser speedEase;
-
   protected float GetSpeed()
   {
     if (UseSpeedEaser)
@@ -75,8 +80,6 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
     return weaponInfo.GetShotSpeed();
   }
 
-
-  [SerializeField] Vector3 playerVelocity;
   protected void SetPlayerSpeedParameters()
   {
     playerVelocity = PlayerController.PlayerVelocity;
@@ -89,8 +92,6 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
       director.SetAdditionalVelocity(Vector3.zero);
     }
   }
-
-
 
   /// <summary>
   /// Updates the travel direction through GetTravelDirection(), and uses it to update the position of the gameobject.
@@ -140,7 +141,7 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   }
 
 
-  [SerializeField] ShotTweener shotTweener;
+
   /// <summary>
   /// Called when the object is about to be released to the pool. Use like you would SetActive(false).
   /// Doesn't actually release the shot, instead that is done when it is actually disabled, otherwise you could re-use it before it is disabled,
@@ -199,7 +200,7 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   //   // OnUpdate(Time.fixedDeltaTime);
   // }
 
-  [SerializeField] int DamagedEnemiesCount;
+
   /// <summary>
   /// Called At the end of Update()
   /// </summary>
@@ -270,32 +271,31 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
     weaponInfo.Add(this, transform);
   }
 
-  protected HashSet<EnemyController> EnteredEnemies = new HashSet<EnemyController>();
 
   protected void OnEnterTransform(Transform t)
   {
     if (EnemyDictionary.ContainsActive(t))
     {
-      EnemyController ec = EnemyDictionary.GetActive(t);
+      EnemyControllerBase ec = EnemyDictionary.GetActive(t);
       EnteredEnemies.Add(ec);
     }
   }
 
-  protected HashSet<EnemyController> ExitedEnemies = new HashSet<EnemyController>();
+
 
   protected void OnExitTransform(Transform t)
   {
     if (EnemyDictionary.Contains(t))
     {
       // Debug.Log("Remove on exit.");
-      EnemyController ec = EnemyDictionary.Get(t);
+      EnemyControllerBase ec = EnemyDictionary.Get(t);
       // DamagedEnemies.Remove(ec);
       ExitedEnemies.Add(ec);
     }
   }
 
-  List<EnemyController> ReleasedEnemies = new List<EnemyController>();
-  void OnEnemyReleased(EnemyController ec)
+
+  void OnEnemyReleased(EnemyControllerBase ec)
   {
     ec.OnEnemyReleased -= OnEnemyReleased;
     ReleasedEnemies.Add(ec);

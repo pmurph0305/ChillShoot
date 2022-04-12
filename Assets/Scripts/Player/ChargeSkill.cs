@@ -35,7 +35,7 @@ public class ChargeSkill
   [SerializeField] ContactFilter2D filter;
   Collider2D[] overlaps = new Collider2D[0];
   [SerializeField] LayerMask mask;
-  EnemyController ec;
+  EnemyControllerBase ec;
 
 
   public Vector3 Finish()

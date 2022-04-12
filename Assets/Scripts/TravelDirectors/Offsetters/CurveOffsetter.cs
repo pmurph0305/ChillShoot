@@ -17,7 +17,7 @@ public class CurveOffsetter : TravelOffsetter
 
   protected virtual float EvaluateCurve(AnimationCurve curve, ref float prev)
   {
-    float val = curve.Evaluate(time / lengthOfCurve);
+    float val = curve.Evaluate(time / lengthOfCurve) * multiplier;
     float deltaS = val - prev;
     prev = val;
     return deltaS;
