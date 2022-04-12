@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StretchToTarget : MonoBehaviour
 {
-  [SerializeField] PrefabShot shot;
+  [SerializeField] PrefabShotBase shot;
   [SerializeField] protected ITargetProvider targetProvider;
   [SerializeField] Transform targetMatcher;
   [SerializeField] Transform transformToStretch;

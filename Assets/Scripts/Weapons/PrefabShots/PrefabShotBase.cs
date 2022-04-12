@@ -12,15 +12,19 @@ using System;
 /// Responsible for tracking its own life-time, updating its movement, and getting its travel direction for updating movement.
 /// Also responsible for disabling/releasing to the pool when it hits an enemy (OnHitEnemy is called from the WeaponInfo class)
 /// </summary>
-public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITargetProvider
+public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>, IWeaponShot, ITargetProvider
 {
+  [Header("Common")]
   [SerializeField] WeaponKey weaponKey;
   public WeaponInfo weaponInfo { get; protected set; }
-  [SerializeField] Collider2D col;
-  [SerializeField] Rigidbody2D rb;
+  [SerializeField] protected TravelDirector director;
+
+
+
+  [Header("Debug")]
   [SerializeField] protected Timer lifeTimer;
-  [SerializeField] TravelDirector director;
-  protected IObjectPool<PrefabShot> pool;
+
+  protected IObjectPool<PrefabShotBase> pool;
   Dictionary<EnemyController, Timer> DamagedEnemies = new Dictionary<EnemyController, Timer>();
   protected int NumberOfHits = 0;
 
@@ -87,6 +91,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   }
 
 
+
   /// <summary>
   /// Updates the travel direction through GetTravelDirection(), and uses it to update the position of the gameobject.
   /// </summary>
@@ -94,7 +99,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   {
     if (fixedDeltaTime)
     {
-      director.UpdateMovement(rb, GetSpeed(), Time.fixedDeltaTime);
+      UpdateRigidbodyMovement();
     }
     else
     {
@@ -103,6 +108,9 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
       // director.UpdateMovement(rb, GetSpeed(), Time.deltaTime);
     }
   }
+
+  protected abstract void UpdateRigidbodyMovement();
+
 
   /// <summary>
   /// Called when the object is gotten from the object pool. Use like you would OnEnable.<br></br>
@@ -243,7 +251,7 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
   /// Sets the objects pool so it can handle releasing itself.
   /// </summary>
   /// <param name="pool"></param>
-  public void SetPool(IObjectPool<PrefabShot> pool)
+  public void SetPool(IObjectPool<PrefabShotBase> pool)
   {
     this.pool = pool;
   }
@@ -257,18 +265,32 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     weaponInfo = WeaponDictionary.Get(weaponKey);
     lifeTimer = new Timer(weaponInfo.GetLifeTime() - shotTweener.GetTweenOutDuration());
     //Register this created gameobject to the weapon info's dictionary.
-    weaponInfo.Add(this, col);
+    // weaponInfo.Add(this, col);
+    // AddWeaponInfoToDictionary(this);
+    weaponInfo.Add(this, transform);
   }
 
+  protected HashSet<EnemyController> EnteredEnemies = new HashSet<EnemyController>();
 
-  HashSet<EnemyController> EnteredEnemies = new HashSet<EnemyController>();
-
-  private void OnTriggerEnter2D(Collider2D other)
+  protected void OnEnterTransform(Transform t)
   {
-    if (EnemyDictionary.ContainsActive(other))
+    if (EnemyDictionary.ContainsActive(t))
     {
-      EnemyController ec = EnemyDictionary.GetActive(other);
+      EnemyController ec = EnemyDictionary.GetActive(t);
       EnteredEnemies.Add(ec);
+    }
+  }
+
+  protected HashSet<EnemyController> ExitedEnemies = new HashSet<EnemyController>();
+
+  protected void OnExitTransform(Transform t)
+  {
+    if (EnemyDictionary.Contains(t))
+    {
+      // Debug.Log("Remove on exit.");
+      EnemyController ec = EnemyDictionary.Get(t);
+      // DamagedEnemies.Remove(ec);
+      ExitedEnemies.Add(ec);
     }
   }
 
@@ -280,18 +302,6 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     // Debug.Log("Released.");
   }
 
-  HashSet<EnemyController> ExitedEnemies = new HashSet<EnemyController>();
-  private void OnTriggerExit2D(Collider2D other)
-  {
-    if (EnemyDictionary.Contains(other))
-    {
-      // Debug.Log("Remove on exit.");
-      EnemyController ec = EnemyDictionary.Get(other);
-      // DamagedEnemies.Remove(ec);
-      ExitedEnemies.Add(ec);
-    }
-  }
-
   public Transform GetTarget()
   {
     if (weaponInfo is TargetedWeaponInfo)
@@ -300,4 +310,5 @@ public class PrefabShot : MonoBehaviour, IPoolable<PrefabShot>, IWeaponShot, ITa
     }
     return null;
   }
+
 }

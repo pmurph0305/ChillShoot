@@ -49,9 +49,9 @@ public class ChargeSkill
     Debug.Log("Overlaps:" + overlaps.Length + " angle:" + chargeObjectVisual.transform.rotation.eulerAngles.z + " Scale:" + chargeObjectVisual.transform.lossyScale);
     foreach (var c in overlaps)
     {
-      if (EnemyDictionary.ContainsActive(c))
+      if (EnemyDictionary.ContainsActive(c.transform))
       {
-        ec = EnemyDictionary.Get(c);
+        ec = EnemyDictionary.Get(c.transform);
         ec.OnHitFromAbility(BaseDamage);
       }
       else

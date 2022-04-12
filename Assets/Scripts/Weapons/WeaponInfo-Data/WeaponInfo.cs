@@ -69,7 +69,7 @@ public class WeaponInfo : IGetShotSpawnInfo
   /// <typeparam name="Collider2D"></typeparam>
   /// <typeparam name="IWeaponShot"></typeparam>
   /// <returns></returns>
-  Dictionary<Collider2D, IWeaponShot> ShotDict = new Dictionary<Collider2D, IWeaponShot>();
+  Dictionary<Transform, IWeaponShot> ShotDict = new Dictionary<Transform, IWeaponShot>();
 
 
   /// <summary>
@@ -77,9 +77,9 @@ public class WeaponInfo : IGetShotSpawnInfo
   /// </summary>
   /// <param name="shot"></param>
   /// <param name="collider"></param>
-  public void Add(IWeaponShot shot, Collider2D collider)
+  public void Add(IWeaponShot shot, Transform t)
   {
-    ShotDict.Add(collider, shot);
+    ShotDict.Add(t, shot);
   }
 
   /// <summary>

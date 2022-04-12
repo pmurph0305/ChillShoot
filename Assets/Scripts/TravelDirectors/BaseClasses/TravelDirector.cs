@@ -76,6 +76,12 @@ public abstract class TravelDirector : MonoBehaviour
     UpdateRotation(deltaTime);
   }
 
+  public virtual void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
+  {
+    rb.MovePosition(rb.position + GetScaledMovement(movementSpeed, deltaTime));
+    UpdateRotation(deltaTime);
+  }
+
   protected virtual void UpdateRotation(float deltaTime)
   {
     if (rotationDirector != null)

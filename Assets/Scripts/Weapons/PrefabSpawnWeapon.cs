@@ -11,14 +11,14 @@ public class PrefabSpawnWeapon : Weapon
 {
   //TODO: seperate component to get the transform to spawn at.
   // [SerializeField] protected Transform ShotSpawnTransform; 
-  [SerializeField] protected PrefabPool<PrefabShot> pool;
+  [SerializeField] protected PrefabPool<PrefabShotBase> pool;
 
   protected override void Shoot()
   {
     for (int i = 0; i < weaponInfo.NumberOfShots; i++)
     {
       // get position and rotation for where to spawn the shot.
-      PrefabShot s = pool.Get(weaponInfo.GetTransformSpawnInfo());
+      PrefabShotBase s = pool.Get(weaponInfo.GetTransformSpawnInfo());
       // Debug.Log("Shoot:" + i, s.gameObject);
     }
   }

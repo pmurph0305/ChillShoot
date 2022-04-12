@@ -39,6 +39,11 @@ public abstract class TravelOffsetter : MonoBehaviour
       case Direction.Left:
         return -transform.right;
       case Direction.Right:
+        return transform.right;
+      case Direction.Forward:
+        return transform.forward;
+      case Direction.Back:
+        return -transform.forward;
       default:
         return transform.right;
     }

@@ -17,6 +17,12 @@ public class TransformDirector : TravelDirector
         return -_transform.up;
       case Direction.Left:
         return -_transform.right;
+      case Direction.Right:
+        return _transform.right;
+      case Direction.Forward:
+        return _transform.forward;
+      case Direction.Back:
+        return -_transform.forward;
       default:
         return _transform.right;
     }

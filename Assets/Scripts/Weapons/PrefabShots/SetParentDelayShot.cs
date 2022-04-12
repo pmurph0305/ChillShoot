@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetParentDelayShot : PrefabShot
+public class SetParentDelayShot : PrefabShot2D
 {
   [SerializeField] float detachTime = 0.1f;
   Timer parentDelayTimer;

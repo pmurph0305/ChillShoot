@@ -90,7 +90,8 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 
 
   Vector3 HitKnockback;
-  public void OnHitFromShot(PrefabShot shot)
+
+  public void OnHitFromShot(PrefabShotBase shot)
   {
     TakeDamage(shot.weaponInfo.GetShotDamage());
     HitKnockback += shot.transform.up * shot.weaponInfo.GetShotKnockback();
@@ -130,7 +131,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
   {
     // Debug.Log("Release");
     pool.Release(this);
-    EnemyDictionary.RemoveActive(col);
+    EnemyDictionary.RemoveActive(transform);
     OnEnemyReleased?.Invoke(this);
   }
 
@@ -162,7 +163,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
     {
       agent.SetDestination(PlayerController.PlayerPosition);
     }
-    EnemyDictionary.AddActive(col, this);
+    EnemyDictionary.AddActive(transform, this);
     travelDirector.OnGetFromPool();
   }
 
@@ -174,7 +175,7 @@ public class EnemyController : MonoBehaviour, IPoolable<EnemyController>, ITarge
 
   public void OnCreate()
   {
-    EnemyDictionary.Add(col, this);
+    EnemyDictionary.Add(transform, this);
     t = this.transform;
     updateDirectionTimer = new Timer(UpdateDirToPlayerTime);
     damageTimer = new Timer(damageTimerLength);

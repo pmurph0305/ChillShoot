@@ -29,10 +29,10 @@ public class TargetedWeaponInfo : WeaponInfo
 
       foreach (var item in cols)
       {
-        if (EnemyDictionary.ContainsActive(item))
+        if (EnemyDictionary.ContainsActive(item.transform))
         {
           target = item.transform;
-          trackedEnemy = EnemyDictionary.GetActive(item);
+          trackedEnemy = EnemyDictionary.GetActive(item.transform);
           trackedEnemy.OnEnemyReleased += OnTargetReleasedHandler;
           break;
         }

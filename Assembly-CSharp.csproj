@@ -131,7 +131,7 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
      <Compile Include="Assets\Scripts\Weapons\ShotSpawnInfoGetters\IGetShotSpawnInfo.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShot.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShot2D.cs" />
      <Compile Include="Assets\Scripts\Damage Numbers\DamageDisplayPool.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\SetParentDelayShot.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
@@ -174,6 +174,8 @@
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShotBase.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShot3D.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

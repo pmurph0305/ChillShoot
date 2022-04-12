@@ -10,7 +10,7 @@ public class VFXManager : MonoBehaviour
 
   private void Awake()
   {
-    PrefabShot.OnHitEnemyAction += OnHitEnemy;
+    PrefabShotBase.OnHitEnemyAction += OnHitEnemy;
     foreach (var item in VFXWeaponPoolEntries)
     {
       dict.Add(item.key, item.pool);
@@ -19,7 +19,7 @@ public class VFXManager : MonoBehaviour
 
   private void OnDestroy()
   {
-    PrefabShot.OnHitEnemyAction -= OnHitEnemy;
+    PrefabShotBase.OnHitEnemyAction -= OnHitEnemy;
   }
 
 
