@@ -105,6 +105,7 @@
      <Compile Include="Assets\Scripts\TravelDirectors\TrackedTransformDirector.cs" />
      <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyControllerBase.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\BaseClasses\Direction.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
@@ -155,6 +156,7 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
      <Compile Include="Assets\Scripts\Pools\PrefabPool.cs" />
      <Compile Include="Assets\Scripts\Upgrades\PlayerUpgradeType.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyController3D.cs" />
      <Compile Include="Assets\Scripts\Curves\ResponseCurves\ExponentialResponseCurve.cs" />
      <Compile Include="Assets\Scripts\Player\ExperiencePickerUpper.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
@@ -176,8 +178,8 @@
      <Compile Include="Assets\Scripts\Pools\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController2D.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
-     <Compile Include="Assets\Scripts\Enemies\EnemyControllerBase.cs" />
-     <Compile Include="Assets\Scripts\Enemies\EnemyController3D.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\NavMeshDirector.cs" />
+     <Compile Include="Assets\Scripts\TravelDirectors\NavMeshAgentDirector.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

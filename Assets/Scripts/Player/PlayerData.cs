@@ -16,8 +16,8 @@ public class PlayerData
   public float CriticalHitChanceMultiplier = 1.0f;
 
   [Header("Speed")]
-  [SerializeField] public float BaseSpeed = 1.0f;
-  [SerializeField] public float Speed = 1.0f;
+  [SerializeField] public float BaseSpeed = 3.0f;
+  [SerializeField] public float Speed = 3.0f;
 
   [Header("HP")]
   [SerializeField] public float BaseHealth = 100;

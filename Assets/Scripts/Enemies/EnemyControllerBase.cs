@@ -29,7 +29,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
 
   public bool useAgent;
 
-
+  [SerializeField] protected Vector3 HitKnockback;
   [SerializeField] float updatePathTime = 1f;
   Timer agentPathTimer;
 
@@ -78,22 +78,22 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
     }
     else
     {
-      travelDirector.SetAdditionalVelocity(HitKnockback);
+      // travelDirector.SetAdditionalVelocity(HitKnockback);
       UpdateMovement(speed, true);
       damageTimer.FixedUpdate();
-      HitKnockback = Vector3.zero;
+      // HitKnockback -= HitKnockback * Time.fixedDeltaTime;
     }
   }
 
 
   protected abstract void UpdateMovement(float speed, bool useFixedUpdate);
 
-  Vector3 HitKnockback;
+
 
   public void OnHitFromShot(PrefabShotBase shot)
   {
     TakeDamage(shot.weaponInfo.GetShotDamage());
-    HitKnockback += shot.transform.up * shot.weaponInfo.GetShotKnockback();
+    HitKnockback += (transform.position - shot.transform.position).normalized * shot.weaponInfo.GetShotKnockback();
   }
 
   public void OnHitFromAbility(float damage)
@@ -161,11 +161,11 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
     damageTimer = new Timer(damageTimerLength);
     if (useAgent)
     {
-      Destroy(GetComponent<Rigidbody2D>());
+      // Destroy(GetComponent<Rigidbody2D>());
     }
     else
     {
-      Destroy(GetComponent<NavMeshAgent>());
+      // Destroy(GetComponent<NavMeshAgent>());
     }
     if (agent != null)
     {

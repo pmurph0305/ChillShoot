@@ -116,8 +116,9 @@ public abstract class TravelDirector : MonoBehaviour
     if (FaceTravelDirection && visual != null && deltaTime > 0)
     {
       visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
+      // visual.rotation = Quaternion.RotateTowards(visual.rotation, Quaternion.LookRotation(Vector3.forward, val), 90f * Time.deltaTime);
       // visual.rotation = Quaternion.RotateTowards(visual.rotation, Quaternion.LookRotation(Vector3.forward, val), 36000f * deltaTime);
     }
-    return val + additionalVelocity * deltaTime;
+    return val + additionalVelocity;
   }
 }

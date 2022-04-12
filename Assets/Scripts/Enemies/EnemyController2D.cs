@@ -14,7 +14,11 @@ public class EnemyController2D : EnemyControllerBase
   {
     if (useFixedUpdate)
     {
+      travelDirector.SetAdditionalVelocity(HitKnockback);
+      HitKnockback -= HitKnockback * Time.fixedDeltaTime;
+      HitKnockback = Vector3.zero;
       travelDirector.UpdateMovement(rb2d, speed, Time.fixedDeltaTime);
+      rb2d.AddForce((Vector2)HitKnockback, ForceMode2D.Impulse);
     }
     else
     {
