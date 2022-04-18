@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class PlayerController : MonoBehaviour
+public abstract class PlayerController : MonoBehaviour
 {
   [SerializeField] PlayerInfo playerData;
   [SerializeField] ExperienceAttractor expAttractor;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
 
   [Header("Skills")]
-  [SerializeField] ChargeSkill chargeSkill;
+  [SerializeField] protected ChargeSkill chargeSkill;
 
 
   [Header("Input Debugging")]
@@ -41,23 +41,18 @@ public class PlayerController : MonoBehaviour
   [SerializeField] Vector3 d;
   [SerializeField] Vector3 v;
   // Update is called once per frame
-  [SerializeField] Vector3 input;
+  [SerializeField] protected Vector3 input;
   void Update()
   {
-    Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-    if (movement.sqrMagnitude > 1f)
-    {
-      movement = movement.normalized;
-    }
-    Vector3 initial = transform.position;
-    transform.position += playerData.GetPlayerSpeed() * Time.deltaTime * movement;
+    OnProcessInput();
+    transform.position += playerData.GetPlayerSpeed() * Time.deltaTime * input;
 
     // UpdatePlayerParameters(false);
-    if (movement.sqrMagnitude > 0.1f)
+    if (input.sqrMagnitude > 0.1f)
     {
       // todo: fix quick rotate to opposite movement direction?
       // todo: fix rotating when no input.
-      up = Vector3.SmoothDamp(up, movement, ref smoothVel, smoothTime);
+      up = Vector3.SmoothDamp(up, input, ref smoothVel, smoothTime);
       // forward.z = 0;
       transform.rotation = Quaternion.LookRotation(Vector3.forward, up);
     }
@@ -66,22 +61,10 @@ public class PlayerController : MonoBehaviour
       expAttractor.Activate(AttractorDuration);
     }
     HealthRegen(Time.deltaTime);
-    UpdatePlayerParameters(movement);
-
-    if (Input.GetKeyDown(KeyCode.LeftShift))
-    {
-      chargeSkill.StartCharging(Time.deltaTime);
-    }
-    else if (Input.GetKey(KeyCode.LeftShift))
-    {
-      chargeSkill.Update(Time.deltaTime);
-    }
-    if (Input.GetKeyUp(KeyCode.LeftShift))
-    {
-      Vector3 p = chargeSkill.Finish();
-      transform.position = p;
-    }
+    UpdatePlayerParameters(input);
   }
+
+  protected abstract void OnProcessInput();
 
 
   public bool TakeDamage(float damage)

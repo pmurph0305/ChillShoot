@@ -1041,9 +1041,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475871629}
-  - component: {fileID: 475871632}
   - component: {fileID: 475871631}
   - component: {fileID: 475871630}
+  - component: {fileID: 475871632}
   m_Layer: 10
   m_Name: ExperienceAttractor
   m_TagString: Untagged
@@ -1112,9 +1112,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 475871628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baf3d85ccc1563b4289d7d303df4f557, type: 3}
+  m_Script: {fileID: 11500000, guid: cc4ef1673d2c62a4ba6c340259f38448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlwaysActive: 1
   col: {fileID: 475871630}
 --- !u!1 &519420028
 GameObject:
@@ -2987,6 +2988,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7626576613723309781, guid: 0bfe9ea2cf2f54c44909ea52a989f10c, type: 3}
   m_PrefabInstance: {fileID: 1217532518}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &920733745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920733746}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920733746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920733745}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5312405, y: 2.1240232, z: 0.11489409}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &923901271
 GameObject:
   m_ObjectHideFlags: 0
@@ -3716,8 +3748,8 @@ GameObject:
   - component: {fileID: 1171662357}
   - component: {fileID: 1171662360}
   - component: {fileID: 1171662361}
-  - component: {fileID: 1171662359}
   - component: {fileID: 1171662362}
+  - component: {fileID: 1171662363}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -3797,51 +3829,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1171662359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171662356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db5fa4f457f3cf47b4518c236cbd49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 1171662361}
-  expAttractor: {fileID: 475871632}
-  AttractorDuration: 3
-  CurrentHealth: 0
-  smoothTime: 0.01
-  chargeSkill:
-    chargeObjectVisual: {fileID: 455083504}
-    box: {fileID: 577435508}
-    MaxChangeTime: 1
-    MaxChargeDistance: 5
-    CurrentTime: 0
-    BaseDamage: 100
-    filter:
-      useTriggers: 1
-      useLayerMask: 1
-      useDepth: 1
-      useOutsideDepth: 1
-      useNormalAngle: 1
-      useOutsideNormalAngle: 1
-      layerMask:
-        serializedVersion: 2
-        m_Bits: 128
-      minDepth: -10
-      maxDepth: 10
-      minNormalAngle: -180
-      maxNormalAngle: 180
-    mask:
-      serializedVersion: 2
-      m_Bits: 128
-  s: 0
-  d: {x: 0, y: 0, z: 0}
-  v: {x: 0, y: 0, z: 0}
-  input: {x: 0, y: 0, z: 0}
 --- !u!61 &1171662360
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3915,6 +3902,51 @@ MonoBehaviour:
     key: 8
   - gameObject: {fileID: 757012308}
     key: 9
+--- !u!114 &1171662363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171662356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6998824fb355344428343bb5dc6676e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 1171662361}
+  expAttractor: {fileID: 475871632}
+  AttractorDuration: 3
+  CurrentHealth: 100
+  smoothTime: 0.01
+  chargeSkill:
+    chargeObjectVisual: {fileID: 455083504}
+    box: {fileID: 577435508}
+    MaxChangeTime: 1
+    MaxChargeDistance: 5
+    CurrentTime: 0
+    BaseDamage: 100
+    filter:
+      useTriggers: 0
+      useLayerMask: 0
+      useDepth: 0
+      useOutsideDepth: 0
+      useNormalAngle: 0
+      useOutsideNormalAngle: 0
+      layerMask:
+        serializedVersion: 2
+        m_Bits: 0
+      minDepth: 0
+      maxDepth: 0
+      minNormalAngle: 0
+      maxNormalAngle: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 128
+  s: 0
+  d: {x: 0, y: 0, z: 0}
+  v: {x: 0, y: 0, z: 0}
+  input: {x: 0, y: 0, z: 0}
 --- !u!1001 &1217532518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4273,7 +4305,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7785467, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5842,7 +5874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e3e69805be9f74e8ebf5cb65f3a864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1171662359}
+  controller: {fileID: 0}
 --- !u!50 &1951105466
 Rigidbody2D:
   serializedVersion: 4
