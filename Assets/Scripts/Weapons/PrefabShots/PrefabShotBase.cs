@@ -93,26 +93,8 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
     }
   }
 
-  /// <summary>
-  /// Updates the travel direction through GetTravelDirection(), and uses it to update the position of the gameobject.
-  /// </summary>
-  protected virtual void UpdateMovement(bool fixedDeltaTime = false)
-  {
-    if (fixedDeltaTime)
-    {
-      UpdateRigidbodyMovement();
-    }
-    else
-    {
-      UpdateMovement();
-      // since it only updates on the next fixed update, this doesn't actually preserve the speed correctly.
-      // director.UpdateMovement(rb, GetSpeed(), Time.deltaTime);
-    }
-  }
-
   protected abstract void UpdateMovement();
-
-  protected abstract void UpdateRigidbodyMovement();
+  protected abstract void UpdateFixedMovement();
 
 
   /// <summary>
@@ -184,23 +166,14 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   // Update is called once per frame
   void Update()
   {
-    UpdateMovement(false);
+    UpdateMovement();
     OnUpdate(Time.deltaTime);
   }
 
-
-
-  // causes issues because on spawn
-  // // if we call SyncTransform manually, with the new get initial offset method, it works.
-  // void FixedUpdate()
-  // {
-  //   // UpdateMovement(true);
-  //   // if (!lifeTimer.IsFinished && lifeTimer.Update(Time.fixedDeltaTime))
-  //   // {
-  //   //   Release();
-  //   // }
-  //   // OnUpdate(Time.fixedDeltaTime);
-  // }
+  private void FixedUpdate()
+  {
+    UpdateFixedMovement();
+  }
 
 
   /// <summary>
@@ -285,8 +258,6 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
     }
   }
 
-
-
   protected void OnExitTransform(Transform t)
   {
     if (EnemyDictionary.Contains(t))
@@ -297,7 +268,6 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
       ExitedEnemies.Add(ec);
     }
   }
-
 
   void OnEnemyReleased(EnemyControllerBase ec)
   {

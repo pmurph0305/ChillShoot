@@ -4,18 +4,33 @@ using UnityEngine;
 
 public class PrefabShot3D : PrefabShotBase
 {
-  [Header("3D")]
+  // [Header("3D")]
   Rigidbody rb;
-  Collider col;
+  // [SerializeField] Collider col;
+
+  private void Awake()
+  {
+    rb = GetComponent<Rigidbody>();
+    if (rb != null && rb.isKinematic)
+    {
+      rb = null;
+    }
+  }
 
   protected override void UpdateMovement()
   {
-    director.UpdateMovement(GetSpeed(), Time.deltaTime, false);
+    if (rb == null)
+    {
+      director.UpdateMovement(GetSpeed(), Time.deltaTime, false);
+    }
   }
 
-  protected override void UpdateRigidbodyMovement()
+  protected override void UpdateFixedMovement()
   {
-    director.UpdateMovement(GetSpeed(), Time.fixedDeltaTime, false);
+    if (rb != null)
+    {
+      director.UpdateMovement(GetSpeed(), Time.fixedDeltaTime, false);
+    }
   }
 
   private void OnTriggerEnter(Collider other)

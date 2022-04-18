@@ -14,19 +14,35 @@ using System;
 /// </summary>
 public class PrefabShot2D : PrefabShotBase
 {
-  [Header("2D")]
-  [SerializeField] Rigidbody2D rb;
-  [SerializeField] Collider2D col;
+  // [Header("2D")]
+  Rigidbody2D rb;
+  // [SerializeField] Collider2D col;
+
+  void Awake()
+  {
+    rb = GetComponent<Rigidbody2D>();
+    if (rb != null && rb.isKinematic)
+    {
+      rb = null;
+    }
+  }
 
   protected override void UpdateMovement()
   {
-    director.UpdateMovement(GetSpeed(), Time.deltaTime, true);
+    if (rb == null)
+    {
+      director.UpdateMovement(GetSpeed(), Time.deltaTime, true);
+    }
   }
 
-  protected override void UpdateRigidbodyMovement()
+  protected override void UpdateFixedMovement()
   {
-    director.UpdateMovement(GetSpeed(), Time.fixedDeltaTime, true);
+    if (rb != null)
+    {
+      director.UpdateMovement(GetSpeed(), Time.fixedDeltaTime, true);
+    }
   }
+
 
   private void OnTriggerEnter2D(Collider2D other)
   {
