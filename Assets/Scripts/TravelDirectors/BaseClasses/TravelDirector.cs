@@ -159,8 +159,8 @@ public abstract class TravelDirector : MonoBehaviour
     }
     else
     {
-      rotationTarget = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(val - (IncludeOffsetInFaceDirection ? zero : offset), Vector3.up), rotationSpeed * deltaTime);
-      visual.rotation = rotationTarget;
+      rotationTarget = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(val - (IncludeOffsetInFaceDirection ? zero : offset), Vector3.up), rotationSpeed);
+      visual.rotation = Quaternion.LookRotation(val - (IncludeOffsetInFaceDirection ? zero : offset));
     }
     return val;
   }
