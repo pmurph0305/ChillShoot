@@ -25,7 +25,7 @@ public class PrefabShot2D : PrefabShotBase
 
   protected override void UpdateRigidbodyMovement()
   {
-    director.UpdateMovement(rb, GetSpeed(), Time.fixedDeltaTime);
+    director.UpdateMovement(GetSpeed(), Time.fixedDeltaTime, true);
   }
 
   private void OnTriggerEnter2D(Collider2D other)

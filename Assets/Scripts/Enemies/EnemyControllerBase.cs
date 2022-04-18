@@ -34,7 +34,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
   Timer agentPathTimer;
 
 
-  [SerializeField] protected TravelDirector travelDirector;
+  [SerializeField] protected ITravelDirector travelDirector;
   public event Action<EnemyControllerBase> OnEnemyReleased;
 
   public static event Action<Vector3, float> OnEnemyDamagedAction;
@@ -144,7 +144,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
       agent.SetDestination(PlayerController.PlayerPosition);
     }
     EnemyDictionary.AddActive(transform, this);
-    travelDirector.OnGetFromPool();
+    travelDirector.ResetTravelDirector();
   }
 
 
@@ -155,6 +155,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
 
   public void OnCreate()
   {
+    travelDirector = GetComponent<ITravelDirector>();
     EnemyDictionary.Add(transform, this);
     t = this.transform;
     updateDirectionTimer = new Timer(UpdateDirToPlayerTime);

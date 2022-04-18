@@ -10,10 +10,10 @@ public class NavMeshAgentDirector : TrackedTransformDirector
   [SerializeField] bool UpdatePosition;
   float SqrStoppingDistance;
   [SerializeField] float minWarpDistanceSqr = 0.1f;
-  public override void OnGetFromPool()
+  public override void ResetTravelDirector()
   {
     recalcTimer = new Timer(RecalcTime);
-    base.OnGetFromPool();
+    base.ResetTravelDirector();
     SqrStoppingDistance = agent.stoppingDistance * agent.stoppingDistance;
     agent.updatePosition = UpdatePosition;
     agent.updateRotation = false;
@@ -97,12 +97,12 @@ public class NavMeshAgentDirector : TrackedTransformDirector
     }
   }
 
-  public override void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
+  protected override void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
   {
     UpdateMovement(movementSpeed, deltaTime, true);
   }
 
-  public override void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
+  protected override void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
   {
     UpdateMovement(movementSpeed, deltaTime, false);
   }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TravelDirector : MonoBehaviour
+public abstract class TravelDirector : MonoBehaviour, ITravelDirector
 {
   [Header("Travel Director")]
   [SerializeField] protected TravelOffsetter offsetter;
@@ -18,7 +18,17 @@ public abstract class TravelDirector : MonoBehaviour
   [SerializeField] protected Vector3 additionalVelocity;
   [SerializeField] protected Vector3 instantVelocity;
 
-  public virtual void OnGetFromPool()
+  Rigidbody2D rb2d;
+  Rigidbody rb;
+  private void Awake()
+  {
+    rb2d = GetComponent<Rigidbody2D>();
+    if (rb2d != null && rb2d.isKinematic) { rb2d = null; }
+    rb = GetComponent<Rigidbody>();
+    if (rb != null && rb.isKinematic) { rb = null; }
+  }
+
+  public virtual void ResetTravelDirector()
   {
     travelDirection = GetNewTravelDirection();
     if (offsetter != null)
@@ -45,7 +55,6 @@ public abstract class TravelDirector : MonoBehaviour
     prev = transform.position;
   }
 
-
   public void SetAdditionalVelocity(Vector3 velocity)
   {
     additionalVelocity = velocity;
@@ -54,12 +63,6 @@ public abstract class TravelDirector : MonoBehaviour
   public void SetInstantVelocity(Vector3 velocity)
   {
     instantVelocity = velocity;
-  }
-
-  public virtual Vector3 GetInitialPosition()
-  {
-    if (offsetter == null) return transform.position;
-    return transform.position + offsetter.GetOffset(0);
   }
 
   /// <summary>
@@ -78,26 +81,50 @@ public abstract class TravelDirector : MonoBehaviour
   }
 
   /// <summary>
+  /// Gets the movement vector for this frame, also rotates the object if there is a rotation director or face travel direction is enabled.
+  /// Note that this also increases the offsets timer, so you will need to move the object yourself.
+  /// Call UpdateMovement instead if you want this script to move it.
+  /// </summary>
+  /// <param name="movementSpeed"></param>
+  /// <param name="deltaTime"></param>
+  /// <param name="is2d"></param>
+  /// <returns></returns>
+  public Vector3 GetMovementVector(float movementSpeed, float deltaTime, bool is2d)
+  {
+    return GetScaledMovement(movementSpeed, deltaTime, is2d);
+  }
+
+
+  /// <summary>
   /// Updates the position of the transform this script is on.
   /// </summary>
   /// <param name="movementSpeed"></param>
   /// <param name="deltaTime"></param>
   public virtual void UpdateMovement(float movementSpeed, float deltaTime, bool is2d)
   {
-    transform.position += GetScaledMovement(movementSpeed, deltaTime, is2d);
+    if (rb != null)
+    {
+      UpdateMovement(rb, movementSpeed, deltaTime);
+    }
+    else if (rb2d != null)
+    {
+      UpdateMovement(rb2d, movementSpeed, deltaTime);
+    }
+    else
+    {
+      transform.position += GetScaledMovement(movementSpeed, deltaTime, is2d);
+    }
     UpdateRotation(deltaTime, is2d);
   }
 
-  public virtual void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
+  protected virtual void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
   {
     rb2d.MovePosition(rb2d.position + (Vector2)GetScaledMovement(movementSpeed, deltaTime, true));
-    UpdateRotation(deltaTime, true);
   }
 
-  public virtual void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
+  protected virtual void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
   {
     rb.MovePosition(rb.position + GetScaledMovement(movementSpeed, deltaTime, false));
-    UpdateRotation(deltaTime);
   }
 
   RaycastHit hit;
@@ -127,10 +154,6 @@ public abstract class TravelDirector : MonoBehaviour
     return offsetter ? offsetter.GetOffset(deltaTime) : zero;
   }
 
-  public Vector3 GetMovementVector(float movementSpeed, float deltaTime, bool is2d)
-  {
-    return GetScaledMovement(movementSpeed, deltaTime, is2d);
-  }
 
   /// <summary>
   /// Gets movement vector for this frame.

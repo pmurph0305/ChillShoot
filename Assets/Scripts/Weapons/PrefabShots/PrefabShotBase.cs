@@ -17,7 +17,7 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   [Header("Common")]
   [SerializeField] WeaponKey weaponKey;
   public WeaponInfo weaponInfo { get; protected set; }
-  [SerializeField] protected TravelDirector director;
+  [SerializeField] protected ITravelDirector director;
 
   [SerializeField] bool UseSpeedEaser;
   [SerializeField] FloatEaser speedEase;
@@ -122,7 +122,7 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   public virtual void OnGetFromPool()
   {
     Vector3 s = transform.localScale;
-    director.OnGetFromPool();
+    director.ResetTravelDirector();
     // rb.MovePosition(director.GetInitialPosition());
     // Physics2D.SyncTransforms();
     DamagedEnemies.Clear();
@@ -265,12 +265,14 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   /// </summary>
   public virtual void OnCreate()
   {
+    director = GetComponent<ITravelDirector>();
     weaponInfo = WeaponDictionary.Get(weaponKey);
     lifeTimer = new Timer(weaponInfo.GetLifeTime() - shotTweener.GetTweenOutDuration());
     //Register this created gameobject to the weapon info's dictionary.
     // weaponInfo.Add(this, col);
     // AddWeaponInfoToDictionary(this);
     weaponInfo.Add(this, transform);
+
   }
 
 

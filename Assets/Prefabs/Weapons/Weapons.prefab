@@ -257,7 +257,7 @@ MonoBehaviour:
     CritChance: 5
     CritMultiplier: 1.5
     ShotSpeed: 5
-    ShotKnockBack: 5
+    ShotKnockBack: 0
     ShotLifeTime: 0.5
     Cooldown: 1
     ScaleMultiplier: 1

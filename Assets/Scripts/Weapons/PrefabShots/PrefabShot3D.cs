@@ -15,7 +15,7 @@ public class PrefabShot3D : PrefabShotBase
 
   protected override void UpdateRigidbodyMovement()
   {
-    director.UpdateMovement(rb, GetSpeed(), Time.fixedDeltaTime);
+    director.UpdateMovement(GetSpeed(), Time.fixedDeltaTime, false);
   }
 
   private void OnTriggerEnter(Collider other)

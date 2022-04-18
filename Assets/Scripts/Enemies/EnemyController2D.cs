@@ -14,7 +14,7 @@ public class EnemyController2D : EnemyControllerBase
   {
     if (useFixedUpdate)
     {
-      travelDirector.UpdateMovement(rb2d, speed, Time.fixedDeltaTime);
+      travelDirector.UpdateMovement(speed, Time.fixedDeltaTime, true);
     }
     else
     {

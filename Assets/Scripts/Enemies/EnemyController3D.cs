@@ -11,7 +11,7 @@ public class EnemyController3D : EnemyControllerBase
   {
     if (useFixedUpdate)
     {
-      travelDirector.UpdateMovement(rb, speed, Time.fixedDeltaTime);
+      travelDirector.UpdateMovement(speed, Time.fixedDeltaTime, false);
     }
     else
     {
