@@ -10,7 +10,9 @@ public abstract class TravelDirector : MonoBehaviour
   [SerializeField] protected bool FaceTravelDirection = true;
   [SerializeField] protected bool IncludeOffsetInFaceDirection = true;
   [SerializeField] protected Transform visual;
-
+  [SerializeField] bool FollowGround;
+  [SerializeField] LayerMask GroundMask;
+  float DistanceFromGround;
 
   [SerializeField] protected Vector3 travelDirection;
   [SerializeField] protected Vector3 additionalVelocity;
@@ -32,6 +34,15 @@ public abstract class TravelDirector : MonoBehaviour
       // Debug.LogWarning("No visual transform set, so face direction will not work correctly, but setting to this.transform.");
       visual = this.transform;
     }
+    if (FollowGround)
+    {
+      if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f, GroundMask))
+      {
+        DistanceFromGround = Vector3.Distance(transform.position, hit.point);
+
+      }
+    }
+    prev = transform.position;
   }
 
 
@@ -71,26 +82,31 @@ public abstract class TravelDirector : MonoBehaviour
   /// </summary>
   /// <param name="movementSpeed"></param>
   /// <param name="deltaTime"></param>
-  public virtual void UpdateMovement(float movementSpeed, float deltaTime)
+  public virtual void UpdateMovement(float movementSpeed, float deltaTime, bool is2d)
   {
-    transform.position += GetScaledMovement(movementSpeed, deltaTime);
-    UpdateRotation(deltaTime);
+    transform.position += GetScaledMovement(movementSpeed, deltaTime, is2d);
+    UpdateRotation(deltaTime, is2d);
   }
 
   public virtual void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
   {
-    rb2d.MovePosition(rb2d.position + (Vector2)GetScaledMovement(movementSpeed, deltaTime));
-    UpdateRotation(deltaTime);
+    rb2d.MovePosition(rb2d.position + (Vector2)GetScaledMovement(movementSpeed, deltaTime, true));
+    UpdateRotation(deltaTime, true);
   }
 
   public virtual void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
   {
-    rb.MovePosition(rb.position + GetScaledMovement(movementSpeed, deltaTime));
+    rb.MovePosition(rb.position + GetScaledMovement(movementSpeed, deltaTime, false));
     UpdateRotation(deltaTime);
   }
 
-  protected virtual void UpdateRotation(float deltaTime)
+  RaycastHit hit;
+  Vector3 prev;
+  Quaternion rotationTarget;
+  float rotationSpeed = 90f;
+  protected virtual void UpdateRotation(float deltaTime, bool is2d = false)
   {
+
     if (rotationDirector != null)
     {
       rotationDirector.UpdateTransform(deltaTime);
@@ -111,32 +127,41 @@ public abstract class TravelDirector : MonoBehaviour
     return offsetter ? offsetter.GetOffset(deltaTime) : zero;
   }
 
+  public Vector3 GetMovementVector(float movementSpeed, float deltaTime, bool is2d)
+  {
+    return GetScaledMovement(movementSpeed, deltaTime, is2d);
+  }
+
   /// <summary>
   /// Gets movement vector for this frame.
   /// </summary>
   /// <param name="movementSpeed"></param>
   /// <returns>Movement vector already scaled by time and movementspeed.</returns>
-  protected virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
+  protected virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime, bool is2d)
   {
-    Vector3 val;
-    if (IncludeOffsetInFaceDirection)
+    Vector3 val = deltaTime * movementSpeed * GetTravelDirection();
+    Vector3 offset = GetOffset(deltaTime);
+    Vector3 instantVel = instantVelocity;
+    instantVelocity = Vector3.zero;
+    val = val + offset + instantVel + additionalVelocity * deltaTime;
+    if (FollowGround)
     {
-      val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
+      if (Physics.Raycast(transform.position + val + offset, Vector3.down, out hit, DistanceFromGround + 0.2f, GroundMask))
+      {
+        val = (hit.point + Vector3.up * DistanceFromGround) - transform.position;
+      }
+    }
+    if (is2d)
+    {
+      // visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
+      rotationTarget = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.forward, val - (IncludeOffsetInFaceDirection ? zero : offset)), rotationSpeed * deltaTime);
+      visual.rotation = Quaternion.LookRotation(Vector3.forward, val - (IncludeOffsetInFaceDirection ? zero : offset));
     }
     else
     {
-      val = deltaTime * movementSpeed * GetTravelDirection();
+      rotationTarget = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(val - (IncludeOffsetInFaceDirection ? zero : offset), Vector3.up), rotationSpeed * deltaTime);
+      visual.rotation = rotationTarget;
     }
-    if (FaceTravelDirection && visual != null && deltaTime > 0)
-    {
-      visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
-    }
-    if (!IncludeOffsetInFaceDirection)
-    {
-      val += GetOffset(deltaTime);
-    }
-    Vector3 instantVel = instantVelocity;
-    instantVelocity = Vector3.zero;
-    return val + additionalVelocity * deltaTime + instantVel;
+    return val;
   }
 }

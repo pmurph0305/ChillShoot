@@ -18,7 +18,7 @@ public class EnemyController2D : EnemyControllerBase
     }
     else
     {
-      travelDirector.UpdateMovement(speed, Time.deltaTime);
+      travelDirector.UpdateMovement(speed, Time.deltaTime, true);
     }
   }
 }

@@ -18,6 +18,11 @@ public class PrefabShot2D : PrefabShotBase
   [SerializeField] Rigidbody2D rb;
   [SerializeField] Collider2D col;
 
+  protected override void UpdateMovement()
+  {
+    director.UpdateMovement(GetSpeed(), Time.deltaTime, true);
+  }
+
   protected override void UpdateRigidbodyMovement()
   {
     director.UpdateMovement(rb, GetSpeed(), Time.fixedDeltaTime);

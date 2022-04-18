@@ -16,8 +16,6 @@ GameObject:
   - component: {fileID: -3150947794679615366}
   - component: {fileID: 8971204573445665504}
   - component: {fileID: 8623568005136754436}
-  - component: {fileID: 6564372383289460122}
-  - component: {fileID: 93917606043094177}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -173,6 +171,10 @@ MonoBehaviour:
   FaceTravelDirection: 1
   IncludeOffsetInFaceDirection: 0
   visual: {fileID: 0}
+  FollowGround: 0
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 0
   travelDirection: {x: 0, y: 0, z: 0}
   additionalVelocity: {x: 0, y: 0, z: 0}
   instantVelocity: {x: 0, y: 0, z: 0}
@@ -216,46 +218,3 @@ MonoBehaviour:
   AlwaysRelativeToTransform: 1
   lerpTime: 1
   lerpAmount: 1
---- !u!114 &6564372383289460122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686872759568759905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee62659fd91853479ffe6b358e08cd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetter: {fileID: 8623568005136754436}
-  rotationDirector: {fileID: 0}
-  FaceTravelDirection: 1
-  IncludeOffsetInFaceDirection: 1
-  visual: {fileID: 0}
-  travelDirection: {x: 0, y: 0, z: 0}
-  additionalVelocity: {x: 0, y: 0, z: 0}
-  instantVelocity: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
-  agent: {fileID: 8971204573445665504}
-  UpdatePosition: 1
-  minWarpDistanceSqr: 1
-  debug:
-    isPathStale: 0
-    isStopped: 0
-    remainingDistance: 0
-  RecalcTime: 1
---- !u!114 &93917606043094177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686872759568759905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ae747d29d48a644c99fddbaae9c7536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 66
-  axis: {x: 0, y: 0, z: 1}

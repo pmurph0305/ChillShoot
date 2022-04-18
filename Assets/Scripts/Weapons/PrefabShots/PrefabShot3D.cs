@@ -8,6 +8,11 @@ public class PrefabShot3D : PrefabShotBase
   Rigidbody rb;
   Collider col;
 
+  protected override void UpdateMovement()
+  {
+    director.UpdateMovement(GetSpeed(), Time.deltaTime, false);
+  }
+
   protected override void UpdateRigidbodyMovement()
   {
     director.UpdateMovement(rb, GetSpeed(), Time.fixedDeltaTime);

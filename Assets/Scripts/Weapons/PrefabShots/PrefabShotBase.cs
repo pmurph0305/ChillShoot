@@ -104,11 +104,13 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
     }
     else
     {
-      director.UpdateMovement(GetSpeed(), Time.deltaTime);
+      UpdateMovement();
       // since it only updates on the next fixed update, this doesn't actually preserve the speed correctly.
       // director.UpdateMovement(rb, GetSpeed(), Time.deltaTime);
     }
   }
+
+  protected abstract void UpdateMovement();
 
   protected abstract void UpdateRigidbodyMovement();
 

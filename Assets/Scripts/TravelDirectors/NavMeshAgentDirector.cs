@@ -99,16 +99,16 @@ public class NavMeshAgentDirector : TrackedTransformDirector
 
   public override void UpdateMovement(Rigidbody2D rb2d, float movementSpeed, float deltaTime)
   {
-    UpdateMovement(movementSpeed, deltaTime);
+    UpdateMovement(movementSpeed, deltaTime, true);
   }
 
   public override void UpdateMovement(Rigidbody rb, float movementSpeed, float deltaTime)
   {
-    UpdateMovement(movementSpeed, deltaTime);
+    UpdateMovement(movementSpeed, deltaTime, false);
   }
 
 
-  public override void UpdateMovement(float movementSpeed, float deltaTime)
+  public override void UpdateMovement(float movementSpeed, float deltaTime, bool is2d)
   {
     PreMoveChecks(deltaTime);
     agent.Move(instantVelocity + GetOffset(deltaTime) + additionalVelocity * deltaTime);
@@ -117,7 +117,7 @@ public class NavMeshAgentDirector : TrackedTransformDirector
     {
       visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
     }
-    UpdateRotation(deltaTime);
+    UpdateRotation(deltaTime, is2d);
   }
 
   void SetDebugValues()

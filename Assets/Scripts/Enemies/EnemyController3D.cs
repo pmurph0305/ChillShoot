@@ -15,7 +15,7 @@ public class EnemyController3D : EnemyControllerBase
     }
     else
     {
-      travelDirector.UpdateMovement(speed, Time.deltaTime);
+      travelDirector.UpdateMovement(speed, Time.deltaTime, false);
     }
   }
 }
