@@ -4,6 +4,8 @@ using UnityEngine;
 using System;
 public class PlayerInfo : MonoBehaviour
 {
+  public static Transform PlayerTransform;
+
   public static PlayerInfo instance;
 
   public static PlayerData Data => instance.pData;
@@ -87,6 +89,7 @@ public class PlayerInfo : MonoBehaviour
     }
     PlayerUpgrade.OnPlayerUpgradeEvent += OnPlayerUpgradeActionHandler;
     ExperiencePickerUpper.OnPlayerGainExpAction += OnPlayerGainExpActionHandler;
+    PlayerTransform = this.transform;
   }
 
 

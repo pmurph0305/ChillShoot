@@ -11,17 +11,17 @@ public class PlayerTransformDirector : TravelDirector
     switch (directionFromPlayer)
     {
       case Direction.Up:
-        return PlayerController.PlayerTransform.up;
+        return PlayerInfo.PlayerTransform.up;
       case Direction.Down:
-        return -PlayerController.PlayerTransform.up;
+        return -PlayerInfo.PlayerTransform.up;
       case Direction.Left:
-        return -PlayerController.PlayerTransform.right;
+        return -PlayerInfo.PlayerTransform.right;
       case Direction.Right:
-        return PlayerController.PlayerTransform.right;
+        return PlayerInfo.PlayerTransform.right;
       case Direction.Forward:
-        return PlayerController.PlayerTransform.forward;
+        return PlayerInfo.PlayerTransform.forward;
       case Direction.Back:
-        return -PlayerController.PlayerTransform.forward;
+        return -PlayerInfo.PlayerTransform.forward;
     }
     return Vector3.zero;
   }

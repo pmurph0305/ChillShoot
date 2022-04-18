@@ -177,6 +177,6 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
 
   public Transform GetTarget()
   {
-    return PlayerController.PlayerTransform;
+    return PlayerInfo.PlayerTransform;
   }
 }

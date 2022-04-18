@@ -10,7 +10,6 @@ public abstract class PlayerController : MonoBehaviour
 
   [SerializeField] float CurrentHealth = 100f;
 
-  public static Transform PlayerTransform { get; private set; }
   public static Vector3 PlayerVelocity;
   public static Vector3 PlayerDirection;
   public static float PlayerSpeed;
@@ -20,7 +19,6 @@ public abstract class PlayerController : MonoBehaviour
   void Start()
   {
     up = transform.up;
-    PlayerTransform = this.transform;
     previous = transform.position;
     CurrentHealth = playerData.pData.MaxHealth;
   }
