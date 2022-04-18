@@ -153,7 +153,7 @@ MonoBehaviour:
   useAgent: 0
   HitKnockback: {x: 0, y: 0, z: 0}
   updatePathTime: 1
-  travelDirector: {fileID: 6564372383289460122}
+  travelDirector: {fileID: -3150947794679615366}
   rb2d: {fileID: -6536042073960072785}
   col: {fileID: -6754030371237035193}
 --- !u!114 &-3150947794679615366
@@ -170,7 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetter: {fileID: 8623568005136754436}
   rotationDirector: {fileID: 0}
-  FaceTravelDirection: 0
+  FaceTravelDirection: 1
+  IncludeOffsetInFaceDirection: 0
   visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
   additionalVelocity: {x: 0, y: 0, z: 0}
@@ -183,7 +184,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6686872759568759905}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 1
   transformDirection: 3
+  AlwaysRelativeToTransform: 1
   lerpTime: 1
   lerpAmount: 1
 --- !u!114 &6564372383289460122
@@ -229,6 +231,7 @@ MonoBehaviour:
   offsetter: {fileID: 8623568005136754436}
   rotationDirector: {fileID: 0}
   FaceTravelDirection: 1
+  IncludeOffsetInFaceDirection: 1
   visual: {fileID: 0}
   travelDirection: {x: 0, y: 0, z: 0}
   additionalVelocity: {x: 0, y: 0, z: 0}

@@ -8,6 +8,7 @@ public abstract class TravelDirector : MonoBehaviour
   [SerializeField] protected TravelOffsetter offsetter;
   [SerializeField] RotationDirector rotationDirector;
   [SerializeField] protected bool FaceTravelDirection = true;
+  [SerializeField] protected bool IncludeOffsetInFaceDirection = true;
   [SerializeField] protected Transform visual;
 
 
@@ -117,10 +118,22 @@ public abstract class TravelDirector : MonoBehaviour
   /// <returns>Movement vector already scaled by time and movementspeed.</returns>
   protected virtual Vector3 GetScaledMovement(float movementSpeed, float deltaTime)
   {
-    Vector3 val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
+    Vector3 val;
+    if (IncludeOffsetInFaceDirection)
+    {
+      val = deltaTime * movementSpeed * GetTravelDirection() + GetOffset(deltaTime);
+    }
+    else
+    {
+      val = deltaTime * movementSpeed * GetTravelDirection();
+    }
     if (FaceTravelDirection && visual != null && deltaTime > 0)
     {
       visual.rotation = Quaternion.LookRotation(Vector3.forward, val);
+    }
+    if (!IncludeOffsetInFaceDirection)
+    {
+      val += GetOffset(deltaTime);
     }
     Vector3 instantVel = instantVelocity;
     instantVelocity = Vector3.zero;

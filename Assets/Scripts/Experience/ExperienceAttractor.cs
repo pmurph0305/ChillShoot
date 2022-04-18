@@ -2,32 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceAttractor : MonoBehaviour
+public abstract class ExperienceAttractor : MonoBehaviour
 {
-  [SerializeField] Collider2D col;
-  ExperiencePickup ep;
-  private void OnTriggerEnter2D(Collider2D other)
-  {
-    if (ExperiencePickupPool.TryGetActiveExperiencePickup(other, out ep))
-    {
-      ep.SetTarget(this.transform);
-    }
-  }
 
-  private void OnTriggerExit2D(Collider2D other)
-  {
-    if (ExperiencePickupPool.TryGetActiveExperiencePickup(other, out ep))
-    {
-      ep.SetTarget(null);
-    }
-  }
+  protected ExperiencePickup ep;
 
   Timer pickupTimer;
   public void Activate(float duration)
   {
     pickupTimer = new Timer(duration);
-    col.enabled = true;
+    EnableCollider(true);
   }
+
+  protected abstract void EnableCollider(bool active);
 
   private void Update()
   {
@@ -35,7 +22,7 @@ public class ExperienceAttractor : MonoBehaviour
     {
       if (pickupTimer.Update())
       {
-        col.enabled = false;
+        EnableCollider(false);
         pickupTimer = null;
       }
     }

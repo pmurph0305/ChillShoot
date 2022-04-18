@@ -60,17 +60,17 @@ public class ExperiencePickupPool : PrefabPool<ExperiencePickup>
   protected override ExperiencePickup CreatePooledItem()
   {
     ExperiencePickup ep = base.CreatePooledItem();
-    CollisionDictionary.Add(ep.GetCollider, ep);
+    CollisionDictionary.Add(ep.transform, ep);
     return ep;
   }
 
-  Dictionary<Collider2D, ExperiencePickup> CollisionDictionary = new Dictionary<Collider2D, ExperiencePickup>();
+  Dictionary<Transform, ExperiencePickup> CollisionDictionary = new Dictionary<Transform, ExperiencePickup>();
 
-  public static bool TryGetActiveExperiencePickup(Collider2D col, out ExperiencePickup val) => instance.TryGetExperiencePickup(col, out val);
-  private bool TryGetExperiencePickup(Collider2D col, out ExperiencePickup val)
+  public static bool TryGetActiveExperiencePickup(Transform t, out ExperiencePickup val) => instance.TryGetExperiencePickup(t, out val);
+  private bool TryGetExperiencePickup(Transform t, out ExperiencePickup val)
   {
     // we don't want to return true for non-active exp pickups
-    if (CollisionDictionary.TryGetValue(col, out val))
+    if (CollisionDictionary.TryGetValue(t, out val))
     {
       if (val.isActiveAndEnabled)
       {

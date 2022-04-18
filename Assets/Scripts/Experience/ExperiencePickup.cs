@@ -10,9 +10,6 @@ public class ExperiencePickup : MonoBehaviour, IPoolable<ExperiencePickup>
 
   private Material m;
 
-  [SerializeField] Collider2D col;
-  public Collider2D GetCollider => col;
-
   [SerializeField] ColorList colorList;
 
   public float speed = 2f;

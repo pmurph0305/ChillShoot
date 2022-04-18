@@ -12,7 +12,19 @@ public class ExperiencePickerUpper : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D other)
   {
-    if (ExperiencePickupPool.TryGetActiveExperiencePickup(other, out ep))
+    if (ExperiencePickupPool.TryGetActiveExperiencePickup(other.transform, out ep))
+    {
+      // Debug.Log("Pickup and release.", ep);
+      // controller.GainExp(ep.ExperienceValue);
+      // PlayerInfo.OnPlayerGainExpAction(ep.ExperienceValue);
+      OnPlayerGainExpAction?.Invoke(ep.ExperienceValue);
+      ep.Release();
+    }
+  }
+
+  private void OnTriggerExit(Collider other)
+  {
+    if (ExperiencePickupPool.TryGetActiveExperiencePickup(other.transform, out ep))
     {
       // Debug.Log("Pickup and release.", ep);
       // controller.GainExp(ep.ExperienceValue);
