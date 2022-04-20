@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class PlayerTransformDirector : TravelDirector
 {
+
+
+  protected override void OnAwake()
+  {
+    base.OnAwake();
+    if (_PlayerTransform == null && PlayerTransform != null)
+    {
+      _PlayerTransform = PlayerTransform;
+    }
+  }
+
+  public static Transform _PlayerTransform;
   [Header("Player Transform Director")]
+  public Transform PlayerTransform;
   [SerializeField] Direction directionFromPlayer;
   protected override Vector3 GetNewTravelDirection()
   {
+    if (_PlayerTransform == null) return Vector3.zero;
     switch (directionFromPlayer)
     {
       case Direction.Up:
-        return PlayerInfo.PlayerTransform.up;
+        return _PlayerTransform.up;
       case Direction.Down:
-        return -PlayerInfo.PlayerTransform.up;
+        return -_PlayerTransform.up;
       case Direction.Left:
-        return -PlayerInfo.PlayerTransform.right;
+        return -_PlayerTransform.right;
       case Direction.Right:
-        return PlayerInfo.PlayerTransform.right;
+        return _PlayerTransform.right;
       case Direction.Forward:
-        return PlayerInfo.PlayerTransform.forward;
+        return _PlayerTransform.forward;
       case Direction.Back:
-        return -PlayerInfo.PlayerTransform.forward;
+        return -_PlayerTransform.forward;
     }
     return Vector3.zero;
   }

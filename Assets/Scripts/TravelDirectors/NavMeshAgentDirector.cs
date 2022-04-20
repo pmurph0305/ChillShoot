@@ -12,7 +12,6 @@ public class NavMeshAgentDirector : TrackedTransformDirector
   [SerializeField] float minWarpDistanceSqr = 0.1f;
   public override void ResetTravelDirector()
   {
-    recalcTimer = new Timer(RecalcTime);
     base.ResetTravelDirector();
     SqrStoppingDistance = agent.stoppingDistance * agent.stoppingDistance;
     agent.updatePosition = UpdatePosition;
@@ -47,7 +46,8 @@ public class NavMeshAgentDirector : TrackedTransformDirector
   [SerializeField] NavMeshDebug debug;
 
   [SerializeField] float RecalcTime = 1.0f;
-  Timer recalcTimer;
+
+  float t = 0;
   public override Vector3 GetTravelDirection()
   {
     // travelDirection = Vector3.MoveTowards(travelDirection, (agent.nextPosition - transform.position).normalized, 1f * Time.deltaTime);
@@ -84,11 +84,11 @@ public class NavMeshAgentDirector : TrackedTransformDirector
 
   private void PreMoveChecks(float deltaTime)
   {
-    recalcTimer.Update(deltaTime);
-    if (recalcTimer.IsFinished || agent.isStopped || agent.isPathStale || !agent.isOnNavMesh)
+    t += deltaTime;
+    if (t >= RecalcTime || agent.isStopped || agent.isPathStale || !agent.isOnNavMesh)
     {
       RecalculatePath();
-      recalcTimer.Reset();
+      t = 0;
     }
     float distance = Vector3.SqrMagnitude(agent.nextPosition - transform.position);
     if (distance > minWarpDistanceSqr)

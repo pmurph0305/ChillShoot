@@ -26,7 +26,10 @@ public abstract class TravelDirector : MonoBehaviour, ITravelDirector
     if (rb2d != null && rb2d.isKinematic) { rb2d = null; }
     rb = GetComponent<Rigidbody>();
     if (rb != null && rb.isKinematic) { rb = null; }
+    OnAwake();
   }
+
+  protected virtual void OnAwake() { }
 
   public virtual void ResetTravelDirector()
   {

@@ -649,6 +649,11 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &400854291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3221785291808351305, guid: 65fbd989ca1a4f741bc1a0a0d0075b0c, type: 3}
+  m_PrefabInstance: {fileID: 3489877189094081612}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &401280561
 GameObject:
   m_ObjectHideFlags: 0
@@ -3366,7 +3371,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7781065, y: 1}
+    m_SensorSize: {x: 1.7785124, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5177,12 +5182,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3489877190070111536, guid: 65fbd989ca1a4f741bc1a0a0d0075b0c, type: 3}
+      propertyPath: Prefab
+      value: 
+      objectReference: {fileID: 400854291}
     - target: {fileID: 3489877190070111540, guid: 65fbd989ca1a4f741bc1a0a0d0075b0c, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4310486089905688401, guid: 65fbd989ca1a4f741bc1a0a0d0075b0c, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847121196200149551, guid: 65fbd989ca1a4f741bc1a0a0d0075b0c, type: 3}
+      propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
