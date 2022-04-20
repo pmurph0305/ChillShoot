@@ -10,7 +10,7 @@ public class TargetedWeaponInfo : WeaponInfo
   [SerializeField] public Transform target;
   [SerializeField] LayerMask TargetLayerMask;
 
-  EnemyControllerBase trackedEnemy;
+  IShotDamageable trackedEnemy;
 
   public virtual void UpdateTarget()
   {
@@ -29,10 +29,10 @@ public class TargetedWeaponInfo : WeaponInfo
 
       foreach (var item in cols)
       {
-        if (EnemyDictionary.ContainsActive(item.transform))
+        if (ShotDamageableDictionary.ContainsActive(item.transform))
         {
           target = item.transform;
-          trackedEnemy = EnemyDictionary.GetActive(item.transform);
+          trackedEnemy = ShotDamageableDictionary.GetActive(item.transform);
           trackedEnemy.OnEnemyReleased += OnTargetReleasedHandler;
           break;
         }
@@ -42,10 +42,10 @@ public class TargetedWeaponInfo : WeaponInfo
 
   public bool NeedsUpdate()
   {
-    return trackedEnemy == null || !trackedEnemy.isActiveAndEnabled;
+    return trackedEnemy == null || !trackedEnemy.isActiveAndEnabled();
   }
 
-  public void OnTargetReleasedHandler(EnemyControllerBase enemyController)
+  public void OnTargetReleasedHandler(IShotDamageable enemyController)
   {
     trackedEnemy.OnEnemyReleased -= OnTargetReleasedHandler;
     UpdateTarget();

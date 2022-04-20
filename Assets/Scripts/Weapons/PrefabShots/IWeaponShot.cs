@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface IWeaponShot
 {
-  /// <summary>
-  /// Called by Weapon info when a shot hits an enemy.
-  /// </summary>
-  void OnHitEnemy(EnemyControllerBase enemy);
+  public float GetShotDamage();
+  public Transform GetTransform();
+  public float GetShotKnockback();
 }

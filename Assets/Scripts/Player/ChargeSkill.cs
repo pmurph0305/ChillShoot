@@ -35,7 +35,7 @@ public class ChargeSkill
   [SerializeField] ContactFilter2D filter;
   Collider2D[] overlaps = new Collider2D[0];
   [SerializeField] LayerMask mask;
-  EnemyControllerBase ec;
+  IShotDamageable ec;
 
 
   public Vector3 Finish()
@@ -49,9 +49,9 @@ public class ChargeSkill
     Debug.Log("Overlaps:" + overlaps.Length + " angle:" + chargeObjectVisual.transform.rotation.eulerAngles.z + " Scale:" + chargeObjectVisual.transform.lossyScale);
     foreach (var c in overlaps)
     {
-      if (EnemyDictionary.ContainsActive(c.transform))
+      if (ShotDamageableDictionary.ContainsActive(c.transform))
       {
-        ec = EnemyDictionary.Get(c.transform);
+        ec = ShotDamageableDictionary.Get(c.transform);
         ec.OnHitFromAbility(BaseDamage);
       }
       else

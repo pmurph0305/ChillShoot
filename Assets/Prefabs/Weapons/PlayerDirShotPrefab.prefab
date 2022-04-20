@@ -4838,8 +4838,8 @@ GameObject:
   - component: {fileID: 6038622607504407457}
   - component: {fileID: 8068250853018516626}
   - component: {fileID: -8803565517505702046}
-  - component: {fileID: 932891991653526923}
   - component: {fileID: -3504462713427025441}
+  - component: {fileID: 6188550837307879433}
   m_Layer: 11
   m_Name: PlayerDirShotPrefab
   m_TagString: PlayerDirBullet
@@ -4944,20 +4944,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponKey: 3
-  col: {fileID: 8068250853018516626}
-  rb: {fileID: -3504462713427025441}
-  lifeTimer:
-    _CurrentTime: 0
-    _EndTime: 0
-    _IsFinished: 0
-  director: {fileID: 932891991653526923}
   UseSpeedEaser: 0
   speedEase:
     start: 0
     current: 0
     duration: 1
     ease: 3
-  playerVelocity: {x: 0, y: 0, z: 0}
   shotTweener:
     TweenIn: 0
     TweenOut: 0
@@ -4967,25 +4959,12 @@ MonoBehaviour:
     TweenOutEndScale: {x: 0, y: 0, z: 0}
     tweenInTime: 0.2
     tweenOutTime: 0.2
+  lifeTimer:
+    _CurrentTime: 0
+    _EndTime: 0
+    _IsFinished: 0
+  playerVelocity: {x: 0, y: 0, z: 0}
   DamagedEnemiesCount: 0
---- !u!114 &932891991653526923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4390567009046939577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46f7f1e9f7ee14a43a36bb25b560cbbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetter: {fileID: 0}
-  rotationDirector: {fileID: 0}
-  FaceTravelDirection: 1
-  visual: {fileID: 0}
-  travelDirection: {x: 0, y: 0, z: 0}
-  additionalVelocity: {x: 0, y: 0, z: 0}
 --- !u!50 &-3504462713427025441
 Rigidbody2D:
   serializedVersion: 4
@@ -5007,3 +4986,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6188550837307879433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390567009046939577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce224b8af2fc86649b1db54b295802bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetter: {fileID: 0}
+  rotationDirector: {fileID: 0}
+  FaceTravelDirection: 1
+  IncludeOffsetInFaceDirection: 1
+  visual: {fileID: 0}
+  FollowGround: 0
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  travelDirection: {x: 0, y: 0, z: 0}
+  additionalVelocity: {x: 0, y: 0, z: 0}
+  instantVelocity: {x: 0, y: 0, z: 0}
+  _transform: {fileID: 691047783576802950}
+  direction: 0

@@ -28,29 +28,29 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
   [SerializeField] Vector3 playerVelocity;
 
   protected IObjectPool<PrefabShotBase> pool;
-  Dictionary<EnemyControllerBase, Timer> DamagedEnemies = new Dictionary<EnemyControllerBase, Timer>();
+  Dictionary<IShotDamageable, Timer> DamagedEnemies = new Dictionary<IShotDamageable, Timer>();
   [SerializeField] int DamagedEnemiesCount;
-  protected HashSet<EnemyControllerBase> EnteredEnemies = new HashSet<EnemyControllerBase>();
-  protected HashSet<EnemyControllerBase> ExitedEnemies = new HashSet<EnemyControllerBase>();
-  List<EnemyControllerBase> ReleasedEnemies = new List<EnemyControllerBase>();
+  protected HashSet<IShotDamageable> EnteredEnemies = new HashSet<IShotDamageable>();
+  protected HashSet<IShotDamageable> ExitedEnemies = new HashSet<IShotDamageable>();
+  List<IShotDamageable> ReleasedEnemies = new List<IShotDamageable>();
 
   protected int NumberOfHits = 0;
 
 
   public event Action OnGetFromPoolAction;
+
   /// <summary>
-  /// Key of weapon that hit enemy, position of weapon that hit enemy, position of enemy that was hit.
+  /// When a bullet hits an enemy and damages it, this event is raised.
   /// </summary>
   public static event Action<ShotHitEventArgs> OnHitEnemyAction;
 
   /// <summary>
   /// Called by the weapon info of this shot when an enemy detects that this shot hit the enemy.
   /// </summary>
-  public virtual void OnHitEnemy(EnemyControllerBase enemy)
+  public virtual void OnHitEnemy(IShotDamageable enemy)
   {
-    if (enemy.isActiveAndEnabled)
+    if (enemy.isActiveAndEnabled())
     {
-      // Debug.Log("Hit", enemy);
       if (weaponInfo.DestroyOnHit)
       {
         NumberOfHits++;
@@ -59,14 +59,13 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
           Release();
         }
       }
-      EffectPlayerPool.StartEffect(enemy.transform.position);
       if (!DamagedEnemies.ContainsKey(enemy))
       {
         enemy.OnEnemyReleased += OnEnemyReleased;
         DamagedEnemies.Add(enemy, new Timer(weaponInfo.DamageCooldown));
       }
 
-      OnHitEnemyAction?.Invoke(new ShotHitEventArgs(weaponKey, transform.position, enemy.transform.position, director.GetTravelDirection()));
+      OnHitEnemyAction?.Invoke(new ShotHitEventArgs(weaponKey, transform.position, enemy.GetTransform().position, director.GetTravelDirection(), enemy.GetTransform(), weaponInfo.GetShotDamage()));
       enemy.OnHitFromShot(this);
     }
   }
@@ -186,14 +185,7 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
       Release();
     }
     DamagedEnemiesCount = DamagedEnemies.Count;
-    if (weaponInfo.DestroyOnHit && weaponInfo.DestroyAfterXHits == 0 && DamagedEnemiesCount > 0)
-    {
-      Debug.LogWarning("Hit issue?", this.gameObject);
-      foreach (var kvp in DamagedEnemies)
-      {
-        Debug.LogWarning("Still damaging:", kvp.Key.gameObject);
-      }
-    }
+
     foreach (var item in EnteredEnemies)
     {
       if (!DamagedEnemies.ContainsKey(item))
@@ -214,7 +206,6 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
       if (kvp.Value.Update(deltaTime))
       {
         kvp.Value.Reset();
-        // kvp.Key.OnHitFromShot(weaponInfo.ShotDamage);
         OnHitEnemy(kvp.Key);
       }
     }
@@ -251,25 +242,25 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
 
   protected void OnEnterTransform(Transform t)
   {
-    if (EnemyDictionary.ContainsActive(t))
+    if (ShotDamageableDictionary.ContainsActive(t))
     {
-      EnemyControllerBase ec = EnemyDictionary.GetActive(t);
+      IShotDamageable ec = ShotDamageableDictionary.GetActive(t);
       EnteredEnemies.Add(ec);
     }
   }
 
   protected void OnExitTransform(Transform t)
   {
-    if (EnemyDictionary.Contains(t))
+    if (ShotDamageableDictionary.Contains(t))
     {
       // Debug.Log("Remove on exit.");
-      EnemyControllerBase ec = EnemyDictionary.Get(t);
+      IShotDamageable ec = ShotDamageableDictionary.Get(t);
       // DamagedEnemies.Remove(ec);
       ExitedEnemies.Add(ec);
     }
   }
 
-  void OnEnemyReleased(EnemyControllerBase ec)
+  void OnEnemyReleased(IShotDamageable ec)
   {
     ec.OnEnemyReleased -= OnEnemyReleased;
     ReleasedEnemies.Add(ec);
@@ -285,4 +276,18 @@ public abstract class PrefabShotBase : MonoBehaviour, IPoolable<PrefabShotBase>,
     return null;
   }
 
+  public float GetShotDamage()
+  {
+    return weaponInfo.GetShotDamage();
+  }
+
+  public Transform GetTransform()
+  {
+    return this.transform;
+  }
+
+  public float GetShotKnockback()
+  {
+    return weaponInfo.GetShotKnockback();
+  }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 using System;
-public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyControllerBase>, ITargetProvider
+public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyControllerBase>, ITargetProvider, IShotDamageable
 {
   [SerializeField] protected float speed = 1;
 
@@ -35,9 +35,10 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
 
 
   [SerializeField] protected ITravelDirector travelDirector;
-  public event Action<EnemyControllerBase> OnEnemyReleased;
+  public event Action<IShotDamageable> OnEnemyReleased;
 
   public static event Action<Vector3, float> OnEnemyDamagedAction;
+
 
   // private void Update()
   // {
@@ -90,10 +91,10 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
 
 
 
-  public void OnHitFromShot(PrefabShotBase shot)
+  public void OnHitFromShot(IWeaponShot shot)
   {
-    TakeDamage(shot.weaponInfo.GetShotDamage());
-    HitKnockback += (transform.position - shot.transform.position).normalized * shot.weaponInfo.GetShotKnockback();
+    TakeDamage(shot.GetShotDamage());
+    HitKnockback += (transform.position - shot.GetTransform().position).normalized * shot.GetShotKnockback();
   }
 
   public void OnHitFromAbility(float damage)
@@ -128,7 +129,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
 
   protected virtual void OnDisabled()
   {
-    EnemyDictionary.RemoveActive(transform);
+    ShotDamageableDictionary.RemoveActive(transform);
     // Debug.Log("Release");
     pool.Release(this);
     OnEnemyReleased?.Invoke(this);
@@ -143,7 +144,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
     {
       agent.SetDestination(PlayerController.PlayerPosition);
     }
-    EnemyDictionary.AddActive(transform, this);
+    ShotDamageableDictionary.AddActive(transform, this);
     travelDirector.ResetTravelDirector();
   }
 
@@ -156,7 +157,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
   public void OnCreate()
   {
     travelDirector = GetComponent<ITravelDirector>();
-    EnemyDictionary.Add(transform, this);
+    ShotDamageableDictionary.Add(transform, this);
     t = this.transform;
     updateDirectionTimer = new Timer(UpdateDirToPlayerTime);
     damageTimer = new Timer(damageTimerLength);
@@ -179,5 +180,15 @@ public abstract class EnemyControllerBase : MonoBehaviour, IPoolable<EnemyContro
   public Transform GetTarget()
   {
     return PlayerInfo.PlayerTransform;
+  }
+
+  bool IShotDamageable.isActiveAndEnabled()
+  {
+    return this.isActiveAndEnabled;
+  }
+
+  public Transform GetTransform()
+  {
+    return this.transform;
   }
 }

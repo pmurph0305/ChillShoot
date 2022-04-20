@@ -4,12 +4,15 @@ using UnityEngine;
 using System;
 public class EffectPlayerPool : PrefabPool<EffectPlayer>
 {
-  public static Action<Vector3> StartEffect;
-
   protected override void OnAwake()
   {
     base.OnAwake();
-    StartEffect += OnStartEffectHandler;
+    PrefabShotBase.OnHitEnemyAction += OnHitEnemyActionHandler;
+  }
+
+  private void OnHitEnemyActionHandler(ShotHitEventArgs obj)
+  {
+    OnStartEffectHandler(obj.EnemyPosition);
   }
 
   void OnStartEffectHandler(Vector3 position)
