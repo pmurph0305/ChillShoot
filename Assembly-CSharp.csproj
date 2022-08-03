@@ -81,6 +81,7 @@
      <Compile Include="Assets\Scripts\LeanInit.cs" />
      <Compile Include="Assets\Scripts\TravelDirectors\TransformDirector.cs" />
      <Compile Include="Assets\Scripts\Common\Pools\IPoolable.cs" />
+     <Compile Include="Assets\Scripts\Weapons\PrefabShots\IShotDamageable.cs" />
      <Compile Include="Assets\Scripts\VFX\VFXPool.cs" />
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\PrefabShotBase.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
@@ -184,7 +185,6 @@
      <Compile Include="Assets\Scripts\Weapons\PrefabShots\ShotPool.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController2D.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
-     <Compile Include="Assets\Scripts\Weapons\PrefabShots\IShotDamageable.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
